@@ -1,0 +1,44 @@
+
+.loading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: .5rem auto;
+    padding: .5rem;
+    min-height: 80vh;
+}
+
+.loader {
+    display: block;
+    width: 1.2rem;
+    height: 1.2rem;
+    margin: auto;
+    background-color: black;
+    border-radius: 50%;
+    animation: loading 1.26s linear infinite;
+}
+
+.loader-dot {
+    color: white;
+    font-size: 1.4rem;
+    line-height: 1.4rem;
+    animation: changeColor 1.26s linear infinite;
+}
+
+@keyframes loading {
+    50% {
+        background-color: rgb(209, 201, 201);
+        width: 1.4rem;
+        height: 1.4rem;
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes changeColor {
+    50% {
+        color: black;
+    }
+}
