@@ -10,7 +10,7 @@ export default function EventCard({ data }: any) {
             <span className="absolute right-8 bg-white text-sm font-semibold px-2.5 shadow-md m-5 rounded-xl" >o</span>
             
             {/* LINKS TO EVENT PAGE BY ID */}
-            <Link href={`/event/${data._id}`}>
+            <Link href={`event/${data._id}`}>
                 <Image className="rounded-xl w-full h-auto" src={ DummyImage} alt="event picture" />
                 <div className="flex flex-row justify-between mt-3 px-2">
                     <h2 className=" font-bold capitalize">{ `${data.title},' ', ${data.location}`}</h2>
