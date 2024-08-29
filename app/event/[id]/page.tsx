@@ -15,14 +15,14 @@ export default function EventPage() {
     const id = params.id;
 
     const get_eventById = async (id: any) => {
-        const res = await fetch(`http://localhost:3000/api/event/${id}`, { method: 'GET' });
+        const res = await fetch(`api/event/${id}`, { method: 'GET' });
         const event = await res.json();
         return event;
     }
 
     const delete_eventById = async (id: any) => {
         console.log('deleting id: ',id);
-        const res = await fetch(`http://localhost:3000/api/event/${id}`, {
+        const res = await fetch(`api/event/${id}`, {
             method: "DELETE"
         }
     );

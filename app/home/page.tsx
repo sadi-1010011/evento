@@ -21,7 +21,7 @@ export default function HomePage() {
 
 
     const get_events = async () => {
-        const res = await fetch("http://localhost:3000/api/events");
+        const res = await fetch("api/events");
         const events = await res.json();
         return events;
     }

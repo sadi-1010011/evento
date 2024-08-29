@@ -115,7 +115,7 @@ export default function CreateEvent() {
     const POST_event = async () => {
         console.log('posting data to server!')
         // upload to server
-        const response = await fetch("http://localhost:3000/api/events", {
+        const response = await fetch("api/events", {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

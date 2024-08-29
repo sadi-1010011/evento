@@ -124,7 +124,7 @@ export default function CreateEvent() {
     const PUT_event = async (id: string) => {
         console.log('updating event data!', id)
         // update to server
-        const response = await fetch(`http://localhost:3000/api/event/${id}`, {
+        const response = await fetch(`api/event/${id}`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
