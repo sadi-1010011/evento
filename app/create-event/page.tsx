@@ -5,6 +5,7 @@ import DummyImage from "@/assets/evento.jpeg";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { post_event } from "../(fetchAPI)/restAPI";
 
 export default function CreateEvent() {
 
@@ -93,7 +94,6 @@ export default function CreateEvent() {
     function handle_Catogory(e: any) {
         if(!e) return
         const value = e.currentTarget.value;
-        console.log(e.currentTarget.value)
         setEventData(previusData => { return { ...previusData, catogory: value }})        
     }
 
@@ -101,28 +101,15 @@ export default function CreateEvent() {
         if(!e) return
         e.preventDefault();
         console.log('submitting data..');
-        console.table(eventdata);
         // submit data.. to backend
-        POST_event().then(res => {
+        // console.table(eventdata);
+        post_event(eventdata).then(res => {
             if (res.ok) {
                 console.log('data saved successfully!');
                 router.push('/home');
             }
             else console.log('something went wrong! in saving to DB ', res.statusText);
         })
-    }
-
-    const POST_event = async () => {
-        console.log('posting data to server!')
-        // upload to server
-        const response = await fetch("api/events", {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ data: eventdata }),
-        })
-        return response;
     }
 
     return (

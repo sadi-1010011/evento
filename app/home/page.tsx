@@ -1,12 +1,15 @@
 "use client"
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 // components
 import Catogories from "@/components/catogories/Catogories";
 import EventCard from "@/components/eventcard/EventCard";
 import SearchBar from "@/components/searchbar/SearchBar";
+// import Loading from "@/app/loading"
+// API
+import { get_allEvents } from "../(fetchAPI)/restAPI";
 
 // EVENT POSTERS
 // import e1 from "@/assets/eventposters/event2.png";
@@ -19,18 +22,11 @@ import SearchBar from "@/components/searchbar/SearchBar";
 
 export default function HomePage() {
 
-
-    const get_events = async () => {
-        const res = await fetch("api/events");
-        const events = await res.json();
-        return events;
-    }
-
     const [events, setEvents] = useState([]);
 
     useEffect(()=> {
         // get events data
-        get_events().then((events) => {
+        get_allEvents().then((events) => {
             if (events.length)
                 setEvents(events);
         });
@@ -42,12 +38,9 @@ export default function HomePage() {
             <SearchBar />
             <Catogories />
             <div className="w-full bg-black min-h-screen overflow-auto mt-3 px-4">
-
+                
                 {
-                    events ?
                     events.map((event,i) => <EventCard key={i} data={event} />)
-                        :
-                    <h1>Loading..</h1>
                 }
 
                 {/* ADMIN ONLY FEATURE! */}

@@ -4,8 +4,10 @@ import DummyImg from "@/assets/evento.jpeg";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+// APIs
+import { get_eventById, delete_eventById } from "@/app/(fetchAPI)/restAPI";
 
 export default function EventPage() {
 
@@ -13,23 +15,6 @@ export default function EventPage() {
     const router = useRouter();
     const params = useParams();
     const id = params.id;
-
-    const get_eventById = async (id: any) => {
-        const res = await fetch(`api/event/${id}`, { method: 'GET' });
-        const event = await res.json();
-        return event;
-    }
-
-    const delete_eventById = async (id: any) => {
-        console.log('deleting id: ',id);
-        const res = await fetch(`api/event/${id}`, {
-            method: "DELETE"
-        }
-    );
-        if (res.ok) router.back(); // go back to home
-        else alert('error in deleting event!');
-    }
-
 
     useEffect(() => {
         // fetch all data by id
@@ -67,7 +52,7 @@ export default function EventPage() {
                 </Link>
             </button>
             <button className="fixed top-4 left-6 bg-red-500 text-white capitalize text-sm font-semibold rounded-full p-2 px-3 border border-gray-700 ">
-                <span onClick={ () => delete_eventById(event._id) }>
+                <span onClick={ () => delete_eventById(event._id).then(res => { if (res.ok) router.back(); else alert('error in deleting event!'); }) }>
                     delete event !
                     <br />
                     <span className="d-block font-light text-xs">{ `(admin only!)` }</span>

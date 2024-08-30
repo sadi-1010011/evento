@@ -5,6 +5,7 @@ import DummyImage from "@/assets/evento.jpeg";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
+import { get_eventById, put_eventById } from "@/app/(fetchAPI)/restAPI";
 
 export default function CreateEvent() {
 
@@ -23,16 +24,6 @@ export default function CreateEvent() {
         }
     )
     }, [id]);
-
-    // fetch event by id
-    const get_eventById = async (id: any) => {
-        const res = await fetch(`http://localhost:3000/api/event/${id}`, {
-            method: 'GET'
-        });
-        const event = await res.json();
-        return event;
-    }
-
 
     function getDroppedImage(event: any) {
         const link = event.target.value;
@@ -112,26 +103,13 @@ export default function CreateEvent() {
         console.log('submitting data..');
         console.table(eventdata);
         // submit data.. to backend
-        PUT_event(id).then(res => {
+        put_eventById(id, eventdata).then(res => {
             if (res.ok) {
                 console.log('data updated successfully!');
                 router.push('/home');
             }
             else console.log('something went wrong! in saving to DB ', res.statusText);
         })
-    }
-
-    const PUT_event = async (id: string) => {
-        console.log('updating event data!', id)
-        // update to server
-        const response = await fetch(`api/event/${id}`, {
-            method: 'PUT',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ data: eventdata }),
-        })
-        return response;
     }
 
     return (
