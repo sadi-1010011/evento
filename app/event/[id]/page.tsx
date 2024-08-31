@@ -35,7 +35,7 @@ export default function EventPage() {
             <GalleryGrid />
             {
                 !event ? 
-                (<div className="my-6">
+                (<div className="my-4 px-3">
                     <SkeletonTheme baseColor="#202020" highlightColor="#444">
                         <Skeleton height={120} className="my-2 rounded-md" count={1} />
                         <Skeleton height={20} className="w-1/2" count={1} />

@@ -1,8 +1,10 @@
 import Image from "next/image";
 import DummyImage from "@/assets/evento.jpeg";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function EventCard({ data }: any) {
+
+    const router = useRouter();
 
     return (
         <div className="flex my-10 flex-col rounded-xl bg-white w-full text-black">
@@ -10,7 +12,7 @@ export default function EventCard({ data }: any) {
             <span className="absolute right-8 bg-white text-sm font-semibold px-2.5 shadow-md m-5 rounded-xl" >o</span>
             
             {/* LINKS TO EVENT PAGE BY ID */}
-            <Link href={`event/${data._id}`}>
+            <div onClick={ () => router.push(`event/${data._id ? data._id : '' }`) }>
                 <Image className="rounded-xl w-full h-auto" src={ DummyImage} alt="event picture" />
                 <div className="flex flex-row justify-between mt-3 px-2">
                     <h2 className=" font-bold capitalize">{ `${data.title}, ${data.location}`}</h2>
@@ -23,7 +25,7 @@ export default function EventCard({ data }: any) {
                 <p className="px-2 text-slate-600">{data.description || 'event description'}</p>
                 {/* <p className="px-2 text-slate-600">duration</p> */}
                 <button className="my-2 pb-2 capitalize font-extrabold text-center w-full text-green-900">view more</button>
-            </Link>
+            </div>
         </div>
     );
 }
