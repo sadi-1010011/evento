@@ -7,7 +7,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 // components
 import Catogories from "@/components/catogories/Catogories";
-import EventCard from "@/components/eventcard/EventCard";
+import EventCard from "@/app/home/EventCard";
 import SearchBar from "@/components/searchbar/SearchBar";
 // import Loading from "@/app/(Loading)/Loading";
 // API
