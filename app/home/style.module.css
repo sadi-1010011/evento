@@ -1,0 +1,14 @@
+/* Evento Logo animation AUG 31 2024 */
+
+.evento {
+    transition: all 0.8s;
+}
+
+@keyframes eventofade {
+    50% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 0;
+    }
+}

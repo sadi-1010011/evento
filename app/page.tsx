@@ -2,21 +2,31 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import Logo from "@/assets/eventoLogo.jpeg";
+import Image from "next/image";
+import styles from "@/app/home/style.module.css";
 
 export default function Home() {
 
   const router = useRouter();
 
   useEffect(()=> {
-    console.log('redirecting..');
+    // console.log('redirecting..');
+    const logo = document.getElementById('evento');
+    // Little animation here..
+    if (logo) {
+      logo.style.transition = "0.8s";
+      logo.style.opacity = '0';
+    }
     setTimeout(()=> {
       router.push('/home');
     }, 800);
   }, []);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
-      <h1>evento</h1>
+    <main id="evento" className="flex min-h-screen flex-col items-center justify-center">
+      <Image className={styles.eventoLogo} priority src={Logo} width={100} height={100} alt="brand logo" />
+      <h1 className="text-lg font-extrabold text-center pt-2">Evento</h1>
     </main>
   );
 }
