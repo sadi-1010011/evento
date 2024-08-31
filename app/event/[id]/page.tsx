@@ -8,6 +8,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 // APIs
 import { get_eventById, delete_eventById } from "@/app/(fetchAPI)/restAPI";
+// Loading skeleton
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
 
 export default function EventPage() {
 
@@ -29,6 +33,21 @@ export default function EventPage() {
     return (
         <main className="flex min-h-screen lg:min-w-10 flex-col bg-black">
             <GalleryGrid />
+            {
+                !event ? 
+                (<div className="my-6">
+                    <SkeletonTheme baseColor="#202020" highlightColor="#444">
+                        <Skeleton height={120} className="my-2 rounded-md" count={1} />
+                        <Skeleton height={20} className="w-1/2" count={1} />
+                        <Skeleton height={50} width={50} className="m-2" borderRadius="50%" count={1} />
+                        <Skeleton height={25} className="w-1/3" count={1} />
+                        <Skeleton height={25} className="" count={1} />
+                    </SkeletonTheme>
+                </div>)
+                :
+            
+            (
+            <>
             <div className="px-4">
                 <h1 className="text-left my-4 pt-2 text-xl font-semibold capitalize">{ event ? event.title : 'loading..' }</h1>
                 <div className="flex items-center">
@@ -42,9 +61,9 @@ export default function EventPage() {
                 </div>
             </div>
 
-            {/* ADMIN ONLY FEATURE ! */}
 
             <button className="fixed top-4 right-6 bg-red-500 text-white capitalize text-sm font-semibold rounded-full p-2 px-3 border border-gray-700 ">
+                {/* ADMIN ONLY FEATURE !!! */}
                 <Link href={`/edit-event/${event ? event._id : false}`}>
                     edit event !
                     <br />
@@ -57,14 +76,17 @@ export default function EventPage() {
                     <br />
                     <span className="d-block font-light text-xs">{ `(admin only!)` }</span>
                 </span>
+                {/* -- END -- */}
             </button>
 
-            {/* END */}
 
             <div className="flex items-center justify-between p-3 fixed bottom-0 right-0 left-0 bg-slate-300 text-black">
                 <h2 className="font-bold">Total price</h2>
                 <span className="font-bold ">{ event ? event.ticketprice : 'free '} $</span>
             </div>
+            </>
+            )
+        }
         </main>
     );
 }

@@ -1,13 +1,15 @@
 "use client"
 
 import Link from "next/link";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 // components
 import Catogories from "@/components/catogories/Catogories";
 import EventCard from "@/components/eventcard/EventCard";
 import SearchBar from "@/components/searchbar/SearchBar";
-// import Loading from "@/app/loading"
+// import Loading from "@/app/(Loading)/Loading";
 // API
 import { get_allEvents } from "../(fetchAPI)/restAPI";
 
@@ -40,7 +42,18 @@ export default function HomePage() {
             <div className="w-full bg-black min-h-screen overflow-auto mt-3 px-4">
                 
                 {
+                    events.length ?
                     events.map((event,i) => <EventCard key={i} data={event} />)
+                        :
+                    <div className="my-6">
+                    <SkeletonTheme baseColor="#202020" highlightColor="#444">
+                        <Skeleton height={120} className="my-2 rounded-md" count={1} />
+                        <Skeleton height={20} className="w-1/2" count={1} />
+                        <Skeleton height={50} width={50} className="m-2" borderRadius="50%" count={1} />
+                        <Skeleton height={25} className="w-1/3" count={1} />
+                        <Skeleton height={25} className="" count={1} />
+                    </SkeletonTheme>
+                    </div>
                 }
 
                 {/* ADMIN ONLY FEATURE! */}
