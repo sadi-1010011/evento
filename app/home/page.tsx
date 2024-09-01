@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Offline from "@/components/offline/Offline";
+// import Offline from "@/components/offline/Offline";
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
@@ -18,8 +18,7 @@ import { get_allEvents } from "../(fetchAPI)/restAPI";
 export default function HomePage() {
 
     const [events, setEvents] = useState([]);
-    const [offline, setOffline] = useState(false);
-    const isOnline = navigator.onLine;
+    // const isOnline = navigator.onLine;
 
     useEffect(()=> {
         // get events data
@@ -29,12 +28,6 @@ export default function HomePage() {
         });
     }, []);
 
-    useEffect(() => {
-        // check connectivity
-        if (isOnline === false) 
-            setOffline(true);
-        else setOffline(false);
-    }, [isOnline]);
 
     return (
         <main className="flex min-h-screen flex-col items-center pt-2 pb-16">
@@ -42,9 +35,7 @@ export default function HomePage() {
             {/* <SearchBar /> */}
             <BottomNavBar />
             <div className="w-full bg-black min-h-screen overflow-auto mt-0 px-2">
-                
-                { offline && <Offline /> }
-                
+                                
                 {
                     events.length ?
                     events.map((event,i) => <EventCard key={i} data={event} />)
