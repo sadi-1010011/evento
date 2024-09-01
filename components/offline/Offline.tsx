@@ -1,4 +1,6 @@
 // offline page
+"use client"
+
 export default function Offline() {
 
     // if offline return UI

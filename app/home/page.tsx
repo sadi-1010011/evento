@@ -9,18 +9,10 @@ import 'react-loading-skeleton/dist/skeleton.css'
 // components
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
 import EventCard from "@/app/home/EventCard";
-import SearchBar from "@/components/searchbar/SearchBar";
+// import SearchBar from "@/components/searchbar/SearchBar";
 // import Loading from "@/app/(Loading)/Loading";
 // API
 import { get_allEvents } from "../(fetchAPI)/restAPI";
-
-// EVENT POSTERS
-// import e1 from "@/assets/eventposters/event2.png";
-// import e2 from "@/assets/eventposters/event3.jpg";
-// import e3 from "@/assets/eventposters/event4.jpg";
-// import e4 from "@/assets/eventposters/event5.jpg";
-// import e5 from "@/assets/eventposters/event6.jpg";
-// import e6 from "@/assets/eventposters/event7.jpg";
 
 
 export default function HomePage() {
