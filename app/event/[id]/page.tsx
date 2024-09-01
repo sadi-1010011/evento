@@ -31,7 +31,7 @@ export default function EventPage() {
     }, [id]);
 
     return (
-        <main className="flex min-h-screen lg:min-w-10 flex-col bg-black">
+        <main className="flex min-h-screen flex-col bg-black">
             <GalleryGrid />
             {
                 !event ? 

@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Offline from "@/components/offline/Offline";
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 // components
-import Catogories from "@/components/catogories/Catogories";
+import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
 import EventCard from "@/app/home/EventCard";
 import SearchBar from "@/components/searchbar/SearchBar";
 // import Loading from "@/app/(Loading)/Loading";
@@ -25,6 +26,8 @@ import { get_allEvents } from "../(fetchAPI)/restAPI";
 export default function HomePage() {
 
     const [events, setEvents] = useState([]);
+    const [offline, setOffline] = useState(false);
+    const isOnline = navigator.onLine;
 
     useEffect(()=> {
         // get events data
@@ -34,12 +37,21 @@ export default function HomePage() {
         });
     }, []);
 
+    useEffect(() => {
+        // check connectivity
+        if (isOnline === false) 
+            setOffline(true);
+        else setOffline(false);
+    }, [isOnline]);
+
     return (
-        <main className="flex min-h-screen flex-col items-center pt-5 px-5">
-            {/* <h1 className="inline-block text-left my-2 font-bold text-xl pl-2">Evento</h1> */}
-            <SearchBar />
-            <Catogories />
-            <div className="w-full bg-black min-h-screen overflow-auto mt-3 px-4">
+        <main className="flex min-h-screen flex-col items-center pt-2 pb-16">
+            <h1 className="inline-block text-left w-full mt-2 font-bold text-2xl pl-2">Evento</h1>
+            {/* <SearchBar /> */}
+            <BottomNavBar />
+            <div className="w-full bg-black min-h-screen overflow-auto mt-0 px-2">
+                
+                { offline && <Offline /> }
                 
                 {
                     events.length ?
