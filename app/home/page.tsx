@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-// import Offline from "@/components/offline/Offline";
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
@@ -18,7 +17,6 @@ import { get_allEvents } from "../(fetchAPI)/restAPI";
 export default function HomePage() {
 
     const [events, setEvents] = useState([]);
-    // const isOnline = navigator.onLine;
 
     useEffect(()=> {
         // get events data
