@@ -16,7 +16,7 @@ export default function EventCard({ data }: any) {
             </span>
             
             {/* LINKS TO EVENT PAGE BY ID */}
-                <Link href={`/event/${data._id ? data._id : '/event/'}`} >
+                <Link href={`event/${data._id}`} >
                     <Image className="rounded-md aspect-square " src={ DummyImage} alt="event picture" />
                     <div className="flex flex-row justify-between mt-3 px-2">
                         <h2 className=" font-bold text-xl capitalize">{ `${data.title}`}</h2>
