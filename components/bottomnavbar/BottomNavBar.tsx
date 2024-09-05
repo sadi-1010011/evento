@@ -3,7 +3,7 @@
 import DummyIcons from "@/assets/evento.jpeg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { act, useState } from "react";
+import { useState } from "react";
 // icons 
 import FavIcon from "@/assets/icons/heart-black.png"
 import CatogoryIcon from "@/assets/icons/categories.png"
@@ -16,7 +16,7 @@ export default function BottomNavBar({ active = 'Explore'}) {
     const [activeTab, setActiveTab] = useState(active);
     const router = useRouter();
 
-    console.log(activeTab);
+    // console.log(activeTab);
     
     // const navigariontabs = ['explore', 'catogory', 'favorites', 'profile'];
 

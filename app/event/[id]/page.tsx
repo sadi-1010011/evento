@@ -1,4 +1,6 @@
-"use client"
+"use client" // client page
+export const dynamic = 'force-dynamic'; // force dynamic route
+
 import GalleryGrid from "@/components/gallerygrid/GalleryGrid";
 import Image from "next/image";
 import { useParams } from "next/navigation";
