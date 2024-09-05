@@ -4,13 +4,16 @@ import Image from "next/image";
 import Link from "next/link";
 import DummyImage from "@/assets/eventoLogo.jpeg";
 import LocationIcon from "@/assets/icons/location-pin.png";
+import FavIcon from "@/assets/icons/heart-black.png"
 
 export default function EventCard({ data }: any) {
 
     return (
-        <div className="flex my-10 flex-col rounded-xl bg-white w-full text-black">
+        <div className="flex my-10 flex-col rounded-xl bg-white w-full text-black relative">
             <div className="absolute bg-white text-sm font-semibold px-2.5 shadow-md m-5 rounded-xl" >{ data.date || 'event date'}</div>
-            <span className="absolute right-8 bg-white text-sm font-semibold px-2.5 shadow-md m-5 rounded-xl" >o</span>
+            <span className="absolute right-0 bg-white shadow-md m-5 p-1 rounded-full" >
+                <Image src={FavIcon} width={24} height={24} alt="favorite icon" />
+            </span>
             
             {/* LINKS TO EVENT PAGE BY ID */}
                 <Link href={`/event/${data._id ? data._id : '/event/'}`} >

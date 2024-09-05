@@ -1,6 +1,5 @@
 "use client"
 import GalleryGrid from "@/components/gallerygrid/GalleryGrid";
-import DummyImg from "@/assets/evento.jpeg";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -11,6 +10,12 @@ import { get_eventById, delete_eventById } from "@/app/(fetchAPI)/restAPI";
 // Loading skeleton
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+// ICONS
+import DeleteIcon from "@/assets/icons/delete.png"
+import EditIcon from "@/assets/icons/edit.png"
+import HostIcon from "@/assets/icons/host_dark.png"
+import LocationIcon from "@/assets/icons/location-pin.png";
+
 
 
 export default function EventPage() {
@@ -49,35 +54,50 @@ export default function EventPage() {
             (
             <>
             <div className="px-4">
-                <h1 className="text-left my-4 pt-2 text-xl font-semibold capitalize">{ event ? event.title : 'loading..' }</h1>
-                <div className="flex items-center">
-                    <Image className="rounded-full mr-3" src={DummyImg} width={50} height={50} alt="host icon" />
-                    <h3 className="capitalize">{ event ? event.hostname : 'host name'}</h3>
+                <h1 className="text-left my-6 pt-2 text-2xl font-semibold capitalize">{ event ? event.title : 'Title here..' }</h1>
+                <div className="flex items-center my-6">
+                    <Image className="rounded-full mr-3 bg-white p-0.5" src={HostIcon} width={50} height={50} alt="host icon" />
+                    <h3 className="capitalize">{ event ? `hosted by ${event.hostname}` : 'host name'}</h3>
                 </div>
-                <p className="mt-3 pl-2 ">{ event ? event.description : 'loading..'}</p>
+
+                <hr style={{ width: '90%', display: 'block', margin: 'auto'}} />
+                
+                <p className="my-6 pl-2 text-gray-300">{ event ? event.description : 'description..'}</p>
                 <div className="flex items-center m-2">
-                    <Image src={DummyImg} width={25} height={25} alt="location icon" />
-                    <span className="px-2">{ event ? event.location : 'loading..'}</span>
+                    <Image className="bg-white p-1.5 rounded-full" src={LocationIcon} width={35} height={35} alt="location icon" />
+                    <span className="px-2">{ event ? event.location : 'location..'}</span>
                 </div>
+
+                <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
+
+                <div className="pl-2">
+                    <h2>Date</h2>
+                    <h1>{ event ? event.date : 'Date..' }</h1>
+                </div>
+                
+
             </div>
 
 
-            <button className="fixed top-4 right-6 bg-red-500 text-white capitalize text-sm font-semibold rounded-full p-2 px-3 border border-gray-700 ">
-                {/* ADMIN ONLY FEATURE !!! */}
-                <Link href={`/edit-event/${event ? event._id : false}`}>
-                    edit event !
-                    <br />
-                    <span className="d-block font-light text-xs">{ `(admin only!)` }</span>
-                </Link>
-            </button>
-            <button className="fixed top-4 left-6 bg-red-500 text-white capitalize text-sm font-semibold rounded-full p-2 px-3 border border-gray-700 ">
-                <span onClick={ () => delete_eventById(event._id).then(res => { if (res.ok) router.back(); else alert('error in deleting event!'); }) }>
-                    delete event !
-                    <br />
-                    <span className="d-block font-light text-xs">{ `(admin only!)` }</span>
-                </span>
-                {/* -- END -- */}
-            </button>
+            {/* ADMIN ONLY FEATURE !!! */}
+
+            <div className="bg-slate-800 flex items-center justify-evenly py-2.5 bottom-0 absolute w-full">
+                <button className="bg-red-500 text-white capitalize text-sm font-semibold rounded-full p-2 px-3">
+                    <Link href={`/edit-event/${event ? event._id : false}`}>
+                        <Image className="block m-auto" src={EditIcon} width={30} height={30} alt="edit icon" />
+                    </Link>
+                </button>
+
+                <span className="d-block font-light text-xs">{ `(admin only!)` }</span>
+
+                <button className="bg-red-500 text-white capitalize text-sm font-semibold rounded-full p-2 px-3">
+                    <span onClick={ () => delete_eventById(event._id).then(res => { if (res.ok) router.back(); else alert('error in deleting event!'); }) }>
+                        <Image className="block m-auto" src={DeleteIcon} width={30} height={30} alt="edit icon" />
+                    </span>
+                </button>
+            </div>
+
+            {/* -- END -- */}
 
 
             <div className="flex items-center justify-between p-3 fixed bottom-0 right-0 left-0 bg-slate-300 text-black">
