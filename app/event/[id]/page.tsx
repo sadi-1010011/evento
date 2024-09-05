@@ -1,12 +1,13 @@
 "use client" // client page
 export const dynamic = 'force-dynamic'; // force dynamic route
 
-import GalleryGrid from "@/components/gallerygrid/GalleryGrid";
+import { unstable_noStore } from "next/cache";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import GalleryGrid from "@/components/gallerygrid/GalleryGrid";
 // APIs
 import { get_eventById, delete_eventById } from "@/app/(fetchAPI)/restAPI";
 // Loading skeleton
@@ -20,8 +21,10 @@ import LocationIcon from "@/assets/icons/location-pin.png";
 
 
 
-export default function EventPage() {
+export default async function EventPage() {
 
+    unstable_noStore();
+    
     const [event, setEvent] = useState<any>();
     const router = useRouter();
     const params = useParams();
