@@ -24,7 +24,7 @@ import LocationIcon from "@/assets/icons/location-pin.png";
 export default async function EventPage() {
 
     unstable_noStore();
-    
+
     const [event, setEvent] = useState<any>();
     const router = useRouter();
     const params = useParams();
@@ -32,7 +32,7 @@ export default async function EventPage() {
 
     useEffect(() => {
         // fetch all data by id
-        get_eventById(id).then((result) => {
+        if (id) get_eventById(id).then((result) => {
                 // console.log('found element by id', result)
                 if (result) setEvent(result)
                 else return;
