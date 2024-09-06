@@ -31,8 +31,7 @@ export default function BottomNavBar({ active = 'Explore'}) {
             alert('favorites under construction')
             // router.push('/favorites');
         if (item === 'Profile')
-            alert('profile under construction')
-            // router.push('/profile');
+            router.push('/profile/1');
     }
 
     return (
