@@ -30,7 +30,7 @@ export default function EventPage() {
     useEffect(() => {
         // fetch all data by id
         console.log('loading event page..');
-        if (id) get_eventById(id).then((result) => {
+        if (id) get_eventById(String(id)).then((result) => {
                 // console.log('found element by id', result)
                 if (result) setEvent(result)
                 else return;
