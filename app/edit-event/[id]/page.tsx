@@ -13,7 +13,7 @@ export default function CreateEvent() {
     const [dropedImage, setDropedImage] = useState('');
     const router = useRouter();
     const params = useParams();
-    const id = params.id;
+    const id = String(params.id);
 
     useEffect(() => {
         // get event by id
