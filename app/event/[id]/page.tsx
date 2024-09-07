@@ -25,12 +25,12 @@ export default function EventPage() {
     const [event, setEvent] = useState<any>();
     const router = useRouter();
     const params = useParams();
-    const id = String(params.id);
+    let id = String(params.id);
 
     useEffect(() => {
         // fetch all data by id
         console.log('loading event page..');
-        if (id) get_eventById(String(id)).then((result) => {
+        if (typeof id === "string") get_eventById(id).then((result) => {
                 // console.log('found element by id', result)
                 if (result) setEvent(result)
                 else return;
