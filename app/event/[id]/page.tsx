@@ -1,7 +1,6 @@
 "use client" // client page
 export const dynamic = 'force-dynamic'; // force dynamic route
 
-import { unstable_noStore } from "next/cache";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -21,14 +20,12 @@ import LocationIcon from "@/assets/icons/location-pin.png";
 
 
 
-export default async function EventPage() {
-
-    unstable_noStore();
+export default function EventPage() {
 
     const [event, setEvent] = useState<any>();
     const router = useRouter();
     const params = useParams();
-    const id = params.id;
+    const id = String(params.id);
 
     useEffect(() => {
         // fetch all data by id

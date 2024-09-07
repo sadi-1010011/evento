@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 export async function GET(req: Request, {params} : { params: { id: string } }) {
     
     const id = params.id; // get id
+    console.log('dynamic route: ', id);
     
     // self explanatory
     await connectMongoDB();

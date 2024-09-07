@@ -1,6 +1,6 @@
 // API CALLS 
 
-export const get_eventById = async (id: any) => {
+export const get_eventById = async (id: string) => {
     const res = await fetch(`/api/event/${id}`, { method: 'GET' });
     const event = await res.json();
     return event;
