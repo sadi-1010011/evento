@@ -1,6 +1,6 @@
 "use client"
 
-import DummyImg from "@/assets/evento.jpeg";
+import DummyImg from "@/assets/eventoLogo.jpeg";
 import catogories from "@/data/catogoriesData";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -24,7 +24,7 @@ export default function CatogoryPage() {
 
                 {
                     // when clicked, sets the selected catogory item
-                    catogories.map(catogory => <div key={catogory} onClick={ (e)=> setSelectedCatogory(e.currentTarget?.lastChild?.textContent ? (e.currentTarget.lastChild.textContent).toLowerCase() : '' ) /* router.push('/home') */ } className={`w-5/12 p-1 transition-all rounded-md my-2 ${selectedCatogory === catogory ? 'bg-slate-200 text-black' : 'bg-slate-900'} `}>
+                    catogories.map(catogory => <div key={catogory} onClick={ (e)=> setSelectedCatogory(e.currentTarget?.lastChild?.textContent ? (e.currentTarget.lastChild.textContent).toLowerCase() : '' ) /* router.push('/home') */ } className={`w-5/12 p-1 transition-all rounded-md my-2 ${selectedCatogory === catogory ? 'bg-slate-200 text-black' : 'bg-slate-900 text-white'} `}>
                         <Image priority src={DummyImg} className="w-full h-auto rounded-md" alt="catogory icon" />
                         <h2 className="text-center pt-1 m-0 capitalize font-semibold">{ catogory }</h2>
                     </div>)

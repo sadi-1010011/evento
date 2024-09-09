@@ -39,7 +39,7 @@ export default function EventPage() {
     }, [id]);
 
     return (
-        <main className="flex min-h-screen flex-col bg-black">
+        <main className="flex min-h-screen flex-col ">
             <GalleryGrid />
             {
                 !event ? 
@@ -65,7 +65,7 @@ export default function EventPage() {
 
                 <hr style={{ width: '90%', display: 'block', margin: 'auto'}} />
                 
-                <p className="my-6 pl-2 text-gray-300">{ event ? event.description : 'description..'}</p>
+                <p className="my-6 pl-2 text-gray-600">{ event ? event.description : 'description..'}</p>
                 <div className="flex items-center m-2">
                     <Image className="bg-white p-1.5 rounded-full" src={LocationIcon} width={35} height={35} alt="location icon" />
                     <span className="px-2">{ event ? event.location : 'location..'}</span>

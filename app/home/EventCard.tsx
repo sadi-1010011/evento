@@ -4,20 +4,26 @@ import Image from "next/image";
 import Link from "next/link";
 import DummyImage from "@/assets/eventoLogo.jpeg";
 import LocationIcon from "@/assets/icons/location-pin.png";
-import FavIcon from "@/assets/icons/heart-black.png"
+import FavIcon from "@/assets/icons/heart-black.png";
+import { DateTime } from "luxon";
 
 export default function EventCard({ data }: any) {
 
+    const eventdate = DateTime.fromISO(data.date).toFormat('yyyy LLL dd'); //=> '2024 Aug 14';
+
     return (
         <div className="flex my-10 flex-col rounded-xl bg-white w-full text-black relative">
-            <div className="absolute bg-white text-sm font-semibold px-2.5 shadow-md m-5 rounded-xl" >{ data.date || 'event date'}</div>
-            <span className="absolute right-0 bg-white shadow-md m-5 p-1 rounded-full" >
-                <Image src={FavIcon} width={24} height={24} alt="favorite icon" />
+            
+            <span className="absolute m-5 p-1 rounded-full" >
+                <Image src={FavIcon} width={22} height={22} alt="favorite icon" />
             </span>
+            <div className="absolute right-0 border text-white text-sm px-2.5 shadow-md m-5 rounded-xl" >
+                { eventdate || 'event date'}
+            </div>
             
             {/* LINKS TO EVENT PAGE BY ID */}
                 <Link href={`event/${data._id}`} >
-                    <Image className="rounded-md aspect-square " src={ DummyImage} alt="event picture" />
+                    <Image className="rounded-xl aspect-square " src={DummyImage} alt="event picture" />
                     <div className="flex flex-row justify-between mt-3 px-2">
                         <h2 className=" font-bold text-xl capitalize">{ `${data.title}`}</h2>
                         {/* <span className="text-sm font-semibold capitalize">rating: 4.9</span> */}
