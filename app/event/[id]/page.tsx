@@ -19,7 +19,6 @@ import HostIcon from "@/assets/icons/host_dark.png"
 import LocationIcon from "@/assets/icons/location-pin.png";
 
 
-
 export default function EventPage() {
 
     const [event, setEvent] = useState<any>();
@@ -28,7 +27,7 @@ export default function EventPage() {
     let id = String(params.id);
 
     const get_eventById = async (id: string) => {
-        const res = await fetch(`/api/event/${id}`, { method: 'GET' });
+        const res = await fetch(`/api/event/${id}`, { method: 'GET', cache: "no-store" });
         const event = await res.json();
         return event;
     }
