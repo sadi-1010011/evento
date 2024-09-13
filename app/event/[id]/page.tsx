@@ -1,4 +1,4 @@
-"use client" // client page
+"use client"; // client page
 export const dynamic = 'force-dynamic'; // force dynamic route
 
 import Image from "next/image";
@@ -35,10 +35,10 @@ export default function EventPage() {
     useEffect(() => {
         // fetch all data by id
         console.log('loading event page..');
-        if (typeof id === "string") get_eventById(id).then((result) => {
+        if (id) get_eventById(id).then((result) => {
                 console.log('found element by id', result)
                 if (result) setEvent(result)
-                else return;
+                // else return;
             }
         )
     }, [id]);
@@ -82,8 +82,6 @@ export default function EventPage() {
                     <h2>Date</h2>
                     <h1>{ event ? event.date : 'Date..' }</h1>
                 </div>
-                
-
             </div>
 
 

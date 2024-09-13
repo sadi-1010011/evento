@@ -40,18 +40,3 @@ export async function POST(req: Request) {
     }
 
 }
-
-export async function DELETE() {
-    // self explanatory
-    await connectMongoDB();
-    // try to get items
-    try {
-        const events = await Event.find({});
-        return NextResponse.json({ message: 'event successfully deleted' });
-    }
-    // err handling here..
-    catch (error: any) {
-        return NextResponse.json({ error: error.message });
-    }
-
-}

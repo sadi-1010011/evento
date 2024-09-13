@@ -17,12 +17,14 @@ import { get_allEvents } from "../(fetchAPI)/restAPI";
 export default function HomePage() {
 
     const [events, setEvents] = useState([]);
+    const [isoffline, setOffline] = useState(false);
 
     useEffect(()=> {
         // get events data
         get_allEvents().then((events) => {
             if (events.length)
                 setEvents(events);
+            else setOffline(true);
         });
     }, []);
 
@@ -35,18 +37,22 @@ export default function HomePage() {
             <div className="w-full bg-white min-h-screen overflow-auto mt-0 px-2">
                                 
                 {
-                    events.length ?
-                    events.map((event,i) => <EventCard key={i} data={event} />)
+                    isoffline ? 
+                        <h1 className="my-40 w-full text-center text-lg text-slate-400 capitalize font-bold">Development Mode !</h1>
                         :
-                    <div className="my-6">
-                    <SkeletonTheme baseColor="#202020" highlightColor="#444">
-                        <Skeleton height={120} className="my-2 rounded-md" count={1} />
-                        <Skeleton height={20} className="w-1/2" count={1} />
-                        <Skeleton height={50} width={50} className="m-2" borderRadius="50%" count={1} />
-                        <Skeleton height={25} className="w-1/3" count={1} />
-                        <Skeleton height={25} className="" count={1} />
-                    </SkeletonTheme>
-                    </div>
+                    events.length ?
+
+                        events.map((event,i) => <EventCard key={i} data={event} />)
+                            :
+                        <div className="my-6">
+                        <SkeletonTheme baseColor="#202020" highlightColor="#444">
+                            <Skeleton height={120} className="my-2 rounded-md" count={1} />
+                            <Skeleton height={20} className="w-1/2" count={1} />
+                            <Skeleton height={50} width={50} className="m-2" borderRadius="50%" count={1} />
+                            <Skeleton height={25} className="w-1/3" count={1} />
+                            <Skeleton height={25} className="" count={1} />
+                        </SkeletonTheme>
+                        </div>
                 }
 
                 {/* ADMIN ONLY FEATURE! */}
