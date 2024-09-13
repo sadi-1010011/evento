@@ -11,13 +11,13 @@ export default function FavoritesCard({ title }: { title: string }) {
         // Drop like animation for UX
         if (favcardref.current) {
             const favcard = favcardref.current;
-            try {   
-                favcard.style.transition = '0.6s';
-                favcard.style.marginBottom = '0.5rem';
-                favcard.style.padding = '0.9rem';
-            } catch (error) {
-                console.log('unable to perform animation: ', error);
-            }
+            // try {   
+            //     favcard.style.transition = '0.6s';
+            //     favcard.style.marginBottom = '0.5rem';
+            //     favcard.style.padding = '0.9rem';
+            // } catch (error) {
+            //     console.log('unable to perform animation: ', error);
+            // } // as of now animation is disabled
         }
     }, []);
 
