@@ -1,7 +1,7 @@
 "use client"
 
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
-import FavoritesCard from "@/components/favoritescard/favoritescard";
+import FavoritesCard from "@/components/favoritescard/FavoritesCard";
 
 export default function FavoritesPage() {
 
