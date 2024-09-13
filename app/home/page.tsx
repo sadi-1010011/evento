@@ -44,8 +44,8 @@ export default function HomePage() {
 
                         events.map((event,i) => <EventCard key={i} data={event} />)
                             :
-                        <div className="my-6">
-                        <SkeletonTheme baseColor="#202020" highlightColor="#444">
+                        <div className="my-8 mx-4">
+                        <SkeletonTheme baseColor="#808080" highlightColor="#888">
                             <Skeleton height={120} className="my-2 rounded-md" count={1} />
                             <Skeleton height={20} className="w-1/2" count={1} />
                             <Skeleton height={50} width={50} className="m-2" borderRadius="50%" count={1} />
