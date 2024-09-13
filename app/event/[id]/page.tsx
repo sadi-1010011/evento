@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import GalleryGrid from "@/components/gallerygrid/GalleryGrid";
 // APIs
-import { delete_eventById } from "@/app/(fetchAPI)/restAPI";
+import { get_eventById, delete_eventById } from "@/app/(fetchAPI)/restAPI";
 // Loading skeleton
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -26,19 +26,13 @@ export default function EventPage() {
     const params = useParams();
     let id = String(params.id);
 
-    const get_eventById = async (id: string) => {
-        const res = await fetch(`/api/event/${id}`, { method: 'GET', cache: "no-store" });
-        const event = await res.json();
-        return event;
-    }
-
     useEffect(() => {
         // fetch all data by id
         console.log('loading event page..');
-        if (id) get_eventById(id).then((result) => {
-                console.log('found element by id', result)
+        if (typeof id === "string") get_eventById(id).then((result) => {
+                console.log("found element by id", result)
                 if (result) setEvent(result)
-                // else return;
+                else return;
             }
         )
     }, [id]);
