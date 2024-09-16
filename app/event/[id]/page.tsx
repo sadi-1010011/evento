@@ -38,11 +38,11 @@ export default function EventPage() {
     }, [id]);
 
     return (
-        <main className="flex min-h-screen flex-col ">
+        <main className="flex min-h-screen flex-col">
             <GalleryGrid />
             {
                 !event ? 
-                (<div className="my-4 px-3">
+                (<div className="my-4 px-6">
                     <SkeletonTheme baseColor="#202020" highlightColor="#444">
                         <Skeleton height={120} className="my-2 rounded-md" count={1} />
                         <Skeleton height={20} className="w-1/2" count={1} />
@@ -72,7 +72,7 @@ export default function EventPage() {
 
                 <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
 
-                <div className="pl-2">
+                <div className="pl-2 pb-10">
                     <h2>Date</h2>
                     <h1>{ event ? event.date : 'Date..' }</h1>
                 </div>
@@ -81,7 +81,7 @@ export default function EventPage() {
 
             {/* ADMIN ONLY FEATURE !!! */}
 
-            <div className="bg-slate-800 flex items-center justify-evenly py-2.5 bottom-0 absolute w-full">
+            <div className="bg-slate-800 text-slate-400 flex items-center justify-evenly py-2.5 mb-10 w-full">
                 <button className="bg-red-500 text-white capitalize text-sm font-semibold rounded-full p-2 px-3">
                     <Link href={`/edit-event/${event ? event._id : false}`}>
                         <Image className="block m-auto" src={EditIcon} width={30} height={30} alt="edit icon" />

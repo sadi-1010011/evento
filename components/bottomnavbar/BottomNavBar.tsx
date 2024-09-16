@@ -29,8 +29,10 @@ export default function BottomNavBar({ active = 'Explore'}) {
             router.push('/home');
         if (item === 'Favorites')
             router.push('/favorites');
-        if (item === 'Profile')
+        if (item === 'Profile') {
             router.push('/profile');
+            router.refresh();
+        }
     }
 
     return (
