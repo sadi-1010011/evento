@@ -1,3 +1,4 @@
+"use client"
 import DummyImg from "@/assets/eventoLogo.jpeg";
 import "./styles.css";
 import Image from "next/image";
