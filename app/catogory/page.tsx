@@ -16,7 +16,7 @@ export default function CatogoryPage() {
                 <SearchBar />
             </div>
 
-            <div className="flex-col items-center justify-center w-full">
+            <div className="grid-rows-3 w-full">
                 <CatogoryCard active="All" />
             </div>
 

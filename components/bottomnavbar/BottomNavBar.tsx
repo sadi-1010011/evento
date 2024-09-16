@@ -1,6 +1,6 @@
 "use client"
 
-import DummyIcons from "@/assets/evento.jpeg";
+import DummyIcon from "@/assets/evento.jpeg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -30,14 +30,14 @@ export default function BottomNavBar({ active = 'Explore'}) {
         if (item === 'Favorites')
             router.push('/favorites');
         if (item === 'Profile')
-            router.push('/profile/1');
+            router.push('/profile');
     }
 
     return (
         <div style={{ boxShadow: "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px" }} className="flex fixed bottom-0 left-0 right-0 bg-white rounded-md z-30 text-black w-full flex-row items-center justify-evenly">
 
                     <div onClick={ () => changeActiveTab('Explore') } className={`flex w-full rounded-md flex-col items-center pb-1 pt-2 transition-all hover:bg-slate-400 hover:text-white ${ activeTab  === 'Explore' ? 'font-bold bg-slate-300' : 'font-normal' }`}>
-                        <Image className="rounded-full" src={DummyIcons} width={22} height={22} alt="tab icon" />
+                        <Image className="rounded-full" src={DummyIcon} width={22} height={22} alt="tab icon" />
                         <span className={`text-xs capitalize my-1 ${ activeTab === 'Explore' ? 'font-bold' : 'font-normal' }`}>Explore</span>
                     </div>
 
