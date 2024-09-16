@@ -1,7 +1,8 @@
 // API CALLS 
 
+
 export const get_eventById = async (id: string) => {
-    const res = await fetch(`/api/event/${id}`, { method: 'GET', cache: 'no-store' });
+    const res = await fetch(`/api/event/${id}`, { method: 'GET', cache: 'no-store', next: { revalidate: 0 }});
     const event = await res.json();
     return event;
 }

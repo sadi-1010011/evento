@@ -1,5 +1,7 @@
 "use client"; // client page
 export const dynamic = 'force-dynamic'; // force dynamic route
+export const fetchCache = 'force-no-store'; // disable vercel data cache!
+export const dynamicParams = true // dynamic params ON!
 
 import Image from "next/image";
 import { useParams } from "next/navigation";
