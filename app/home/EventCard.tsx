@@ -23,7 +23,7 @@ export default function EventCard({ data }: any) {
             </div>
             
             {/* LINKS TO EVENT PAGE BY ID */}
-                <div onClick={ () => { router.push(`event/${data._id}`); router.refresh(); }} >
+                <div onClick={ (event) => { event.preventDefault(); router.push(`event/${data._id}`); router.refresh(); }} >
                     <Image className="rounded-xl aspect-square " src={DummyImage} alt="event picture" />
                     <div className="flex flex-row justify-between mt-3 px-2">
                         <h2 className=" font-bold text-xl capitalize">{ `${data.title}`}</h2>
