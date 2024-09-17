@@ -1,9 +1,9 @@
-"use server"
-// export const dynamic = 'force-dynamic'; // force dynamic route
+
+export const dynamic = 'force-dynamic'; // force dynamic route
 // export const fetchCache = 'force-no-store'; // disable vercel data cache!
 
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
 import GalleryGrid from "@/components/gallerygrid/GalleryGrid";
 // APIs
 // import { get_eventById, delete_eventById } from "@/app/(fetchAPI)/restAPI";
@@ -17,7 +17,7 @@ import HostIcon from "@/assets/icons/host_dark.png"
 import LocationIcon from "@/assets/icons/location-pin.png";
 
 
-export default async function EventPage() {
+export default function Page() {
 
     const event = {
         _id: '23982',
