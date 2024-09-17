@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import GalleryGrid from "@/components/gallerygrid/GalleryGrid";
 // APIs
-import { get_eventById, delete_eventById } from "@/app/(fetchAPI)/restAPI";
+// import { get_eventById, delete_eventById } from "@/app/(fetchAPI)/restAPI";
 // Loading skeleton
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -20,10 +20,10 @@ import LocationIcon from "@/assets/icons/location-pin.png";
 export default async function EventPage() {
 
     const event = {
+        _id: '23982',
         title: 'event title',
         hostname: 'hostname',
         location: 'calicut',
-        _id: '23982',
         ticketprice: 100,
         description: 'some description',
         date: '23-3-2021'
@@ -76,9 +76,9 @@ export default async function EventPage() {
 
             <div className="bg-slate-800 text-slate-400 flex items-center justify-evenly py-2.5 mb-10 w-full">
                 <button className="bg-red-500 text-white capitalize text-sm font-semibold rounded-full p-2 px-3">
-                    <Link href={`/edit-event/${event ? event._id : false}`}>
+                    <a href={`/edit-event/${event._id}`}>
                         <Image className="block m-auto" src={EditIcon} width={30} height={30} alt="edit icon" />
-                    </Link>
+                    </a>
                 </button>
 
                 <span className="d-block font-light text-xs">{ `(admin only!)` }</span>
