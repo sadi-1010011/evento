@@ -7,8 +7,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 // components
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
-import EventCard from "@/app/home/EventCard";
-// import SearchBar from "@/components/searchbar/SearchBar";
+import EventCard from "@/app/events/EventCard";
 // import Loading from "@/app/(Loading)/Loading";
 // API
 import { get_allEvents } from "../(fetchAPI)/restAPI";

@@ -24,8 +24,8 @@ export default function EventCard({ data }: any) {
             </div>
             
             {/* LINKS TO EVENT PAGE BY ID */}
-                {/* <div onClick={ (event) => { event.preventDefault(); router.push(`event/${data._id}`); router.refresh(); }} > */}
-                <a href={`event/${data._id}`}>
+                <div onClick={ (event) => { event.preventDefault(); router.push(`events/${data._id}`); router.refresh(); }} >
+                {/* <a href={`events/${data._id}`}> */}
                     <Image className="rounded-xl aspect-square " src={DummyImage} alt="event picture" />
                     <div className="flex flex-row justify-between mt-3 px-2">
                         <h2 className=" font-bold text-xl capitalize">{ `${data.title}`}</h2>
@@ -39,8 +39,8 @@ export default function EventCard({ data }: any) {
                     <p className="inline pr-2 text-slate-600">{data.location || 'event description'}</p>
                     {/* <p className="px-2 text-slate-600">duration</p> */}
                     <button className="my-0.5 pb-2 capitalize font-extrabold text-center w-full text-green-900 font-sans">view more</button>
-                    </a>
-                {/* </div> */}
+                    {/* </a> */}
+                </div>
             </div>
     );
 }

@@ -1,12 +1,16 @@
-
+"use client"; // client page
 export const dynamic = 'force-dynamic'; // force dynamic route
-// export const fetchCache = 'force-no-store'; // disable vercel data cache!
+export const fetchCache = 'force-no-store'; // disable vercel data cache!
+export const dynamicParams = true // dynamic params ON!
 
 import Image from "next/image";
-// import Link from "next/link";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import GalleryGrid from "@/components/gallerygrid/GalleryGrid";
 // APIs
-// import { get_eventById, delete_eventById } from "@/app/(fetchAPI)/restAPI";
+import { get_eventById, delete_eventById } from "@/app/(fetchAPI)/restAPI";
 // Loading skeleton
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -17,18 +21,23 @@ import HostIcon from "@/assets/icons/host_dark.png"
 import LocationIcon from "@/assets/icons/location-pin.png";
 
 
-export default function Page() {
+export default function EventPage() {
 
-    const event = {
-        _id: '23982',
-        title: 'event title',
-        hostname: 'hostname',
-        location: 'calicut',
-        ticketprice: 100,
-        description: 'some description',
-        date: '23-3-2021'
-    }
-    console.log('loading event page..');
+    const [event, setEvent] = useState<any>();
+    const router = useRouter();
+    const params = useParams();
+    let id = String(params.id);
+
+    useEffect(() => {
+        // fetch all data by id
+        console.log('loading event page..');
+        if (typeof id === "string") get_eventById(id).then((result) => {
+                console.log("found element by id", result)
+                if (result) setEvent(result)
+                else return;
+            }
+        )
+    }, [id]);
 
     return (
         <main className="flex min-h-screen flex-col">
@@ -76,15 +85,17 @@ export default function Page() {
 
             <div className="bg-slate-800 text-slate-400 flex items-center justify-evenly py-2.5 mb-10 w-full">
                 <button className="bg-red-500 text-white capitalize text-sm font-semibold rounded-full p-2 px-3">
-                    <a href={`/edit-event/${event._id}`}>
+                    <Link href={`/edit-event/${event ? event._id : false}`}>
                         <Image className="block m-auto" src={EditIcon} width={30} height={30} alt="edit icon" />
-                    </a>
+                    </Link>
                 </button>
 
                 <span className="d-block font-light text-xs">{ `(admin only!)` }</span>
 
                 <button className="bg-red-500 text-white capitalize text-sm font-semibold rounded-full p-2 px-3">
+                    <span onClick={ () => delete_eventById(event._id).then(res => { if (res.ok) router.back(); else alert('error in deleting event!'); }) }>
                         <Image className="block m-auto" src={DeleteIcon} width={30} height={30} alt="edit icon" />
+                    </span>
                 </button>
             </div>
 

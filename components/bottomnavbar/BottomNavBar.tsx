@@ -26,7 +26,7 @@ export default function BottomNavBar({ active = 'Explore'}) {
         if (item === 'Catogory')
             router.push('/catogory');
         if (item === 'Explore')
-            router.push('/home');
+            router.push('/events');
         if (item === 'Favorites')
             router.push('/favorites');
         if (item === 'Profile')

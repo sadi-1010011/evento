@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Logo from "@/assets/eventoLogo.jpeg";
 import Image from "next/image";
-import styles from "@/app/home/style.module.css";
+import styles from "@/app/events/style.module.css";
 
 export default function Home() {
 
@@ -19,7 +19,7 @@ export default function Home() {
       logo.style.opacity = '0';
     }
     setTimeout(()=> {
-      router.push('/home');
+      router.push('/events');
     }, 800);
   }, []);
 
