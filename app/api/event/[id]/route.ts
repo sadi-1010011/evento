@@ -41,7 +41,9 @@ export async function DELETE(req: Request, {params} : { params: { id: string }})
 export async function PUT(req: Request, {params} : { params: { id: string }}) {
 
     const { data } = await req.json();
+    console.log(data);
     const id = params.id;
+    await connectMongoDB();
 
     try {
         const event = await Event.updateOne({ _id: id }, data );

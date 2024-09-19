@@ -20,7 +20,7 @@ export const put_eventById = async (id: string, eventdata: {}) => {
     console.log('updating event data!', id)
     // update to server
     const response = await fetch(`/api/event/${id}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
             "Content-Type": "application/json",
         },

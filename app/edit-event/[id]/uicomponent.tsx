@@ -94,7 +94,7 @@ export default function CreateEventUI({ data }: { data: any }) {
         put_eventById(id, eventdata).then(res => {
             if (res.ok) {
                 console.log('data updated successfully!');
-                router.push('/');
+                router.push('/events');
             }
             else console.log('something went wrong! in saving to DB ', res.statusText);
         })
