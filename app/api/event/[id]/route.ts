@@ -56,6 +56,7 @@ export async function PUT(req: Request, {params} : { params: { id: string }}) {
 
     // other type of errs
     catch (error: any) {
+        console.log('err in updating event: ', error);
         return NextResponse.json({ error: error.message });
     }
     
