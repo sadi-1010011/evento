@@ -4,7 +4,6 @@ export const fetchCache = 'force-no-store'; // disable vercel data cache!
 export const dynamicParams = true // dynamic params ON!
 
 import Image from "next/image";
-import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -21,12 +20,11 @@ import HostIcon from "@/assets/icons/host_dark.png"
 import LocationIcon from "@/assets/icons/location-pin.png";
 
 
-export default function EventPage() {
+export default function EventPage({ params }: { params: { id: string }}) {
 
     const [event, setEvent] = useState<any>();
-    const router = useRouter();
-    const params = useParams();
     let id = String(params.id);
+    const router = useRouter();
 
     useEffect(() => {
         // fetch all data by id

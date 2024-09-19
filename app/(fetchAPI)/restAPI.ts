@@ -5,6 +5,7 @@ import { unstable_noStore as noStore } from "next/cache";
 
 export const get_eventById = async (id: string) => {
     noStore();
+    console.log('fetch req to /api/events/[id]');
     const res = await fetch(`/api/event/${id}`, { method: 'GET', cache: 'no-store', next: { revalidate: 0 }});
     const event = await res.json();
     return event;
