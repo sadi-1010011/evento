@@ -1,4 +1,4 @@
-import { put_eventById } from "@/app/(fetchAPI)/restAPI";
+// import { put_eventById } from "@/app/(fetchAPI)/restAPI";
 import connectMongoDB from "@/lib/db";
 import Event from "@/models/event";
 import EditEventUI from "./uicomponent";

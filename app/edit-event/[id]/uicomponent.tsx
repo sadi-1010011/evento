@@ -162,7 +162,7 @@ export default function EditEventUI({ data }: { data: any }) {
             </div>
 
             <div className="m-6 text-center">
-                <Link href="/">go Back</Link>
+                <Link href="/events">go Back</Link>
             </div>
         </div>
     );
