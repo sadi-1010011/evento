@@ -1,41 +1,45 @@
-"use client"; // client page
-export const dynamic = 'force-dynamic'; // force dynamic route
-export const fetchCache = 'force-no-store'; // disable vercel data cache!
+// export const dynamic = 'force-dynamic'; // force dynamic route
+// export const fetchCache = 'force-no-store'; // disable vercel data cache!
 export const dynamicParams = true // dynamic params ON!
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import GalleryGrid from "@/components/gallerygrid/GalleryGrid";
-// APIs
-import { get_eventById, delete_eventById } from "@/app/(fetchAPI)/restAPI";
 // Loading skeleton
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 // ICONS
-import DeleteIcon from "@/assets/icons/delete.png"
-import EditIcon from "@/assets/icons/edit.png"
 import HostIcon from "@/assets/icons/host_dark.png"
 import LocationIcon from "@/assets/icons/location-pin.png";
+import connectMongoDB from "@/lib/db";
+import Event from "@/models/event";
+import EditDelete from "@/components/adminFeatures/adminFeature";
 
+export async function generateStaticParams() {
+    const events = await fetch(`https://evento-calicut.vercel.app/api/events`, { method: 'GET', next: { revalidate: 60 } }).then(res => res.json());
+   
+    return events.map((event: any) => ({
+      id: event._id,
+    }))
+}
 
-export default function EventPage({ params }: { params: { id: string }}) {
+export default async function EventPage({ params }: { params: { id: string }}) {
 
-    const [event, setEvent] = useState<any>();
-    let id = String(params.id);
-    const router = useRouter();
+    let id = params.id;
+    let event: any;
+    console.log('fetching: ', id)
 
-    useEffect(() => {
-        // fetch all data by id
-        console.log('loading event page..');
-        if (typeof id === "string") get_eventById(id).then((result) => {
-                console.log("found element by id", result)
-                if (result) setEvent(result)
-                else return;
-            }
-        )
-    }, [id]);
+    // self explanatory
+    await connectMongoDB();
+
+    // try to get items
+    try {
+        event = await Event.findById(id);
+    }
+    // err handling here..
+    catch (error: any) {
+        console.log(error);
+    }
+    console.log('event', event);
 
     return (
         <main className="flex min-h-screen flex-col">
@@ -81,21 +85,7 @@ export default function EventPage({ params }: { params: { id: string }}) {
 
             {/* ADMIN ONLY FEATURE !!! */}
 
-            <div className="bg-slate-800 text-slate-400 flex items-center justify-evenly py-2.5 mb-10 w-full">
-                <button className="bg-red-500 text-white capitalize text-sm font-semibold rounded-full p-2 px-3">
-                    <Link href={`/edit-event/${event ? event._id : false}`}>
-                        <Image className="block m-auto" src={EditIcon} width={30} height={30} alt="edit icon" />
-                    </Link>
-                </button>
-
-                <span className="d-block font-light text-xs">{ `(admin only!)` }</span>
-
-                <button className="bg-red-500 text-white capitalize text-sm font-semibold rounded-full p-2 px-3">
-                    <span onClick={ () => delete_eventById(event._id).then(res => { if (res.ok) router.back(); else alert('error in deleting event!'); }) }>
-                        <Image className="block m-auto" src={DeleteIcon} width={30} height={30} alt="edit icon" />
-                    </span>
-                </button>
-            </div>
+                <EditDelete id={event._id} />
 
             {/* -- END -- */}
 

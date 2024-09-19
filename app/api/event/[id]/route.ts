@@ -13,15 +13,6 @@ export async function GET(req: Request, {params} : { params: { id: string } }) {
     try {
         const event = await Event.findById(id);
         if (event) return NextResponse.json(event);
-        
-        // new Response(event, {
-        //     status: 200,
-        //     headers: {
-        //     "Cache-Control": "max-age=0",
-        //     "CDN-Cache-Control": "max-age=0",
-        //     "Vercel-CDN-Cache-Control": "max-age=0",
-        //     },
-        // });
         else return NextResponse.json({ message: 'event unavailable' });
     }
     // err handling here..
