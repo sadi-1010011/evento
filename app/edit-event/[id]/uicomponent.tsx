@@ -5,9 +5,9 @@ import DummyImage from "@/assets/evento.jpeg";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { put_eventById } from "@/app/(fetchAPI)/restAPI";
+// import { put_eventById } from "@/app/(fetchAPI)/restAPI";
 
-export default function CreateEventUI({ data }: { data: any }) {
+export default function EditEventUI({ data }: { data: any }) {
 
     const [eventdata, setEventData] = useState<any>(data);
     const [dropedImage, setDroppedImage] = useState('');
@@ -85,19 +85,24 @@ export default function CreateEventUI({ data }: { data: any }) {
         setEventData((previusData: any) => { return { ...previusData, catogory: value }})        
     }
 
-    function handle_Submit(e: any, id: string) {
+    async function handle_Submit(e: any, id: string) {
         if(!e) return
         e.preventDefault();
         console.log('submitting data..');
         console.table(eventdata);
         // submit data.. to backend
-        put_eventById(id, eventdata).then(res => {
-            if (res.ok) {
+        const response = await fetch(`https://evento-calicut.vercel.app/api/event/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ data: eventdata }),
+        })
+            if (response.ok) {
                 console.log('data updated successfully!');
                 router.push('/events');
             }
-            else console.log('something went wrong! in saving to DB ', res.statusText);
-        })
+            else console.log('something went wrong! in saving to DB ', response.statusText);
     }
 
     return (

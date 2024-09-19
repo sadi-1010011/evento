@@ -1,7 +1,7 @@
-import { get_eventById, put_eventById } from "@/app/(fetchAPI)/restAPI";
-import CreateEventUI from "./uicomponent";
+import { put_eventById } from "@/app/(fetchAPI)/restAPI";
 import connectMongoDB from "@/lib/db";
 import Event from "@/models/event";
+import EditEventUI from "./uicomponent";
 
 
 export async function generateStaticParams() {
@@ -12,7 +12,7 @@ export async function generateStaticParams() {
     }))
 }
 
-export default async function CreateEventPage({ params }: { params: { id: string }}) {
+export default async function EditEventPage({ params }: { params: { id: string }}) {
 
     let eventdata: any;
     const id = params.id;
@@ -35,6 +35,6 @@ export default async function CreateEventPage({ params }: { params: { id: string
 
 
     return ( 
-            <CreateEventUI data={eventdata} />
+            <EditEventUI data={eventdata} />
     );
 }
