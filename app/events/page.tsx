@@ -1,6 +1,5 @@
 "use client"
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -11,19 +10,21 @@ import EventCard from "@/app/events/EventCard";
 // import Loading from "@/app/(Loading)/Loading";
 // API
 import { get_allEvents } from "../(fetchAPI)/restAPI";
+import { useRouter } from "next/navigation";
 
 
 export default function HomePage() {
 
     const [events, setEvents] = useState([]);
     const [isoffline, setOffline] = useState(false);
+    const router = useRouter();
 
     useEffect(()=> {
         // get events data
         get_allEvents().then((events) => {
             if (events.length)
                 setEvents(events);
-            // else setOffline(true);
+            else setOffline(true);
         });
     }, []);
 
@@ -56,11 +57,11 @@ export default function HomePage() {
 
                 {/* ADMIN ONLY FEATURE! */}
 
-                <Link href="/create-event" className="flex m-4 p-2 items-center justify-center rounded-md border-2 border-slate-800 hover:bg-slate-400 hover:text-black">
+                <div onClick={ () => router.push("/create-event") } className="flex m-4 p-2 items-center justify-center rounded-md border-2 border-slate-800 hover:bg-slate-400 hover:text-black">
                     <h2 className="capitalize font-bold">add event</h2>
                     <span className="rounded-50 p-2 font-semibold text-xl capitalize">+</span>
                     <span className="d-block font-light text-xs">{ `(admin only!)` }</span>
-                </Link>
+                </div>
 
                 {/* END */}
 

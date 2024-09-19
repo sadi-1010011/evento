@@ -6,7 +6,6 @@ import LocationIcon from "@/assets/icons/location-pin.png";
 import FavIcon from "@/assets/icons/heart-black.png";
 import { DateTime } from "luxon";
 import { useRouter } from "next/navigation";
-// import Link from "next/link";
 
 export default function EventCard({ data }: any) {
 
@@ -24,7 +23,7 @@ export default function EventCard({ data }: any) {
             </div>
             
             {/* LINKS TO EVENT PAGE BY ID */}
-                <div onClick={ (event) => { event.preventDefault(); router.push(`events/${data._id}`); router.refresh(); }} >
+                <div onClick={ (event) => { event.preventDefault(); router.push(`events/${data._id}`); }} >
                 {/* <Link href={`events/${data._id}`}> */}
                     <Image className="rounded-xl aspect-square " src={DummyImage} alt="event picture" />
                     <div className="flex flex-row justify-between mt-3 px-2">

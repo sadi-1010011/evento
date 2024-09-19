@@ -26,20 +26,19 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
     let id = params.id;
     let event: any;
-    console.log('fetching: ', id)
 
     // self explanatory
     await connectMongoDB();
 
     // try to get items
     try {
-        event = await Event.findById(id);
+        let data = await Event.findById(id);
+        event = JSON.parse(JSON.stringify(data));
     }
     // err handling here..
     catch (error: any) {
         console.log(error);
     }
-    console.log('event', event);
 
     return (
         <main className="flex min-h-screen flex-col">

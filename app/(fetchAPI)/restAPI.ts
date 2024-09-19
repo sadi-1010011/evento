@@ -1,10 +1,7 @@
 // API CALLS 
 
-import { unstable_noStore as noStore } from "next/cache";
-
-
 export const get_eventById = async (id: string) => {
-    console.log('fetch req to /api/events/[id]');
+    // console.log('fetch req to /api/events/[id]');
     const res = await fetch(`https://evento-calicut.vercel.app/api/event/${id}`, { method: 'GET', next: { revalidate: 60 }});
     const event = await res.json();
     return event;
