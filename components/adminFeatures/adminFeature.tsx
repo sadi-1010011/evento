@@ -1,3 +1,4 @@
+"use client"
 
 // ICONS
 import DeleteIcon from "@/assets/icons/delete.png"

@@ -9,7 +9,8 @@ export const get_eventById = async (id: string) => {
 
 export const delete_eventById = async (id: any) => {
     console.log('deleting id: ',id);
-        const res = await fetch(`https://evento-calicut.vercel.app/api/event/${id}`, {
+        const res = await fetch(`/api/event/${id}`, {
+            // mode: "no-cors",
             method: "DELETE"
         }
     );
@@ -19,7 +20,7 @@ export const delete_eventById = async (id: any) => {
 export const put_eventById = async (id: string, eventdata: {}) => {
     console.log('updating event data!', id)
     // update to server
-    const response = await fetch(`https://evento-calicut.vercel.app/api/event/${id}`, {
+    const response = await fetch(`/api/event/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

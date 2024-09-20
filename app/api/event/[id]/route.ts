@@ -25,6 +25,8 @@ export async function GET(req: Request, {params} : { params: { id: string } }) {
 export async function DELETE(req: Request, {params} : { params: { id: string }}) {
     
     const id = params.id; // get id to delete
+    console.log('deleting item: ', id);
+
     await connectMongoDB();
     try {
         const event = await Event.findByIdAndDelete(id);

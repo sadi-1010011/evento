@@ -91,7 +91,7 @@ export default function EditEventUI({ data }: { data: any }) {
         console.log('submitting data..');
         console.table(eventdata);
         // submit data.. to backend
-        const response = await fetch(`https://evento-calicut.vercel.app/api/event/${id}`, {
+        const response = await fetch(`/api/event/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
