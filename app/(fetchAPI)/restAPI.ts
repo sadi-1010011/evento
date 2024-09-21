@@ -11,7 +11,7 @@ export const delete_eventById = async (id: any) => {
     console.log('deleting id: ',id);
         const res = await fetch(`/api/events/${id}`, {
             // mode: "no-cors",
-            method: "DELETE"
+            method: 'DELETE'
         }
     );
     return res;
@@ -21,7 +21,7 @@ export const put_eventById = async (id: string, eventdata: {}) => {
     console.log('updating event data!', id)
     // update to server
     const response = await fetch(`/api/events/${id}`, {
-        method: "PUT",
+        method: 'PUT',
         headers: {
             "Content-Type": "application/json",
         },

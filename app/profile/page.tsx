@@ -27,6 +27,12 @@ export default function ProfilePage() {
                         <span className="w-full h-auto border-yellow-300 border p-1.5 rounded-full">85</span>
                     </div>
                     <span className="text-xs text-slate-700 font-semibold">Streak</span>
+
+                    {/* LOGIN/SIGNUP */}
+                    <div className="flex items-center w-full mt-1.5 p-1 justify-around bg-slate-200 rounded-md hover:bg-black transition-all">
+                        <button className="rounded-md px-1 py-0.5 text-md font-semibold capitalize text-green-900 hover:text-white">Google Login</button>
+                        {/* <button className="rounded-md px-1 py-0.5 text-md font-semibold capitalize text-red-800">Sign Up</button> */}
+                    </div>
                 </div>
             </div>
 
