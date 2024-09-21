@@ -9,6 +9,7 @@ export interface IEvent extends Document {
     description: string;
     ticketprice: number;
     paid: boolean;
+    thumbnail: string;
     date: string;
 }
 
@@ -45,6 +46,10 @@ const eventSchema: Schema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    thumbnail: {
+        type: String,
+        required: false,
+    }
 }, {
     timestamps: true
 });

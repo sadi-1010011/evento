@@ -29,9 +29,7 @@ export default function Test() {
             <div>
                 <h1 className="text-slate-400">result in console</h1>
                 <div>
-                    {
-                        // result ? result.map((item: any/) => item.value) : 'result here..'
-                    }
+                    <span>{ result }</span>
                 </div>
             </div>
         </div>

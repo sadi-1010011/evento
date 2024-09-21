@@ -6,11 +6,17 @@ import LocationIcon from "@/assets/icons/location-pin.png";
 import FavIcon from "@/assets/icons/heart-black.png";
 import { DateTime } from "luxon";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function EventCard({ data }: any) {
 
     const router = useRouter();
+    const [thumbnail, setThumbnail] = useState('');
     const eventdate = DateTime.fromISO(data.date).toFormat('yyyy LLL dd'); //=> '2024 Aug 14';
+
+    useEffect(() => {
+        setThumbnail(data.thumbnail);
+    }, [data.thumbnail]);
 
     return (
         <div className="flex my-10 flex-col rounded-xl bg-white w-full text-black relative">
@@ -25,7 +31,7 @@ export default function EventCard({ data }: any) {
             {/* LINKS TO EVENT PAGE BY ID */}
                 <div onClick={ (event) => { event.preventDefault(); router.push(`events/${data._id}`); }} >
                 {/* <Link href={`events/${data._id}`}> */}
-                    <Image className="rounded-xl aspect-square " src={DummyImage} alt="event picture" />
+                    <Image className="rounded-xl aspect-square" src={thumbnail || DummyImage} width={500} height={500} alt="event picture" />
                     <div className="flex flex-row justify-between mt-3 px-2">
                         <h2 className=" font-bold text-xl capitalize">{ `${data.title}`}</h2>
                         {/* <span className="text-sm font-semibold capitalize">rating: 4.9</span> */}

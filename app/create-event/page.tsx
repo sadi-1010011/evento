@@ -6,24 +6,34 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { post_event } from "../(fetchAPI)/restAPI";
+import { DateTime } from "luxon";
 
 export default function CreateEvent() {
 
     const [eventdata, setEventData] = useState({
         title: '',
-        catogory: '',
+        catogory: 'all',
         hostname: '',
-        location: '',
+        location: 'calicut',
         description: '',
         ticketprice: 0,
+        thumbnail: '',
         paid: false, // default to free event
-        date: '' // event date
+        date: DateTime.now().toFormat('ff') // event date
     });
     const [dropedImage, setDropedImage] = useState('');
     const router = useRouter();
 
     useEffect(() => {
-
+        console.log('image upload coming soon..');
+        // https://dummyjson.com/image/SIZE/?text=TEXT
+        // fetch(`https://dummyjson.com/image/400x200/008080/ffffff?text=${ eventdata.title }`)
+        //     .then(response => response.blob()) // Convert response to blob
+        //     .then(blob => {
+        //         console.log('Fetched image blob:');
+                // setDropedImage();
+        // });
+        // Blob {size: SIZE, type: 'image/png'}
     }, []);
 
     function getDroppedImage(event: any) {
@@ -102,7 +112,9 @@ export default function CreateEvent() {
         e.preventDefault();
         console.log('submitting data..');
         // submit data.. to backend
-        // console.table(eventdata);
+        // set image thumbnail
+        if (dropedImage && eventdata) eventdata.thumbnail = dropedImage;
+        console.table(eventdata);
         post_event(eventdata).then(res => {
             if (res.ok) {
                 console.log('data saved successfully!');
@@ -113,9 +125,9 @@ export default function CreateEvent() {
     }
 
     return (
-        <div className="w-screen h-screen my-2 pt-3 px-6">
+        <div className="min-h-screen w-full my-2 pt-3 px-6">
             <h1 className="text-center text-xl capitalize font-semibold">add event</h1>
-            <div className="flex my-8 flex-col rounded-xl bg-white w-full text-black p-2 overflow-hidden">
+            <div className="flex my-8 flex-col relative rounded-xl bg-white w-full text-black p-2 overflow-hidden">
                 {/* IMAGE DROP */}
                 <div className="absolute bg-white text-slate-400 text-sm capitalize font-semibold cursor-copy shadow-md m-5 rounded-xl" >
                     <input onChange={ (event) => getDroppedImage(event) } className="capitalize inline-block p-5 rounded-xl font-bold placeholder-slate-500 outline-none border-none" type="text" placeholder="drop image link" />

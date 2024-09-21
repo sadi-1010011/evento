@@ -2,10 +2,13 @@ import DummyIcon from "@/assets/profile/mishal.jpeg";
 import SettingsIcon from "@/assets/icons/settings.png"
 import Image from "next/image";
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
+// SIGN IN
+import { signIn } from "next-auth/react";
 
 export default function ProfilePage() {
+
     return (
-        <div className="flex z-0 items-center min-h-screen w-full overflow-x-hidden flex-col bg-slate-200">
+        <div className="flex z-0 items-center min-h-screen w-full overflow-x-hidden overflow-y-scroll flex-col bg-slate-200">
             
             {/* BLUE COMPONENT */}
             <div className="flex flex-col z-2 relative justify-center items-center pt-3 pb-10 bg-blue-900 rounded-b-3xl text-white text-center">
@@ -29,10 +32,16 @@ export default function ProfilePage() {
                     <span className="text-xs text-slate-700 font-semibold">Streak</span>
 
                     {/* LOGIN/SIGNUP */}
-                    <div className="flex items-center w-full mt-1.5 p-1 justify-around bg-slate-200 rounded-md hover:bg-black transition-all">
-                        <button className="rounded-md px-1 py-0.5 text-md font-semibold capitalize text-green-900 hover:text-white">Google Login</button>
-                        {/* <button className="rounded-md px-1 py-0.5 text-md font-semibold capitalize text-red-800">Sign Up</button> */}
-                    </div>
+                    <form action={ async () => {
+                        "use server"
+                        // await signIn("google");
+                        console.log('sign in coming soon..')
+                    }}>
+                        <div className="flex items-center w-full mt-1.5 p-1 justify-around bg-slate-200 rounded-md hover:bg-black transition-all">
+                            <button type="submit" className="rounded-md px-1 py-0.5 text-md font-semibold capitalize text-green-900 hover:text-white">Google Login</button>
+                            {/* <button className="rounded-md px-1 py-0.5 text-md font-semibold capitalize text-red-800">Sign Up</button> */}
+                        </div>
+                    </form>
                 </div>
             </div>
 
