@@ -2,6 +2,9 @@ import connectMongoDB from "@/lib/db";
 import Event from "@/models/event";
 import { NextResponse } from "next/server";
 
+// cache the events req
+export const dynamic = 'force-static';
+export const revalidate = 60; // new data in 1 mints
 
 export async function GET() {
     // self explanatory

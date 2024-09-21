@@ -91,7 +91,7 @@ export default function EditEventUI({ data }: { data: any }) {
         console.log('submitting data..');
         console.table(eventdata);
         // submit data.. to backend
-        const response = await fetch(`/api/event/${id}`, {
+        const response = await fetch(`/api/events/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -157,12 +157,12 @@ export default function EditEventUI({ data }: { data: any }) {
                     </select>
                 </div>
 
-                <button onClick={ (e)=> handle_Submit(e, eventdata ? eventdata._id : '') } className="mt-2 mb-1 p-2 capitalize font-extrabold text-black bg-green-400 rounded-md">save</button>
+                <button onClick={ (e)=> handle_Submit(e, eventdata._id) } className="mt-2 mb-1 p-2 capitalize font-extrabold text-black bg-green-400 rounded-md">save</button>
 
             </div>
 
             <div className="m-6 text-center">
-                <Link href="/events">go Back</Link>
+                <span onClick={ ()=> router.back() }>go Back</span>
             </div>
         </div>
     );

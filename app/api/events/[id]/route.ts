@@ -2,6 +2,7 @@ import connectMongoDB from "@/lib/db";
 import Event from "@/models/event";
 import { NextResponse } from "next/server";
 
+
 export async function GET(req: Request, {params} : { params: { id: string } }) {
     
     const id = params.id; // get id

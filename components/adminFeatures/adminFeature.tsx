@@ -7,8 +7,11 @@ import EditIcon from "@/assets/icons/edit.png"
 import { delete_eventById } from "@/app/(fetchAPI)/restAPI";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function EditDelete({ id }: { id: string }) {
+
+    const router = useRouter();
 
     return (
         <div className="bg-slate-800 text-slate-400 flex items-center justify-evenly py-2.5 mb-10 w-full">
@@ -21,7 +24,7 @@ export default function EditDelete({ id }: { id: string }) {
         <span className="d-block font-light text-xs">{ `(admin only!)` }</span>
 
         <button className="bg-red-500 text-white capitalize text-sm font-semibold rounded-full p-2 px-3">
-        <span onClick={ () => delete_eventById(id).then(res => { if (res.ok) alert('deleted successfully!'); }) }>
+        <span onClick={ () => delete_eventById(id).then(res => { if (res.ok) { alert('deleted successfully!'); router.back(); } }) }>
             <Image className="block m-auto" src={DeleteIcon} width={30} height={30} alt="edit icon" />
         </span>
         </button>
