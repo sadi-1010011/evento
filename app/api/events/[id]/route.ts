@@ -2,6 +2,7 @@ import connectMongoDB from "@/lib/db";
 import Event from "@/models/event";
 import { NextResponse } from "next/server";
 
+export const dynamic = 'force-dynamic' // dynamic route 
 
 export async function GET(req: Request, {params} : { params: { id: string } }) {
     
@@ -44,7 +45,7 @@ export async function DELETE(req: Request, {params} : { params: { id: string }})
 export async function PUT(req: Request, {params} : { params: { id: string }}) {
 
     const { data } = await req.json();
-    console.log(data);
+    console.log('put request with: ', data);
     const id = params.id;
     await connectMongoDB();
 
