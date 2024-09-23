@@ -1,3 +1,5 @@
+"use client"
+
 import DummyIcon from "@/assets/profile/mishal.jpeg";
 import SettingsIcon from "@/assets/icons/settings.png"
 import Image from "next/image";
@@ -32,16 +34,11 @@ export default function ProfilePage() {
                     <span className="text-xs text-slate-700 font-semibold">Streak</span>
 
                     {/* LOGIN/SIGNUP */}
-                    <form action={ async () => {
-                        "use server"
-                        // await signIn("google");
-                        console.log('sign in coming soon..')
-                    }}>
-                        <div className="flex items-center w-full mt-1.5 p-1 justify-around bg-slate-200 rounded-md hover:bg-black transition-all">
-                            <button type="submit" className="rounded-md px-1 py-0.5 text-md font-semibold capitalize text-green-900 hover:text-white">Google Login</button>
-                            {/* <button className="rounded-md px-1 py-0.5 text-md font-semibold capitalize text-red-800">Sign Up</button> */}
-                        </div>
-                    </form>
+
+                    <div className="flex items-center w-full mt-1.5 p-1 justify-around bg-slate-200 rounded-md hover:bg-black transition-all">
+                        <button onClick={() => { signIn("github", { redirectTo: "/" }) } } className="rounded-md px-1 py-0.5 text-md font-semibold capitalize text-black hover:text-white">Login with GitHub</button>
+                        {/* <button className="rounded-md px-1 py-0.5 text-md font-semibold capitalize text-red-800">Sign Up</button> */}
+                    </div>
                 </div>
             </div>
 

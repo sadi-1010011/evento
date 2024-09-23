@@ -21,20 +21,20 @@ export default function EventCard({ data }: any) {
     return (
         <div className="flex my-10 flex-col rounded-xl bg-white w-full text-black relative">
             
-            <span className="absolute m-5 p-1 rounded-full" >
+            <span className="absolute right-0 m-5 p-1 rounded-full" >
                 <Image src={FavIcon} width={22} height={22} alt="favorite icon" />
             </span>
-            <div className="absolute right-0 border text-white text-sm px-2.5 shadow-md m-5 rounded-xl" >
+            <div className="absolute border text-white text-sm px-2.5 shadow-md m-5 rounded-xl" >
                 { eventdate || 'event date'}
             </div>
             
             {/* LINKS TO EVENT PAGE BY ID */}
-                <div onClick={ (event) => { event.preventDefault(); router.push(`events/${data._id}`); }} >
+                <div onClick={ (event) => { event.preventDefault(); router.push(`events/${data._id}`); }} className="w-full" >
                 {/* <Link href={`events/${data._id}`}> */}
-                    <Image className="rounded-xl aspect-square" src={thumbnail || DummyImage} width={500} height={500} alt="event picture" />
+                    <Image className="rounded-xl aspect-square w-full h-auto" src={thumbnail || DummyImage} width={500} height={500} placeholder="empty" alt="event picture" />
                     <div className="flex flex-row justify-between mt-3 px-2">
                         <h2 className=" font-bold text-xl capitalize">{ `${data.title}`}</h2>
-                        {/* <span className="text-sm font-semibold capitalize">rating: 4.9</span> */}
+                        {/* <span className="text-sm font-semibold capitalize">4.9</span> */}
                     </div>
                     <div className="flex items-center my-0.5 px-2">
                         <span>By&nbsp;</span><h3 className="capitalize">{data.hostname || 'host name'}</h3>

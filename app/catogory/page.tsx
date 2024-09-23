@@ -1,6 +1,6 @@
 "use client"
 
-import SearchBar from "@/components/searchbar/SearchBar";
+// import SearchBar from "@/components/searchbar/SearchBar";
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
 import CatogoryCard from "@/components/catogorycard/Catogorycard";
 
@@ -12,11 +12,11 @@ export default function CatogoryPage() {
             <h1 className="capitalize text-xl text-center font-semibold mt-5 mb-2">find catogories</h1>
             <div className="flex-col items-center justify-evenly px-6 py-4">
 
-            <div className="mb-4">
+            {/* <div className="mb-4">
                 <SearchBar />
-            </div>
+            </div> */}
 
-            <div className="grid-rows-3 w-full">
+            <div className="grid-rows-3 gap-2 w-full">
                 <CatogoryCard active="All" />
             </div>
 
