@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic'; // force dynamic route
+// export const dynamic = 'force-dynamic'; // force dynamic route
 export const dynamicParams = true // dynamic params ON!
 
 import Image from "next/image";
