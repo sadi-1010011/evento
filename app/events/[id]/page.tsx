@@ -11,7 +11,7 @@ import HostIcon from "@/assets/icons/host_dark.png"
 import LocationIcon from "@/assets/icons/location-pin.png";
 import connectMongoDB from "@/lib/db";
 import Event from "@/models/event";
-import EditDelete from "@/components/adminFeatures/adminFeature";
+// import EditDelete from "@/components/adminFeatures/adminFeature";
 
 export async function generateStaticParams() {
     const events = await fetch(`https://evento-calicut.vercel.app/api/events`, { method: 'GET', next: { revalidate: 60 } }).then(res => res.json());
@@ -89,6 +89,15 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
                 <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
 
+                <div className="my-4 pl-2">
+                    <h1 className="text-lg font-semibold first-letter:capitalize">Availability</h1>
+                    <span className="text-gray-600">1-6 Sept</span>
+                </div>
+
+
+                <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
+
+
                 <h1 className="pl-2 my-4 text-lg font-semibold first-letter:capitalize" >What this event offers</h1>
                 
                 <div className="pl-2 my-6 flex-col items-start capitalize">
@@ -108,12 +117,8 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
 
                 <div className="pl-2 my-6 flex-col items-start capitalize">
-                    <h1>Guest Favorite</h1>
+                    <h1 className="text-lg font-semibold first-letter:capitalize">Guest Favorite</h1>
                     <span>This event is in top 10% of eligible listings based on ratings, reviews and reliability</span>
-                </div>
-
-                <div className="flex my-6 mx-4 py-3 items-center justify-center rounded-md border-2 border-slate-800 hover:bg-slate-700 hover:text-white transition-all">
-                    <h2 className="capitalize ">show all 47 reviews</h2>
                 </div>
 
 
@@ -121,8 +126,17 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
 
                 <div className="my-4 pl-2">
-                    <h1 className="text-lg font-semibold first-letter:capitalize">Availability</h1>
-                    <span className="text-gray-600">1-6 Sept</span>
+                    <h1 className="text-lg font-semibold first-letter:capitalize">Event rules</h1>
+                    <span className="text-gray-600">start time: 4 pm</span>
+                    <span className="text-gray-600">end time: 12 am</span>
+                </div>
+
+
+
+
+
+                <div className="flex my-6 mx-4 py-3 items-center justify-center rounded-md border-2 border-slate-800 hover:bg-slate-700 hover:text-white transition-all">
+                    <h2 className="capitalize ">show all 47 reviews</h2>
                 </div>
 
 
@@ -140,16 +154,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
                 <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
 
 
-                <div className="my-4 pl-2">
-                    <h1 className="text-lg font-semibold first-letter:capitalize">Event rules</h1>
-                    <span className="text-gray-600">start time: 4 pm</span>
-                    <span className="text-gray-600">end time: 12 am</span>
-                </div>
-
-
-                <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
-
-
+                
                 <div className="my-4 pl-2">
                     <h1 className="text-lg font-semibold first-letter:capitalize">Safety & security</h1>
                     <span className="text-gray-600">smoke alarm</span>
@@ -164,20 +169,28 @@ export default async function EventPage({ params }: { params: { id: string }}) {
                     <h1 className="text-md font-semibold text-gray-600 first-letter:capitalize">Report this event!</h1>
                 </div>
 
+
+                <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
+
+
             </div>
+
+
 
 
             {/* ADMIN ONLY FEATURE !!! */}
 
-                <EditDelete id={event._id} />
+                {/* <div className="w-full">
+                    <EditDelete id={event._id} />
+                </div> */}
 
             {/* -- END -- */}
 
-
-            <div className="flex items-center justify-between p-3 fixed bottom-0 right-0 left-0 bg-slate-300 text-black">
+            <div className="flex items-center justify-between p-4 bg-gray-700 text-white">
                 <h2 className="font-bold">Total price</h2>
                 <span className="font-bold ">{ event ? event.ticketprice : 'free '} $</span>
-            </div>
+            </div>  
+
             </>
             )
         }
