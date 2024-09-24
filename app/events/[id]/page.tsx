@@ -133,7 +133,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
                     <h1 className="text-lg font-semibold first-letter:capitalize">Cancellation Policy</h1>
                     <span className="text-gray-600">This reservation in non-refundable.</span>
                     <br />
-                    <span className="text-gray-600">Review this Host's full policy for details.</span>
+                    <span className="text-gray-600">Review this Host full policy for details.</span>
                 </div>
 
 

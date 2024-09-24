@@ -12,7 +12,7 @@ export default function GalleryGrid({ images }: { images: string }) {
         if (images.length) {
             setImage(images);
         }
-    }, []);
+    }, [images]);
 
     return(
         <div className="grid-container w-full 3 flex flex-row flex-wrap items-center justify-evenly text-center">
