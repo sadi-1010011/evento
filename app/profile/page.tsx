@@ -6,20 +6,23 @@ import Image from "next/image";
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
 // SIGN IN
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function ProfilePage() {
+
+    const router = useRouter()
 
     return (
         <div className="flex z-0 items-center min-h-screen w-full overflow-x-hidden overflow-y-scroll flex-col bg-slate-200">
             
             {/* BLUE COMPONENT */}
-            <div className="flex flex-col z-2 relative justify-center items-center pt-3 pb-10 bg-blue-900 rounded-b-3xl text-white text-center">
+            <div className="flex flex-col z-2 relative justify-center items-center pt-3 pb-10 bg-gray-900 rounded-b-3xl text-white text-center">
                 <div className="flex w-full justify-between px-4">
                     <h2 className="text-center text-md capitalize">Profile Page</h2>
-                    <Image width={22} height={22} src={SettingsIcon} alt="settings icon" />
+                    <Image onClick={ () => router.push("/settings")} width={22} height={22} src={SettingsIcon} alt="settings icon" />
                 </div>
                 <div className="w-1/2 m-auto pt-10 pb-6 h-auto">
-                    <Image priority className="w-full h-auto border-yellow-300 border p-1.5 rounded-full" src={DummyIcon} alt="profile pic" />
+                    <Image priority className="w-full h-auto border-gray-700 border p-1.5 rounded-full" src={DummyIcon} alt="profile pic" />
                 </div>
                 <h1 className="m-0 font-bold ">Rocket Mishal</h1>
                 <span className="text-xs text-gray-300">Level 10</span>

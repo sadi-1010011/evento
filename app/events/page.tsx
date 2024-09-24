@@ -57,7 +57,7 @@ export default function HomePage() {
 
                 {/* ADMIN ONLY FEATURE! */}
 
-                <div onClick={ () => router.push("/create-event") } className="flex m-4 p-2 items-center justify-center rounded-md border-2 border-slate-800 hover:bg-slate-400 hover:text-black">
+                <div onClick={ () => router.push("/create-event") } className="flex m-4 p-2 items-center justify-center rounded-md border-2 border-slate-800 hover:bg-slate-700 hover:text-white transition-all">
                     <h2 className="capitalize font-bold">add event</h2>
                     <span className="rounded-50 p-2 font-semibold text-xl capitalize">+</span>
                     <span className="d-block font-light text-xs">{ `(admin only!)` }</span>
