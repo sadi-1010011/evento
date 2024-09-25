@@ -18,7 +18,7 @@ export default function ProfilePage() {
             {/* BLUE COMPONENT */}
             <div className="flex flex-col z-2 relative justify-center items-center pt-3 pb-10 bg-gray-900 rounded-b-3xl text-white text-center">
                 <div className="flex w-full justify-between px-4">
-                    <h2 className="text-center text-md capitalize">Profile Page</h2>
+                    <h2 className="text-center text-md capitalize">Profile</h2>
                     <Image onClick={ () => router.push("/settings")} width={32} height={32} className="border-2 rounded-full bg-white h-auto hover:bg-gray-400 transition-all" src={SettingsIcon} alt="settings icon" />
                 </div>
                 <div className="w-1/2 m-auto pt-10 pb-6 h-auto">
@@ -38,9 +38,9 @@ export default function ProfilePage() {
 
                     {/* LOGIN/SIGNUP */}
 
-                    <div className="flex flex-col gap-1 items-center w-full mt-1.5 p-1 justify-around rounded-md">
-                        <button onClick={() => { signIn("github", { redirectTo: "/" }) } } className="bg-slate-200 w-full rounded-md px-1 py-1.5 text-md font-semibold capitalize text-green-800 hover:text-white hover:bg-gray-700">Login with GitHub</button>
-                        <button onClick={() => router.push("/register") } className="bg-slate-200 w-full rounded-md px-1 py-1.5 text-md font-semibold capitalize text-red-800 hover:text-white transition-all hover:bg-gray-700">Register account</button>
+                    <div className="flex flex-col gap-1.5 items-center w-full mt-1.5 p-1 justify-around rounded-md">
+                        <button onClick={() => { signIn("github", { redirectTo: "/" }) } } className="w-full py-2 rounded-md border-2 border-slate-800 hover:bg-slate-700 hover:text-white transition-all">Login with GitHub</button>
+                        <button onClick={() => router.push("/register") } className="w-full py-2 rounded-md border-2 border-slate-800 hover:bg-slate-700 hover:text-white transition-all">Register account</button>
                     </div>
                 </div>
             </div>

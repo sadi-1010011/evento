@@ -24,7 +24,8 @@ export default function HomePage() {
         get_allEvents().then((events) => {
             if (events.length)
                 setEvents(events);
-            else setOffline(true);
+            // OFFLINE MODE!
+            // else setOffline(true);
         });
     }, []);
 
