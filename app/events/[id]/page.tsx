@@ -7,7 +7,10 @@ import GalleryGrid from "@/components/gallerygrid/GalleryGrid";
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 // ICONS
-import HostIcon from "@/assets/icons/host_dark.png"
+import VerifyIcon from "@/assets/icons/verify.png";
+import HostIcon from "@/assets/icons/host_dark.png";
+import FavIcon from "@/assets/icons/heart-black.png";
+import ShareIcon from "@/assets/icons/share-black.png";
 import LocationIcon from "@/assets/icons/location-pin.png";
 import connectMongoDB from "@/lib/db";
 import Event from "@/models/event";
@@ -39,8 +42,15 @@ export default async function EventPage({ params }: { params: { id: string }}) {
         console.log(error);
     }
 
+
     return (
         <main className="flex min-h-screen flex-col">
+
+            {/* Share, Favorite Btn */}
+            <div className="flex gap-2 m-2 absolute right-2 top-2 z-10">
+                <Image className="rounded-full bg-white p-1.5" src={ShareIcon} width={32} height={32} alt="share icon" />
+                <Image className="rounded-full bg-white p-1.5" src={FavIcon} width={32} height={32} alt="favorite icon" />
+            </div>
             <GalleryGrid images={ event.thumbnail } />
             {
                 !event ? 
@@ -62,6 +72,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
                 <div className="flex items-center my-6">
                     <Image className="rounded-full mr-3 bg-white p-0.5" src={HostIcon} width={50} height={50} alt="host icon" />
                     <h3 className="capitalize">{ event ? `hosted by ${event.hostname}` : 'host name'}</h3>
+                    <Image className="rounded-full bg-white px-0.5" src={VerifyIcon} width={22} height={22} alt="verify icon" />
                 </div>
 
                 <hr style={{ width: '90%', display: 'block', margin: 'auto'}} />

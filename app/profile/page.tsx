@@ -39,8 +39,8 @@ export default function ProfilePage() {
                     {/* LOGIN/SIGNUP */}
 
                     <div className="flex flex-col gap-1 items-center w-full mt-1.5 p-1 justify-around rounded-md">
-                        <button onClick={() => { signIn("github", { redirectTo: "/" }) } } className="bg-slate-200 w-full rounded-md px-1 py-1.5 text-md font-semibold capitalize text-green-800 hover:text-black">Login with GitHub</button>
-                        <button onClick={() => router.push("/register") } className="bg-slate-200 w-full rounded-md px-1 py-1.5 text-md font-semibold capitalize text-red-800 hover:text-black transition-all">Register account</button>
+                        <button onClick={() => { signIn("github", { redirectTo: "/" }) } } className="bg-slate-200 w-full rounded-md px-1 py-1.5 text-md font-semibold capitalize text-green-800 hover:text-white hover:bg-gray-700">Login with GitHub</button>
+                        <button onClick={() => router.push("/register") } className="bg-slate-200 w-full rounded-md px-1 py-1.5 text-md font-semibold capitalize text-red-800 hover:text-white transition-all hover:bg-gray-700">Register account</button>
                     </div>
                 </div>
             </div>

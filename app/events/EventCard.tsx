@@ -18,8 +18,13 @@ export default function EventCard({ data }: any) {
     const router = useRouter();
     const [favorite, setFavorite] = useState(false)
     const [thumbnail, setThumbnail] = useState('');
-    const eventdate = DateTime.fromISO(data.date).toFormat('yyyy LLL dd'); //=> '2024 Aug 14';
-
+    const eventdate = dateLabel()
+    
+    function dateLabel() {
+        let eventdate = DateTime.fromISO(data.date).toFormat('yyyy LLL dd'); //=> '2024 Aug 14';
+        // let today = DateTime.now().toFormat('yyyy LLL dd');
+        return eventdate;
+    }
     useEffect(() => {
         setThumbnail(data.thumbnail);
     }, [data.thumbnail]);
@@ -34,14 +39,16 @@ export default function EventCard({ data }: any) {
             </div>
             
             {/* LINKS TO EVENT PAGE BY ID */}
-                <div onClick={ (event) => { event.preventDefault(); router.push(`events/${data._id}`); }} className="w-full" >
-                {/* <Link href={`events/${data._id}`}> */}
 
-                {/* IMG CAROUSEL */}
+                <div onClick={ (event) => { event.preventDefault(); router.push(`events/${data._id}`); }} className="w-full" >
+
+                    {/* IMG CAROUSEL */}
+
                     <Carousel autoPlay infiniteLoop swipeable stopOnHover interval={2400} showArrows={false} showStatus={false}>
                         <Image className="rounded-xl aspect-square w-full h-auto" src={thumbnail || DummyImage} width={500} height={500} placeholder="empty" alt="event picture" />
                         <Image className="rounded-xl aspect-square w-full h-auto" src={ DummyImage} width={500} height={500} placeholder="empty" alt="event picture" />
                     </Carousel>
+
                     <div className="flex flex-row justify-between items-center mt-3 px-2">
                         <h2 className=" font-bold text-xl capitalize">{ `${data.title}`}</h2>
                         <span className="text-sm font-semibold capitalize">4.9</span>
@@ -54,7 +61,6 @@ export default function EventCard({ data }: any) {
                     <p className="inline pr-2 text-slate-600">{data.location || 'event description'}</p>
                     {/* <p className="px-2 text-slate-600">duration</p> */}
                     <button className="my-0.5 pb-2 capitalize font-extrabold text-center w-full text-green-900 font-sans">view more</button>
-                    {/* </Link> */}
                 </div>
             </div>
     );
