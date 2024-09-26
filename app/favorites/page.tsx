@@ -13,7 +13,7 @@ export default function FavoritesPage() {
             <div className="flex w-full flex-col items-center justify-center py-4">
                 {
                     data.map((event: any, i: number) =>
-                        i < 3 && <FavoritesCard title={ event.title } />
+                        i < 3 && <FavoritesCard key={i} title={ event.title } />
                     )
                 }
             </div>

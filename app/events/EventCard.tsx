@@ -27,7 +27,7 @@ export default function EventCard({ data } :{ data: IEvent }) {
     useEffect(() => {
         setThumbnail(data.thumbnail);
         if (typeof data.date === 'string') setEventdate(dateLabel(data.date))
-    }, [data.thumbnail]);
+    }, [data.thumbnail, data.date]);
 
     return (
         <div className="flex z-0 my-10 flex-col rounded-xl bg-white w-full text-black relative overflow-hidden">
