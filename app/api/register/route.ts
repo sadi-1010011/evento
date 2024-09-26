@@ -6,32 +6,34 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
 
-    const { data } = await req.json();
-    console.log(data.email)
-
+    const { username, email, password }  = await req.json();
+    // console.log(username, email, password);
    
     // get connection
     await connectMongoDB();
-    
+
+    // check if user exists
+    const existingUser = await User.findOne({ email })
+    if (existingUser) return new NextResponse("Email is already registered!", { status: 400});
+
+    // const hashedPassword = await bcrypt.hash(data.password, 5);
+
+    const newUser = new User({
+        username,
+        email,
+        password
+    });
+        
+
     try {
-
-        if (data) {
-            // check if user exists
-            const email = data.email;
-            const existingUser = await User.findOne({ email })
-            if (existingUser) return new NextResponse("Email is already registered!", { status: 400});
-            // secure password
-            // const hashedPassword = await bcrypt.hash(data.password, 5);
-            
-            // wait to store data
-            await User.create(data);
-        }
-
+        // wait to save data
+        await newUser.save();
         return NextResponse.json({message: "successfully registered user"},{status: 200});
     }
 
     catch (error: any) {
-        return NextResponse.json({ error: 'couldnt save to DB - server error!'}, { status: 500});
+        console.log('catch block!')
+        return NextResponse.json({ error: 'couldnt save to DB - server error!!'}, { status: 500});
     }
 
 }

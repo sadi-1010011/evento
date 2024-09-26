@@ -10,7 +10,7 @@ export default function RegisterPage() {
     const [email, setEmail] = useState('')
     const [password, setPass] = useState('')
     const [repassword, setRePass] = useState('')
-    const [formerrors, setFormErrors] = useState([]);
+    const [formerrors, setFormErrors] = useState<any>([]);
 
     function handleFirstname(e: any) {
         e.preventDefault();
@@ -47,16 +47,15 @@ export default function RegisterPage() {
         // data validation
         let errors = []; // empty array for errs
         const emailtest = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        const username = `${firstname} ${lastname}`;
+        const username = `${firstname} ${lastname}`.replaceAll(' ', '');
         // fill array if errs
         if (!username) errors.push("username is required!");
         if (!email) errors.push("email is required!")
         if (password.length < 8) errors.push("password is short!")
-        if (!password) errors.push("password is required!")
+        if (!password || !repassword) errors.push("password is required!")
         if (password !== repassword) errors.push("passwords does not match!");
         if (emailtest.test(email)) errors.push("Enter valid E-mail!");
-        
-        
+                
         const data = {
             username: username,
             email: email,
@@ -66,8 +65,7 @@ export default function RegisterPage() {
         // post to backend if everything fine
         if (data && errors.length === 0) {
             // api call
-            console.table(data);
-            console.log('submiting to backend!!')
+            console.log('submiting user data to backend!!')
 
             try {
                 const res = await fetch("/api/register", {
@@ -83,16 +81,21 @@ export default function RegisterPage() {
                 });
 
                 if (res.status === 400) {
-                    errors.push("E-mail is already registered!");
+                    errors.push("E-mail is already registered!")
+                    setFormErrors(errors);
                 }
+
+                else setFormErrors('');
             } catch (error) {
                 console.log('error in saving data: ', error);
+                setFormErrors('');
             }
 
         }
 
         else {
             console.log(errors);
+            setFormErrors(errors);
         }
 
     }
@@ -113,6 +116,12 @@ export default function RegisterPage() {
                     <input onChange={ handlePassword} className="bg-zinc-900 w-full focus:border-2 rounded-full py-2 px-5 outline-none" type="password" placeholder="Password" value={password} />
                     <input onChange={ handleRePass } className="bg-zinc-900 w-full focus:border-2 rounded-full py-2 px-5 outline-none" type="password" placeholder="Confirm password" value={repassword} />
                     <button type="submit" className="capitalize w-1/2 bg-blue-900 hover:bg-blue-950 rounded-full my-2 py-2 px-5 outline-none border-none">sign up</button>
+                    {
+                        formerrors && (formerrors.map((err: string, i: number) =>
+                            <span key={i} className="text-sm -m-1 first-letter:capitalize font-light text-red-400">{ err }</span>))
+                                // :
+                            // creatinguser && <span className="text-sm -m-1 first-letter:capitalize font-light text-green-400">creating user...</span>
+                    }
                 </form>
             </div>
 

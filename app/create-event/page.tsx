@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import DummyImage from "@/assets/evento.jpeg";
+import AddIcon from "@/assets/icons/plus.png";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -14,14 +15,15 @@ export default function CreateEvent() {
         title: '',
         catogory: 'all',
         hostname: '',
-        location: 'calicut',
+        location: '',
         description: '',
-        ticketprice: 0,
+        ticketprice: '',
         thumbnail: '',
         paid: false, // default to free event
         date: DateTime.now().toFormat('ff') // event date
     });
     const [dropedImage, setDropedImage] = useState('');
+    const [formerrors, setFormErrors] = useState<any>();
     const router = useRouter();
 
     useEffect(() => {
@@ -125,49 +127,50 @@ export default function CreateEvent() {
     }
 
     return (
-        <div className="min-h-screen w-full my-2 pt-3 px-6">
-            <h1 className="text-center text-xl capitalize font-semibold">add event</h1>
-            <div className="flex my-8 flex-col relative rounded-xl bg-white w-full text-black p-2 overflow-hidden">
+        <div className="flex items-center justify-center w-full h-screen pt-3 px-2">
+
+            <div className="flex flex-col items-center justify-center w-full sm:w-4/5 md:w-4/5 mx-2 px-4 py-8 bg-black text-white rounded-3xl">
+                <h1 className="text-2xl font-bold capitalize">Add event</h1>
+                <h1 className="capitalize text-xs text-center font-light mt-2 mb-2">already have event detail? <Link href="/profile">Scan poster</Link></h1>
+
+            <form action={ (e) => handle_Submit(e) } className="w-full flex flex-col gap-2 items-center justify-center my-4 py-2 px-2">
+                
                 {/* IMAGE DROP */}
-                <div className="absolute bg-white text-slate-400 text-sm capitalize font-semibold cursor-copy shadow-md m-5 rounded-xl" >
-                    <input onChange={ (event) => getDroppedImage(event) } className="capitalize inline-block p-5 rounded-xl font-bold placeholder-slate-500 outline-none border-none" type="text" placeholder="drop image link" />
+                <div className="flex flex-col gap-0.5 pt-4 items-center justify-center rounded-xl bg-zinc-900 w-full py-2 px-5 outline-none" >
+                    {/* <span className="capitalize text-xs text-center font-light mt-2 mb-2">drop image</span> */}
+                    <Image priority className="rounded-xl w-auto h-auto opacity-20" src={ dropedImage ? dropedImage : AddIcon} width={100} height={100} alt="event picture" />
+                    <input onChange={ (event) => getDroppedImage(event) } className="bg-zinc-900 w-full focus:border-2 py-2 px-5 outline-none text-center rounded-full text-xs capitalize" type="text" placeholder="drop image or link" />
                 </div>
-                <span className="absolute right-8 bg-red-600 text-white text-sm cursor-not-allowed font-semibold px-2 shadow-md m-5 rounded-xl" >no image</span>
-                <Image priority className="rounded-xl w-full h-auto" src={ dropedImage ? dropedImage : DummyImage} width={100} height={100} alt="event picture" />
-                <div className="flex flex-row justify-items-start mt-3 px-2 overflow-hidden">
+
+                <div className="flex gap-1">
+                    
                     {/* EVENT TITLE */}
-                    <input onChange={ (e)=> handle_Title(e)} className="capitalize font-bold placeholder-black outline-none border-none" type="text" placeholder="event title," value={ eventdata.title } />
+                    <input onChange={ (e)=> handle_Title(e)} className="bg-zinc-900 w-1/2 focus:border-2 rounded-l-full py-2 px-5 outline-none" type="text" placeholder="event title" value={eventdata.title} />
+                    
                     {/* EVENT LOCATION */}
-                    <input onChange={ (e)=> handle_Location(e)} className="capitalize font-bold placeholder-black outline-none border-none" type="text" placeholder="location.." value={ eventdata.location } />
+                    <input onChange={ (e)=> handle_Location(e)} className="bg-zinc-900 w-1/2 focus:border-2 rounded-r-full py-2 px-5 outline-none" type="text" placeholder="location" value={eventdata.location} />
                 </div>
-                <div className="flex items-center my-2 px-2">
-                        <Image className="rounded-full mr-3" src={DummyImage} width={40} height={40} alt="host icon" />
-                        {/* EVENT HOST */}
-                        <input onChange={ (e)=> handle_Hostname(e)} className="capitalize font-bold placeholder-black outline-none border-none" type="text" placeholder="Host name.." value={ eventdata.hostname } />
-                    </div>
+                
+                {/* EVENT HOST */}
+                <input onChange={ (e)=> handle_Hostname(e)} className="bg-zinc-900 w-full focus:border-2 rounded-full py-2 px-5 outline-none" type="text" placeholder="host name" value={eventdata.hostname} />
+                
                 {/* EVENT DESCRIPTION */}
-                <input onChange={ (e)=> handle_Description(e)} className="px-2 capitalize py-3 placeholder-black outline-none border-none" type="text" placeholder="event description.." value={ eventdata.description } />
+                <input onChange={ (e)=> handle_Description(e)} className="bg-zinc-900 w-full focus:border-2 rounded-full py-2 px-5 outline-none" type="text" placeholder="event description" value={eventdata.description} />
+                
+                {/* EVENT DATE */}
+                {/* <span className="capitalize text-xs text-center font-light mt-2 mb-2">Event date</span> */}
+                <input onChange={ (e)=> handle_Date(e)} className="bg-zinc-900 w-full focus:border-2 rounded-full py-2 px-5 outline-none border-none" type="date" />
 
-                <div className="px-2 pb-2">
-                    <span>Event date : </span>
-                    {/* EVENT DATE */}
-                    <input onChange={ (e)=> handle_Date(e)} type="date" className="outline-none border-none" />
-                </div>
+                {/* EVENT PAID */}
+                {/* <label htmlFor="checkbox">paid event</label>
+                <input onChange={ (e)=> handle_Paid(e)} className="mx-2 w-5" name="checkbox" type="checkbox" defaultChecked={ eventdata.paid } /> */}
 
-                <div className="px-2 pb-3">
-                    <label htmlFor="checkbox">paid event</label>
-                    {/* EVENT PAID */}
-                    <input onChange={ (e)=> handle_Paid(e)} className="mx-2 w-5" name="checkbox" type="checkbox" defaultChecked={ eventdata.paid } />
-                </div>
+                {/* TICKET PRICE */}
+                <input onChange={ (e)=> handle_Ticketprice(e)} className="bg-zinc-900 w-full focus:border-2 rounded-full py-2 px-5 outline-none" name="ticketprice" type="number" placeholder="ticket price" value={eventdata.ticketprice} />
 
-                <div className="px-2 pb-3">
-                    <label htmlFor="ticketprice">ticket price </label>
-                    {/* TICKET PRICE */}
-                    <input onChange={ (e)=> handle_Ticketprice(e)} className="w-1/3 mx-2 border-4 rounded-md text-center" name="ticketprice" type="number" value={ eventdata.ticketprice} />
-                </div>
-
-                <div className="block">
-                    <select onChange={ (e)=> handle_Catogory(e)} className="p-2 w-full text-center bg-slate-200 rounded-md text-sm capitalize">
+                {/* EVENT TYPE */}
+                <div className="block bg-zinc-900 w-full focus:border-2 rounded-full py-2 px-5 outline-none">
+                    <select onChange={ (e)=> handle_Catogory(e)} className="p-2 w-full text-center bg-zinc-900 rounded-md text-sm capitalize">
                         <option>music</option>
                         <option>dance</option>
                         <option>sports</option>
@@ -176,13 +179,43 @@ export default function CreateEvent() {
                     </select>
                 </div>
 
-                <button onClick={ (e)=> handle_Submit(e) } className="mt-2 mb-1 p-2 capitalize font-extrabold text-black bg-green-400 rounded-md">save</button>
 
-            </div>
+                <button type="submit" onClick={ (e)=> handle_Submit(e) } className="font-semibold capitalize w-1/2 bg-blue-900 hover:bg-blue-950 rounded-full my-2 py-2 px-5 outline-none border-none">save event</button>
+                {
+                    formerrors && (formerrors.map((err: string, i: number) => <span key={i} className="text-sm -m-1 first-letter:capitalize font-light text-red-400">{ err }</span>))
+                }
 
-            <div className="m-6 text-center">
+            </form>
+        </div>
+
+
+
+
+            {/* <div className="flex my-8 flex-col relative rounded-xl bg-white w-full text-black p-2 overflow-hidden">
+                
+                
+               
+                <div className="flex items-center my-2 px-2">
+                        <Image className="rounded-full mr-3" src={DummyImage} width={40} height={40} alt="host icon" />
+                        
+                    </div>
+
+                <div className="px-2 pb-3">
+                    
+                </div>
+
+                <div className="px-2 pb-3">
+                    <label htmlFor="ticketprice">ticket price </label>
+                </div>
+
+                
+
+
+            </div> */}
+
+            {/* <div className="m-6 text-center">
                 <Link href="/events">go Back</Link>
-            </div>
+            </div> */}
         </div>
     );
 }
