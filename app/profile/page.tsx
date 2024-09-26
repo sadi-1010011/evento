@@ -5,7 +5,7 @@ import SettingsIcon from "@/assets/icons/settings.png"
 import Image from "next/image";
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
 // SIGN IN
-import { signIn } from "next-auth/react";
+// import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 export default function ProfilePage() {
@@ -39,8 +39,9 @@ export default function ProfilePage() {
                     {/* LOGIN/SIGNUP */}
 
                     <div className="flex flex-col gap-1.5 items-center w-full mt-1.5 p-1 justify-around rounded-md">
-                        <button onClick={() => { signIn("github", { redirectTo: "/" }) } } className="w-full py-2 rounded-md border-2 border-slate-800 hover:bg-slate-700 hover:text-white transition-all">Login with GitHub</button>
-                        <button onClick={() => router.push("/register") } className="w-full py-2 rounded-md border-2 border-slate-800 hover:bg-slate-700 hover:text-white transition-all">Register account</button>
+                        {/* <button onClick={() => { signIn("github", { redirectTo: "/" }) } } className="w-full py-2 rounded-md border-2 border-slate-800 hover:bg-slate-700 hover:text-white transition-all">Login with GitHub</button> */}
+                        <button onClick={() => router.push("/register") } className="w-full py-2 rounded-md border-2 border-slate-800 hover:bg-slate-700 hover:text-white transition-all capitalize">create account</button>
+                        <button onClick={() => router.push("/register") } className="w-full py-2 rounded-md border-2 border-slate-800 hover:bg-slate-700 hover:text-white transition-all capitalize">login with Email</button>
                     </div>
                 </div>
             </div>

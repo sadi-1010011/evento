@@ -1,10 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import validateEmail from "@/utils/validateMail";
 
 export default function RegisterPage() {
 
+    const router = useRouter();
     const [firstname, setFirstname] = useState('')
     const [lastname, setLastname] = useState('')
     const [email, setEmail] = useState('')
@@ -46,7 +49,6 @@ export default function RegisterPage() {
 
         // data validation
         let errors = []; // empty array for errs
-        const emailtest = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const username = `${firstname} ${lastname}`.replaceAll(' ', '');
         // fill array if errs
         if (!username) errors.push("username is required!");
@@ -54,7 +56,7 @@ export default function RegisterPage() {
         if (password.length < 8) errors.push("password is short!")
         if (!password || !repassword) errors.push("password is required!")
         if (password !== repassword) errors.push("passwords does not match!");
-        if (emailtest.test(email)) errors.push("Enter valid E-mail!");
+        if (validateEmail(email)) { console.log('email regex test passed') } // errors.push("Enter valid E-mail!");
                 
         const data = {
             username: username,
@@ -85,7 +87,10 @@ export default function RegisterPage() {
                     setFormErrors(errors);
                 }
 
-                else setFormErrors('');
+                if (res.status === 200) {
+                    setFormErrors('');
+                    router.push("/profile");
+                } 
             } catch (error) {
                 console.log('error in saving data: ', error);
                 setFormErrors('');
@@ -118,7 +123,7 @@ export default function RegisterPage() {
                     <button type="submit" className="capitalize w-1/2 bg-blue-900 hover:bg-blue-950 rounded-full my-2 py-2 px-5 outline-none border-none">sign up</button>
                     {
                         formerrors && (formerrors.map((err: string, i: number) =>
-                            <span key={i} className="text-sm -m-1 first-letter:capitalize font-light text-red-400">{ err }</span>))
+                            <span key={i} className="text-xs -m-1 first-letter:capitalize font-light text-red-400">{ err }</span>))
                                 // :
                             // creatinguser && <span className="text-sm -m-1 first-letter:capitalize font-light text-green-400">creating user...</span>
                     }
