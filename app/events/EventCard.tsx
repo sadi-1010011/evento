@@ -63,7 +63,11 @@ export default function EventCard({ data } :{ data: IEvent }) {
                     &nbsp;
                     <p className="inline pr-2 text-slate-600">{data.location || 'event description'}</p>
                     {/* <p className="px-2 text-slate-600">duration</p> */}
-                    <button className="my-0.5 pb-2 capitalize font-extrabold text-center w-full text-green-900 font-sans">view more</button>
+                    {/* <button className="my-0.5 pb-2 capitalize font-extrabold text-center w-full text-green-900 font-sans">view more</button> */}
+                    {/* <div className="flex flex-col gap-1 w-full pt-6 items-center">
+                        <button className="py-2 w-1/2 rounded-md border-2 hover:bg-slate-700 hover:text-white transition-all capitalize shadow-md">remind me</button>
+                        <button className="py-2 w-1/2 rounded-md border-2 hover:bg-slate-700 hover:text-white transition-all capitalize shadow-md">tell a friend</button>
+                    </div> */}
                 </div>
             </div>
     );

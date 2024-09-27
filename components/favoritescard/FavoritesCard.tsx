@@ -1,5 +1,7 @@
 import DummyImg from "@/assets/eventoLogo.jpeg";
 import Favicon from "@/assets/icons/fav-red.png";
+import BellIcon from "@/assets/icons/star.png";
+import ShareIcon from "@/assets/icons/share-black.png";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 
@@ -23,25 +25,27 @@ export default function FavoritesCard({ title }: { title: string }) {
     }, []);
 
     return (
-        <div id="favcard" ref={favcardref} className="flex w-full items-center justify-between py-2 px-4 my-1 bg-gray-100 rounded-s-full shadow-xl">
-            <Image className="rounded-s-md mr-3 opacity-60" priority src={DummyImg} width={80} height={60} alt="event thumbnail" />
-            <div className="flex flex-col w-full px-2">
-                <h1 className="text-md text-black font-bold capitalize m-0 p-0">{title}</h1>
-                <span className="text-xs text-slate-400">date</span>
-                <div className="flex items-center justify-center gap-2">
-                    <button className="flex my-1 py-1 px-2 items-center justify-center capitalize rounded-md border-2 border-slate-400 hover:bg-slate-700 hover:text-white transition-all">
-                        remind me
-                    </button>
-                    <button className="flex my-1 py-1 px-2 items-center justify-center capitalize rounded-md border-2 border-slate-400 hover:bg-slate-700 hover:text-white transition-all">
-                        tell a friend
-                    </button>
-                </div>
-            </div>
-            <Image className="mx-2" src={Favicon} width={22} height={22} alt="favicon" />
+        <div id="favcard" ref={favcardref} className="flex flex-col w-4/5 items-center pt-3 pb-6 px-4 my-1.5 bg-gray-100 rounded shadow-lg relative z-0 overflow-hidden">
             
-            {/* <div className="flex my-6 mx-4 py-3 items-center justify-center rounded-md border-2 border-slate-800 hover:bg-slate-700 hover:text-white transition-all">
-                <h2 className="capitalize ">Remind me</h2>
-            </div> */}
+            {/* EVENT THUMBNAIL - lazy fetch */}
+            <Image priority={false} className="absolute -z-10 w-full h-auto opacity-10 right-0 left-0 bottom-0 top-0 mx-0 aspect-square" src={DummyImg} width={22} height={22} alt="favicon" />
+
+            {/* FAVORITE btn */}
+            <Image className="absolute z-10 right-2 top-5 mx-2" src={Favicon} width={22} height={22} alt="favicon" />
+            
+            <h1 className="text-2xl text-left w-full font-bold capitalize">event title</h1>
+            <span className="text-sm text-slate-400 text-left w-full">date</span>
+
+            <div className="flex flex-col gap-2 w-1/2 pt-6">
+                <button className="inline-flex items-center justify-center gap-2 py-2 rounded-md border-2 bg-white hover:border-slate-700 hover:bg-slate-700 hover:text-white transition-all capitalize shadow-md">
+                    <Image src={BellIcon} width={18} height={18} alt="remind icon" />
+                    remind me
+                </button>
+                <button className="inline-flex items-center justify-center gap-2 py-2 rounded-md border-2 bg-white hover:border-slate-700 hover:bg-slate-700 hover:text-white transition-all capitalize shadow-md">
+                    <Image src={ShareIcon} width={18} height={18} alt="remind icon" />
+                    tell a friend
+                </button>
+            </div>
         </div>
 
     );

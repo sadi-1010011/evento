@@ -10,6 +10,7 @@ function dateLabel(date: string) {
         switch (datediff) {
             case 1: return (`Tomorrow`);
             case 2: return (`2 more days`);
+            default: return ('today');
         }
     }
     return (eventdate.toFormat('yyyy LLL dd'));

@@ -1,9 +1,11 @@
 "use client"
 
 import DummyIcon from "@/assets/profile/mishal.jpeg";
-import SettingsIcon from "@/assets/icons/settings.png"
+import RatingIcon from "@/assets/icons/star.png";
+import HostIcon from "@/assets/icons/host_dark.png";
 import Image from "next/image";
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
+// import SettingsIcon from "@/assets/icons/settings.png";
 // SIGN IN
 // import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -13,39 +15,49 @@ export default function ProfilePage() {
     const router = useRouter()
 
     return (
-        <div className="flex z-0 items-center min-h-screen w-full overflow-x-hidden overflow-y-scroll flex-col bg-slate-200">
+        <div className="flex items-center min-h-screen w-full overflow-x-hidden flex-col pt-4 px-2">
             
-            {/* BLUE COMPONENT */}
-            <div className="flex flex-col z-2 relative justify-center items-center pt-3 pb-10 bg-gray-900 rounded-b-3xl text-white text-center">
-                <div className="flex w-full justify-between px-4">
-                    <h2 className="text-center text-md capitalize">Profile</h2>
-                    <Image onClick={ () => router.push("/settings")} width={32} height={32} className="border-2 rounded-full bg-white h-auto hover:bg-gray-400 transition-all" src={SettingsIcon} alt="settings icon" />
-                </div>
-                <div className="w-1/2 m-auto pt-10 pb-6 h-auto">
-                    <Image priority className="w-full h-auto border-gray-700 border p-1.5 rounded-full" src={DummyIcon} alt="profile pic" />
-                </div>
-                <h1 className="m-0 font-bold ">Rocket Mishal</h1>
-                <span className="text-xs text-gray-300">Level 10</span>
-            
-                {/* INFO COMPONENT */}
-                <div style={{ "top": "calc(100% - 1.5rem)" }} className="flex flex-col items-center justify-center z-10 absolute rounded-2xl bg-white text-black p-2.5 w-4/5 m-auto  text-center">
-                    <h2 className="font-semibold capitalize">some text</h2>
-                    <span className="text-xs text-slate-700">user description here</span>
-                    <div className="w-1/3 m-auto p-4 h-auto">
-                        <span className="w-full h-auto border-yellow-300 border p-1.5 rounded-full">85</span>
+            {/* PROFILE CARD */}
+            <div className="flex items-center justify-around w-2/3 sm:w-2/3 md:w-2/3 px-2 py-6 bg-white text-black rounded-3xl shadow-md">
+                
+                {/* PROFILE PIC, NAME */}
+                <div className="flex flex-col items-center w-2/3">
+                    <Image priority className="w-3/5 h-auto aspect-square border-gray-300 border p-1.5 rounded-full" src={DummyIcon} alt="profile pic" />
+                    <h1 className="text-2xl font-bold capitalize text-center pt-2">mishal</h1>
+                    <div className="inline-flex items-center gap-x-0.5">
+                        <Image src={HostIcon} width={22} height={22} className="inline p-0.5" alt="host icon" />
+                        <span className="text-sm font-semibold capitalize text-center">superhost</span>
                     </div>
-                    <span className="text-xs text-slate-700 font-semibold">Streak</span>
+                </div>
 
-                    {/* LOGIN/SIGNUP */}
-
-                    <div className="flex flex-col gap-1.5 items-center w-full mt-1.5 p-1 justify-around rounded-md">
-                        {/* <button onClick={() => { signIn("github", { redirectTo: "/" }) } } className="w-full py-2 rounded-md border-2 border-slate-800 hover:bg-slate-700 hover:text-white transition-all">Login with GitHub</button> */}
-                        <button onClick={() => router.push("/register") } className="w-full py-2 rounded-md border-2 border-slate-800 hover:bg-slate-700 hover:text-white transition-all capitalize">create account</button>
-                        <button onClick={() => router.push("/register") } className="w-full py-2 rounded-md border-2 border-slate-800 hover:bg-slate-700 hover:text-white transition-all capitalize">login with Email</button>
+                {/* INFO */}
+                <div className="flex flex-col w-1/3 text-left items-left justify-evenly">
+                    <div>
+                        <h1 className="text-xl font-bold capitalize pt-2">163</h1>
+                        <span className="text-sm font-semibold capitalize">reviews</span>
+                    </div>
+                    <div className="inline-flex flex-col items-start">
+                        <h1 className="inline-flex items-center justify-center gap-x-1 text-xl font-bold capitalize pt-2">
+                            4.92
+                            <Image src={RatingIcon} width={12} height={12} alt="rating icon" />
+                        </h1>
+                        <span className="text-sm font-semibold capitalize">rating</span>
+                    </div>
+                    <div>
+                        <h1 className="text-xl font-bold capitalize pt-2">11</h1>
+                        <span className="text-sm font-semibold capitalize">years</span>
                     </div>
                 </div>
             </div>
 
+            {/* <h1 className="text-2xl font-bold capitalize text-center pt-2">login</h1> */}
+
+            <div className="flex flex-col gap-1.5 w-1/2 pt-6">
+                <button onClick={() => router.push("/register") } className="py-2 rounded-md border-2 bg-white hover:border-slate-700 hover:bg-slate-700 hover:text-white transition-all capitalize shadow-md">create account</button>
+                <button onClick={() => router.push("/register") } className="py-2 rounded-md border-2 bg-white hover:border-slate-700 hover:bg-slate-700 hover:text-white transition-all capitalize shadow-md">login with Email</button>
+            </div>
+
+            
             <BottomNavBar active="Profile" />
         </div>
     );
