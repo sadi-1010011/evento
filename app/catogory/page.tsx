@@ -9,7 +9,7 @@ export default function CatogoryPage() {
 
 
     return (
-        <div className="w-full h-screen pt-3 bg-slate-200">
+        <div className="w-full h-screen pt-3">
             <h1 className="capitalize text-xl text-center font-semibold mt-5 mb-2">find catogories</h1>
             <div className="flex-col items-center justify-evenly px-6 py-4">
 
