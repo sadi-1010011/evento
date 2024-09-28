@@ -47,7 +47,6 @@ export default function ProfileCard({ name, email }: { name: string, email: stri
 
         </div>
 
-        <button onClick={ () => userLogout() } className="my-6 py-2 px-4 rounded-md border-2 bg-white hover:border-slate-700 hover:bg-slate-700 hover:text-white transition-all capitalize shadow-md">logout</button>
         </>
     );
 }

@@ -44,7 +44,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
 
     return (
-        <main className="flex min-h-screen flex-col">
+        <main className="flex min-h-screen flex-col bg-white text-black dark:bg-black dark:text-white">
 
             {/* Share, Favorite Btn */}
             <div className="flex gap-2 m-2 absolute right-2 top-2 z-10">
@@ -72,12 +72,12 @@ export default async function EventPage({ params }: { params: { id: string }}) {
                 <div className="flex items-center my-6">
                     <Image className="rounded-full mr-3 bg-white p-0.5" src={HostIcon} width={50} height={50} alt="host icon" />
                     <h3 className="capitalize">{ event ? `hosted by ${event.hostname}` : 'host name'}</h3>
-                    <Image className="rounded-full bg-white px-0.5" src={VerifyIcon} width={22} height={22} alt="verify icon" />
+                    <Image className="rounded-full bg-white px-0.5 ml-1.5" src={VerifyIcon} width={22} height={22} alt="verify icon" />
                 </div>
 
                 <hr style={{ width: '90%', display: 'block', margin: 'auto'}} />
                 
-                <p className="my-6 pl-2 text-gray-600">{ event ? event.description : 'description..'}</p>
+                <p className="my-6 pl-2 text-gray-600 dark:text-slate-200">{ event ? event.description : 'description..'}</p>
                 
 
                 <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
@@ -102,7 +102,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
                 <div className="my-4 pl-2">
                     <h1 className="text-lg font-semibold first-letter:capitalize">Availability</h1>
-                    <span className="text-gray-600">1-6 Sept</span>
+                    <span className="text-gray-600 dark:text-slate-200">1-6 Sept</span>
                 </div>
 
 
@@ -138,8 +138,8 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
                 <div className="my-4 pl-2">
                     <h1 className="text-lg font-semibold first-letter:capitalize">Event rules</h1>
-                    <span className="text-gray-600">start time: 4 pm</span>
-                    <span className="text-gray-600">end time: 12 am</span>
+                    <span className="text-gray-600 dark:text-slate-200">start time: 4 pm</span>
+                    <span className="text-gray-600 dark:text-slate-200">end time: 12 am</span>
                 </div>
 
 
@@ -156,9 +156,9 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
                 <div className="my-4 pl-2">
                     <h1 className="text-lg font-semibold first-letter:capitalize">Cancellation Policy</h1>
-                    <span className="text-gray-600">This reservation in non-refundable.</span>
+                    <span className="text-gray-600 dark:text-slate-200">This reservation in non-refundable.</span>
                     <br />
-                    <span className="text-gray-600">Review this Host full policy for details.</span>
+                    <span className="text-gray-600 dark:text-slate-200">Review this Host full policy for details.</span>
                 </div>
 
 
@@ -168,16 +168,16 @@ export default async function EventPage({ params }: { params: { id: string }}) {
                 
                 <div className="my-4 pl-2">
                     <h1 className="text-lg font-semibold first-letter:capitalize">Safety & security</h1>
-                    <span className="text-gray-600">smoke alarm</span>
-                    <span className="text-gray-600">security guards</span>
-                    <span className="text-gray-600">some spaces are shared</span>
+                    <span className="text-gray-600 dark:text-slate-200">smoke alarm</span>
+                    <span className="text-gray-600 dark:text-slate-200">security guards</span>
+                    <span className="text-gray-600 dark:text-slate-200">some spaces are shared</span>
                 </div>
 
                 <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
 
 
                 <div className="my-4 pl-2">
-                    <h1 className="text-md font-semibold text-gray-600 first-letter:capitalize">Report this event!</h1>
+                    <h1 className="text-md font-semibold text-gray-600 dark:text-slate-200 first-letter:capitalize">Report this event!</h1>
                 </div>
 
 

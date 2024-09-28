@@ -6,6 +6,7 @@ import { useState } from "react";
 import validateEmail from "@/utils/validateMail";
 import { userLogin } from "../serverActions/userLogin";
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
+import TopNavbar from "@/components/topnavbar/TopNavbar";
 
 export default function LoginPage() {
 
@@ -77,16 +78,18 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="flex items-center justify-center w-full h-screen pt-3 px-2">
+        <div className="flex flex-col items-center bg-white text-black dark:bg-slate-900 dark:text-white">
+        <TopNavbar />
+        <div className="flex items-center justify-center w-full min-h-screen pt-2 px-2 -mt-10">
 
-            <div className="flex flex-col items-center justify-center w-full sm:w-4/5 md:w-4/5 mx-2 px-4 py-8 bg-white text-black rounded-3xl shadow-2xl">
+            <div className="flex flex-col items-center justify-center w-full sm:w-4/5 md:w-4/5 mx-2 px-4 py-8 bg-white text-black dark:bg-black dark:text-white rounded-3xl shadow-2xl">
                 <h1 className="text-2xl font-bold capitalize">Evento login</h1>
                 <h1 className="capitalize text-xs text-center font-light mt-2">Dont have an account? <Link className="text-blue-500 hover:underline" href="/register">register</Link></h1>
 
                 <form action={ async () => handleSubmit() } className="w-full flex flex-col gap-2 items-center justify-center my-4 py-2 px-2">
                     {/* <input onChange={ handleUsername } className="bg-zinc-200 w-full focus:border-2 rounded-full py-2 px-5 outline-none" type="text" placeholder="User Name" value={username} /> */}
-                    <input onChange={ handleEmail } className="bg-zinc-200 w-full focus:border-2 rounded-full py-2 px-5 outline-none" type="email" placeholder="Email" value={email} />
-                    <input onChange={ handlePassword} className="bg-zinc-200 w-full focus:border-2 rounded-full py-2 px-5 outline-none" type="password" placeholder="Password" value={password} />
+                    <input onChange={ handleEmail } className="bg-zinc-200 dark:bg-zinc-900 w-full focus:border-2 rounded-full py-2 px-5 outline-none" type="email" placeholder="Email" value={email} />
+                    <input onChange={ handlePassword} className="bg-zinc-200 dark:bg-zinc-900 w-full focus:border-2 rounded-full py-2 px-5 outline-none" type="password" placeholder="Password" value={password} />
                     <h1 className="capitalize text-xs text-center font-light mt-4">forgot password? <Link className="text-blue-500 hover:underline" href="/profile">recover</Link></h1>
                     <button type="submit" className="capitalize w-1/2 bg-blue-950 text-white hover:bg-slate-700 rounded-full my-2 py-2 px-5 outline-none border-none">Login</button>
                     {
@@ -98,6 +101,7 @@ export default function LoginPage() {
                 </form>
             </div>
             <BottomNavBar active="Profile" />
+        </div>
         </div>
     )
 }

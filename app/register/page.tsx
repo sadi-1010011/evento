@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import validateEmail from "@/utils/validateMail";
+import TopNavbar from "@/components/topnavbar/TopNavbar";
 
 export default function RegisterPage() {
 
@@ -106,20 +107,21 @@ export default function RegisterPage() {
     }
 
     return (
+        <div className="flex flex-col items-center bg-white text-black dark:bg-slate-900 dark:text-white">
+        <TopNavbar />
         <div className="flex items-center justify-center w-full h-screen pt-3 px-2">
-
-            <div className="flex flex-col items-center justify-center w-full sm:w-4/5 md:w-4/5 mx-2 px-4 py-8 bg-white text-black rounded-3xl shadow-2xl">
+            <div className="flex flex-col items-center justify-center w-full sm:w-4/5 md:w-4/5 mx-2 px-4 py-8 bg-white text-black dark:bg-black dark:text-white rounded-3xl shadow-2xl">
                 <h1 className="text-2xl font-bold capitalize">Create account</h1>
                 <h1 className="capitalize text-xs text-center font-light mt-2 mb-2">already have account? <Link className="text-blue-500 hover:underline" href="/profile">Log in</Link></h1>
 
                 <form action={ () => handleSubmit() } className="w-full flex flex-col gap-2 items-center justify-center my-4 py-2 px-2">
                     <div className="flex gap-1">
-                        <input onChange={ handleFirstname } className="bg-zinc-200 w-1/2 focus:border-2 rounded-l-full py-2 px-5 outline-none" type="text" placeholder="First Name" value={firstname} />
-                        <input onChange={ handleLastname } className="bg-zinc-200 w-1/2 focus:border-2 rounded-r-full py-2 px-5 outline-none" type="text" placeholder="Last Name" value={lastname} />
+                        <input onChange={ handleFirstname } className="bg-zinc-200 dark:bg-zinc-900 w-1/2 focus:border-2 rounded-l-full py-2 px-5 outline-none" type="text" placeholder="First Name" value={firstname} />
+                        <input onChange={ handleLastname } className="bg-zinc-200 dark:bg-zinc-900 w-1/2 focus:border-2 rounded-r-full py-2 px-5 outline-none" type="text" placeholder="Last Name" value={lastname} />
                     </div>
-                    <input onChange={ handleEmail } className="bg-zinc-200 w-full focus:border-2 rounded-full py-2 px-5 outline-none" type="email" placeholder="Email" value={email} />
-                    <input onChange={ handlePassword} className="bg-zinc-200 w-full focus:border-2 rounded-full py-2 px-5 outline-none" type="password" placeholder="Password" value={password} />
-                    <input onChange={ handleRePass } className="bg-zinc-200 w-full focus:border-2 rounded-full py-2 px-5 outline-none" type="password" placeholder="Confirm password" value={repassword} />
+                    <input onChange={ handleEmail } className="bg-zinc-200 dark:bg-zinc-900 w-full focus:border-2 rounded-full py-2 px-5 outline-none" type="email" placeholder="Email" value={email} />
+                    <input onChange={ handlePassword} className="bg-zinc-200 dark:bg-zinc-900 w-full focus:border-2 rounded-full py-2 px-5 outline-none" type="password" placeholder="Password" value={password} />
+                    <input onChange={ handleRePass } className="bg-zinc-200 dark:bg-zinc-900 w-full focus:border-2 rounded-full py-2 px-5 outline-none" type="password" placeholder="Confirm password" value={repassword} />
                     <button type="submit" className="capitalize w-1/2 bg-blue-950 text-white hover:bg-slate-700 rounded-full my-2 py-2 px-5 outline-none border-none">sign up</button>
                     {
                         formerrors && (formerrors.map((err: string, i: number) =>
@@ -129,7 +131,7 @@ export default function RegisterPage() {
                     }
                 </form>
             </div>
-
+        </div>
         </div>
     )
 }

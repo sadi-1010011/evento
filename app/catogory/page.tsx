@@ -3,14 +3,18 @@
 // import SearchBar from "@/components/searchbar/SearchBar";
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
 import CatogoryCard from "@/components/catogorycard/Catogorycard";
+import TopNavbar from "@/components/topnavbar/TopNavbar";
 // import Link from "next/link";
 
 export default function CatogoryPage() {
 
 
     return (
-        <div className="w-full h-screen pt-3">
-            <h1 className="capitalize text-xl text-center font-semibold mt-5 mb-2">find catogories</h1>
+        <div className="w-full h-screen pt-2 bg-white text-white dark:bg-black dark:text-white">
+
+            <TopNavbar />
+
+            <h1 className="capitalize text-xl text-center text-black dark:text-white font-semibold">find catogories</h1>
             <div className="flex-col items-center justify-evenly px-6 py-4">
 
                 {/* <div className="mb-4">

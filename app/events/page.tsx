@@ -31,11 +31,11 @@ export default function HomePage() {
 
 
     return (
-        <main className="flex min-h-screen flex-col items-center px-3 pt-2 pb-16 bg-white">
+        <main className="flex min-h-screen flex-col items-center px-3 pt-2 pb-16 bg-white text-black dark:bg-black dark:text-white">
             <h1 className="inline-block text-left w-full mt-2 font-bold text-2xl pl-2">Evento</h1>
             {/* <SearchBar /> */}
             <BottomNavBar />
-            <div className="w-full bg-white min-h-screen overflow-auto mt-0 px-2">
+            <div className="w-full min-h-screen overflow-auto mt-0 px-2">
                                 
                 {
                     isoffline ? 

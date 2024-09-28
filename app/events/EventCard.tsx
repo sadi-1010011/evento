@@ -30,11 +30,11 @@ export default function EventCard({ data } :{ data: IEvent }) {
     }, [data.thumbnail, data.date]);
 
     return (
-        <div className="flex z-0 my-10 flex-col rounded-xl bg-white w-full text-black relative overflow-hidden">
+        <div className="flex z-0 my-10 w-full flex-col rounded-xl bg-white text-black dark:bg-black dark:text-white relative overflow-hidden">
             <span className="absolute z-50 right-0 m-5 p-1 rounded-full" >
                 <Image onClick={ ()=> { setFavorite(!favorite); alert('you need to Login to add favorites!') } } src={favorite ? FavedIcon : FavIcon} width={22} height={22} alt="favorite icon" />
             </span>
-            <div className="absolute z-50 border text-black bg-white text-sm px-2.5 shadow-md m-5 rounded-xl" >
+            <div className="absolute z-50 border bg-white text-black dark:bg-black dark:text-white text-sm px-2.5 shadow-md m-5 rounded-xl" >
                 { eventdate || 'evnt date' }
             </div>
             
