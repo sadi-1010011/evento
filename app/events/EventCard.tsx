@@ -30,7 +30,7 @@ export default function EventCard({ data } :{ data: IEvent }) {
     }, [data.thumbnail, data.date]);
 
     return (
-        <div className="flex z-0 my-10 w-full flex-col rounded-xl bg-white text-black dark:bg-black dark:text-white relative overflow-hidden">
+        <div className="flex z-0 mb-10 w-full flex-col rounded-xl bg-white text-black dark:bg-black dark:text-white relative overflow-hidden">
             <span className="absolute z-50 right-0 m-5 p-1 rounded-full" >
                 <Image onClick={ ()=> { setFavorite(!favorite); alert('you need to Login to add favorites!') } } src={favorite ? FavedIcon : FavIcon} width={22} height={22} alt="favorite icon" />
             </span>
@@ -44,12 +44,12 @@ export default function EventCard({ data } :{ data: IEvent }) {
 
                     {/* IMG CAROUSEL */}
 
-                    <Carousel autoPlay infiniteLoop swipeable={false} stopOnHover interval={2400} showArrows={false} showStatus={false}>
+                    <Carousel showThumbs={false} autoPlay infiniteLoop swipeable={false} stopOnHover interval={2400} showArrows={false} showStatus={false}>
                         <Image className="rounded-xl aspect-square w-full h-auto" src={thumbnail || DummyImage} width={500} height={500} placeholder="empty" alt="event picture" />
                         <Image className="rounded-xl aspect-square w-full h-auto" src={ DummyImage} width={500} height={500} placeholder="empty" alt="event picture" />
                     </Carousel>
 
-                    <div className="flex flex-row justify-between items-center px-2 -mt-6">
+                    <div className="flex flex-row justify-between items-center px-2 mt-2">
                         <h2 className="font-bold text-xl capitalize">{ `${data.title}`}</h2>
                         <span className="flex items-center justify-center gap-1 text-sm font-semibold capitalize">
                             <Image src={RatingIcon} width={13} height={13} alt="rating icon" />

@@ -1,3 +1,4 @@
+"use client";
 import DummyImg from "@/assets/eventoLogo.jpeg";
 import Favicon from "@/assets/icons/fav-red.png";
 import BellIcon from "@/assets/icons/star.png";

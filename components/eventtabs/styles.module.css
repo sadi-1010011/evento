@@ -1,0 +1,11 @@
+/* styles module for eventtabs */
+
+.activetab {
+    border-bottom: 0px;
+    transition: border 0.15s;
+}
+
+.inactivetab {
+    border-bottom: 0px;
+    transition: border 0.15s;
+}

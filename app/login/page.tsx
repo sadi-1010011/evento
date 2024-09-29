@@ -7,10 +7,12 @@ import validateEmail from "@/utils/validateMail";
 import { userLogin } from "../serverActions/userLogin";
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
 import TopNavbar from "@/components/topnavbar/TopNavbar";
+import { useFormStatus } from "react-dom";
 
 export default function LoginPage() {
 
     const router = useRouter();
+    const { pending } = useFormStatus();
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPass] = useState('')
@@ -78,7 +80,7 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="flex flex-col items-center bg-white text-black dark:bg-slate-900 dark:text-white">
+        <div className="flex flex-col items-center bg-white text-black dark:bg-slate-950 dark:text-white">
         <TopNavbar />
         <div className="flex items-center justify-center w-full min-h-screen pt-2 px-2 -mt-10">
 
@@ -91,7 +93,7 @@ export default function LoginPage() {
                     <input onChange={ handleEmail } className="bg-zinc-200 dark:bg-zinc-900 w-full focus:border-2 rounded-full py-2 px-5 outline-none" type="email" placeholder="Email" value={email} />
                     <input onChange={ handlePassword} className="bg-zinc-200 dark:bg-zinc-900 w-full focus:border-2 rounded-full py-2 px-5 outline-none" type="password" placeholder="Password" value={password} />
                     <h1 className="capitalize text-xs text-center font-light mt-4">forgot password? <Link className="text-blue-500 hover:underline" href="/profile">recover</Link></h1>
-                    <button type="submit" className="capitalize w-1/2 bg-blue-950 text-white hover:bg-slate-700 rounded-full my-2 py-2 px-5 outline-none border-none">Login</button>
+                    <button type="submit" className="capitalize w-1/2 bg-blue-950 text-white hover:bg-slate-700 rounded-full my-2 py-2 px-5 outline-none border-none">{ pending ? 'verifying' : 'Login' }</button>
                     {
                         formerrors && (formerrors.map((err: string, i: number) =>
                             <span key={i} className="text-xs -m-1 first-letter:capitalize font-light text-red-400">{ err }</span>))

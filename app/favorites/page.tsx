@@ -1,11 +1,20 @@
-"use client"
+"use server"
 
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
 import FavoritesCard from "@/components/favoritescard/FavoritesCard";
 import TopNavbar from "@/components/topnavbar/TopNavbar";
 import data from "@/data/eventData";
+// import { getSession } from "@/utils/getsession";
+// import { redirect } from "next/navigation";
 
-export default function FavoritesPage() {
+export default async function FavoritesPage() {
+
+    // const session = await getSession();
+    // if (!session) {
+    //     redirect("/login");
+    // }
+
+
 
     return (
         <div className="flex min-h-screen w-full flex-col pt-2 bg-white text-black dark:bg-black dark:text-white">
