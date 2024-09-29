@@ -24,7 +24,7 @@ export async function userLogin(formData: any) {
             // user exists !
             if (password === user[0]?.password) {
                 // create the session
-                const duration = 24 * 60 * 60 * 100;
+                const duration = 60 * 60 * 24 * 7; // one week
                 const expires = new Date(Date.now() + duration); // expiry date
                 const session = await encrypt({ user, expires }); // encrypt
             

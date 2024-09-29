@@ -14,7 +14,7 @@ export default function EditDelete({ id }: { id: string }) {
     const router = useRouter();
 
     return (
-        <div className="bg-slate-800 text-slate-400 flex items-center justify-evenly py-2.5 mb-10 w-full">
+        <div className="bg-evento-white text-slate-400 flex items-center justify-evenly py-2.5 mb-10 w-full">
         <button className="bg-red-500 text-white capitalize text-sm font-semibold rounded-full p-2 px-3">
         <Link href={`/edit-event/${id}`}>
             <Image className="block m-auto" src={EditIcon} width={30} height={30} alt="edit icon" />

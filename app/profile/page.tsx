@@ -11,12 +11,12 @@ export default async function ProfilePage() {
 
     const session = await getSession();
 
-    if (!session) redirect("/login");
+    if (!session) redirect("/register");
     
     const user = session.user[0];
 
     return (
-        <div className="flex items-center min-h-screen w-full pt-2 overflow-x-hidden flex-col dark:bg-black dark:text-white transition-all">
+        <div className="flex items-center min-h-screen w-full pt-2 overflow-x-hidden flex-col bg-evento-white dark:bg-black dark:text-white transition-all">
         
             <TopNavbar />
 

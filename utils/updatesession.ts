@@ -8,8 +8,9 @@ export async function updateSession(req: NextRequest) {
     if (!session) return;
     
     // refresh the session
+    const duration = 60 * 60 * 24;
     const parsed = await decrypt(session);
-    parsed.expires = new Date(Date.now() + 10 * 1000);
+    parsed.expires = new Date(Date.now() + duration);
 
     const res = NextResponse.next();
 

@@ -7,7 +7,7 @@ import { userLogout } from "../serverActions/userLogout";
 export default function SettingsPage() {
 
     return (
-        <div className="w-full h-screen pt-2 bg-white text-black dark:bg-black dark:text-white">
+        <div className="w-full h-screen pt-2 bg-evento-white text-black dark:bg-black dark:text-white">
             <h1 className="capitalize text-xl text-center font-semibold mt-5 mb-2">settings page</h1>
             <div className="flex flex-col w-full min-h-screen items-center justify-center px-6 py-4">
 

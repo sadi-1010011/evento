@@ -32,11 +32,11 @@ export default function HomePage() {
 
 
     return (
-        <main className="flex min-h-screen flex-col items-center px-3 pt-2 pb-16 bg-white text-black dark:bg-black dark:text-white">
-            <h1 className="inline-block text-left w-full mt-2 font-bold text-2xl pl-2">Evento</h1>
+        <main className="flex min-h-screen flex-col items-center px-3 pt-2 pb-16 bg-evento-white text-black dark:bg-black dark:text-white">
+            <div className="inline-flex flex-row w-full px-2 pt-2 items-center justify-between">
+                <h1 className="inline-block text-left w-full mt-1 font-bold text-2xl pl-2">Evento</h1>
+            </div>
             
-            {/* <SearchBar /> */}
-
             <EventTabs active={2} />
 
             <div className="w-full min-h-screen overflow-auto mt-0 px-2">
@@ -47,10 +47,10 @@ export default function HomePage() {
                         :
                     events.length ?
 
-                        events.map((event,i) => <>
-                            <EventCard key={i} data={event} />
+                        events.map((event,i) => <div className="p-1" key={i}>
+                            <EventCard data={event} />
                             <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
-                        </>)
+                        </div>)
                             :
                         <div className="my-8 mx-4">
                         <SkeletonTheme baseColor="#909090" highlightColor="#888">
@@ -65,7 +65,7 @@ export default function HomePage() {
 
                 {/* ADMIN ONLY FEATURE! */}
 
-                <div onClick={ () => router.push("/create-event") } className="flex m-4 p-2 items-center justify-center rounded-md border-2 border-slate-800 hover:bg-slate-700 hover:text-white transition-all">
+                <div onClick={ () => router.push("/create-event") } className="flex m-4 p-2 items-center justify-center rounded-md border-2 border-slate-500 hover:bg-evento-black hover:text-white transition-all">
                     <h2 className="capitalize font-bold">add event</h2>
                     <span className="rounded-50 p-2 font-semibold text-xl capitalize">+</span>
                     <span className="d-block font-light text-xs">{ `(admin only!)` }</span>

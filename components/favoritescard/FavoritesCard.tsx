@@ -1,53 +1,71 @@
-"use client";
-import DummyImg from "@/assets/eventoLogo.jpeg";
-import Favicon from "@/assets/icons/fav-red.png";
-import BellIcon from "@/assets/icons/star.png";
-import ShareIcon from "@/assets/icons/share-black.png";
+"use client"
+
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+// import RatingIcon from "@/assets/icons/star.png";
+import DummyImage from "@/assets/eventoLogo.jpeg";
+import LocationIcon from "@/assets/icons/location-pin.png";
+// import ShareIcon from "@/assets/icons/share-black.png";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+// image carousel
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+// import dateLabel from "@/utils/dateLabel";
+import { IEvent } from "@/models/event";
+import { FavoritedBtn, RemindMeBtn } from "../animatedbtns/AnimatedBtns";
 
-export default function FavoritesCard({ title }: { title: string }) {
 
-    const favcardref = useRef(null);
+export default function EventCard({ data } :{ data: IEvent }) {
 
-    useEffect(()=> {
-        // Drop like animation for UX
-        if (favcardref.current) {
-            const favcard = favcardref.current;
-            // console.log(favcard);
-            // try {   
-            //     favcard.style.transition = '0.6s';
-            //     favcard.style.marginBottom = '0.5rem';
-            //     favcard.style.padding = '0.9rem';
-            // } catch (error) {
-            //     console.log('unable to perform animation: ', error);
-            // } // as of now animation is disabled
-        }
-    }, []);
+
+    const router = useRouter();
+    const [favorite, setFavorite] = useState(false);
+    const [thumbnail, setThumbnail] = useState('');
+    const [eventdate, setEventdate] = useState('');
+    
+
+    // useEffect(() => {
+    //     setThumbnail(data.thumbnail);
+    //     if (typeof data.date === 'string') setEventdate(dateLabel(data.date))
+    // }, [data.thumbnail]);
 
     return (
-        <div id="favcard" ref={favcardref} className="flex flex-col w-full items-center pt-3 pb-6 px-4 my-1.5 rounded shadow-lg relative z-0 overflow-hidden">
-            
-            {/* EVENT THUMBNAIL - lazy fetch */}
-            <Image priority={false} className="absolute -z-10 w-full h-auto opacity-10 right-0 left-0 bottom-0 top-0 mx-0 aspect-square" src={DummyImg} width={22} height={22} alt="favicon" />
-
-            {/* FAVORITE btn */}
-            <Image className="absolute z-10 right-2 top-5 mx-2" src={Favicon} width={22} height={22} alt="favicon" />
-            
-            <h1 className="text-2xl text-left w-full font-bold capitalize">{ 'title' }</h1>
-            <span className="text-sm text-slate-400 text-left w-full">date</span>
-
-            <div className="flex flex-col gap-2 w-1/2 pt-6">
-                <button className="inline-flex items-center justify-center gap-2 py-2 rounded-md border-2 bg-white text-black hover:border-slate-700 hover:bg-slate-700 hover:text-white transition-all capitalize shadow-md">
-                    <Image src={BellIcon} width={18} height={18} alt="remind icon" />
-                    remind me
-                </button>
-                <button className="inline-flex items-center justify-center gap-2 py-2 rounded-md border-2 bg-white text-black hover:border-slate-700 hover:bg-slate-700 hover:text-white transition-all capitalize shadow-md">
-                    <Image src={ShareIcon} width={18} height={18} alt="remind icon" />
-                    tell a friend
-                </button>
+        <div className="flex z-0 mb-10 w-full flex-col rounded-xl bg-evento-white text-black dark:bg-black dark:text-white relative overflow-hidden">
+            <span className="absolute z-50 right-0 my-1 mx-1.5 p-1 inline-flex flex-col gap-5" >
+                <FavoritedBtn />
+                <RemindMeBtn />
+                {/* <Image src={ShareIcon} width={18} height={18} alt="share icon" /> */}
+            </span>
+            <div className="absolute font-medium z-50 border bg-white text-black dark:bg-black dark:text-white text-sm px-3 py-1 shadow-md m-3 rounded-md" >
+                { eventdate || 'evnt date' }
             </div>
-        </div>
+            
+            {/* LINKS TO EVENT PAGE BY ID */}
 
+                <div onClick={ (event) => { event.preventDefault(); router.push(`events/${data._id}`); }} className="w-full" >
+
+                    {/* IMG CAROUSEL */}
+
+                    <Carousel preventMovementUntilSwipeScrollTolerance swipeScrollTolerance={20} showThumbs={false} autoPlay infiniteLoop swipeable={true} stopOnHover interval={3000} showArrows={false} showStatus={false}>
+                        <Image className="rounded-xl aspect-square w-full h-auto" src={thumbnail || DummyImage} width={500} height={500} placeholder="empty" alt="event picture" />
+                        <Image className="rounded-xl aspect-square w-full h-auto" src={ DummyImage} width={500} height={500} placeholder="empty" alt="event picture" />
+                    </Carousel>
+
+                    <div className="flex flex-row justify-between items-center pr-2 mt-2">
+                        <h2 className="font-medium text-lg capitalize">{ `${data.title}`}</h2>
+                        {/* <span className="flex items-center justify-center gap-1 text-sm font-semibold capitalize">
+                            <Image src={RatingIcon} width={13} height={13} alt="rating icon" />
+                            4.9
+                        </span> */}
+                    </div>
+                    <div className="flex items-center -mt-0.5 pr-2 text-gray-600">
+                        <span>Hosted By&nbsp;</span><h3 className="capitalize">{data.hostname || 'host name'}</h3>
+                    </div>
+                    <Image className="inline pr-1" src={LocationIcon} width={24} height={24} alt="location icon" />
+                    <p className="inline pr-2">{data.location || 'event description'}</p>
+                </div>
+            </div>
     );
 }
+
+                    

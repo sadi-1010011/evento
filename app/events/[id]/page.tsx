@@ -14,6 +14,8 @@ import ShareIcon from "@/assets/icons/share-black.png";
 import LocationIcon from "@/assets/icons/location-pin.png";
 import connectMongoDB from "@/lib/db";
 import Event from "@/models/event";
+import EditDelete from "@/components/adminFeatures/adminFeature";
+import ProfileCard from "@/components/profilecard/ProfileCard";
 // import EditDelete from "@/components/adminFeatures/adminFeature";
 
 export async function generateStaticParams() {
@@ -44,7 +46,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
 
     return (
-        <main className="flex min-h-screen flex-col bg-white text-black dark:bg-black dark:text-white">
+        <main className="flex min-h-screen flex-col bg-evento-white text-black dark:bg-black dark:text-white">
 
             {/* Share, Favorite Btn */}
             <div className="flex gap-2 m-2 absolute right-2 top-2 z-10">
@@ -66,7 +68,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
                 :
             
             (
-            <>
+            <div>
             <div className="px-4">
                 <h1 className="text-left my-6 pt-2 text-2xl font-semibold capitalize">{ event ? event.title : 'Title here..' }</h1>
                 <div className="flex items-center my-6">
@@ -76,6 +78,10 @@ export default async function EventPage({ params }: { params: { id: string }}) {
                 </div>
 
                 <hr style={{ width: '90%', display: 'block', margin: 'auto'}} />
+
+                <div className="flex items-center justify-center mb-10">
+                    <ProfileCard name={event.hostname} email="me@gmail.com" />
+                </div>
                 
                 <p className="my-6 pl-2 text-gray-600 dark:text-slate-200">{ event ? event.description : 'description..'}</p>
                 
@@ -142,10 +148,6 @@ export default async function EventPage({ params }: { params: { id: string }}) {
                     <span className="text-gray-600 dark:text-slate-200">end time: 12 am</span>
                 </div>
 
-
-
-
-
                 <div className="flex my-6 mx-4 py-3 items-center justify-center rounded-md border-2 border-slate-800 hover:bg-slate-700 hover:text-white transition-all">
                     <h2 className="capitalize ">show all 47 reviews</h2>
                 </div>
@@ -191,18 +193,18 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
             {/* ADMIN ONLY FEATURE !!! */}
 
-                {/* <div className="w-full">
+                <div className="w-full mb-20">
                     <EditDelete id={event._id} />
-                </div> */}
+                </div>
 
             {/* -- END -- */}
 
-            <div className="flex items-center justify-between p-4 bg-gray-700 text-white">
-                <h2 className="font-bold">Total price</h2>
-                <span className="font-bold ">{ event ? event.ticketprice : 'free '} $</span>
+            <div className="fixed bottom-0 w-full flex items-center justify-between py-4 px-4 bg-gray-700 text-white">
+                <h2 className="font-bold text-lg">Total price</h2>
+                <span className="font-bold text-lg">{ event ? event.ticketprice : 'free '} $</span>
             </div>  
 
-            </>
+            </div>
             )
         }
         </main>

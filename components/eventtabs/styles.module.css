@@ -7,5 +7,6 @@
 
 .inactivetab {
     border-bottom: 0px;
+    color: rgb(137, 136, 136);
     transition: border 0.15s;
 }

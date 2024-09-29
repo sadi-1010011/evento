@@ -3,7 +3,7 @@
 const data = [
     {
         id: 1,
-        title: 'Traveler',
+        title: 'Rocket Science Masterclass',
         catogory: 'all',
         hostname: 'me',
         location: 'calicut',
@@ -12,6 +12,7 @@ const data = [
         date: '16/4/22',
         progress: {},
         state: 'current',
+        thumbnail: '',
         pic: 'poster1',
     },
     {

@@ -80,11 +80,11 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="flex flex-col items-center bg-white text-black dark:bg-slate-950 dark:text-white">
+        <div className="flex flex-col items-center bg-evento-white text-black dark:bg-evento-black dark:text-white">
         <TopNavbar />
-        <div className="flex items-center justify-center w-full min-h-screen pt-2 px-2 -mt-10">
+        <div className="flex items-center justify-center w-full h-auto pt-2 px-2 mt-20">
 
-            <div className="flex flex-col items-center justify-center w-full sm:w-4/5 md:w-4/5 mx-2 px-4 py-8 bg-white text-black dark:bg-black dark:text-white rounded-3xl shadow-2xl">
+            <div className="flex flex-col items-center justify-center w-full sm:w-4/5 md:w-4/5 mx-2 px-4 py-8 bg-evento-white text-black dark:bg-black dark:text-white rounded-3xl shadow-evento-shadow border-slate-100">
                 <h1 className="text-2xl font-bold capitalize">Evento login</h1>
                 <h1 className="capitalize text-xs text-center font-light mt-2">Dont have an account? <Link className="text-blue-500 hover:underline" href="/register">register</Link></h1>
 

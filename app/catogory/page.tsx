@@ -10,18 +10,17 @@ export default function CatogoryPage() {
 
 
     return (
-        <div className="w-full h-screen pt-2 bg-white text-white dark:bg-black dark:text-white">
+        <div className="w-full h-screen pt-2 bg-evento-white text-black dark:bg-black dark:text-white">
 
-            <TopNavbar />
+            <h1 className="w-full text-left text-3xl capitalize font-medium pl-6 pt-6 pb-4">Catogories</h1>
 
-            <h1 className="capitalize text-xl text-center text-black dark:text-white font-semibold">find catogories</h1>
-            <div className="flex-col items-center justify-evenly px-6 py-4">
+            <div className="flex-col items-center justify-evenly px-2 py-4">
 
                 {/* <div className="mb-4">
                     <SearchBar />
                 </div> */}
 
-                <div className="flex items-center justify-center w-full flex-wrap">
+                <div className="flex items-center gap-x-2 justify-center w-full flex-wrap">
                     <CatogoryCard active="All" />
                 </div>
 

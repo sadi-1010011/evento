@@ -13,7 +13,8 @@ function dateLabel(date: string) {
             default: return ('today');
         }
     }
-    return (eventdate.toFormat('yyyy LLL dd'));
+    const shortDayName = eventdate.weekdayShort; // show week day
+    return (`${ eventdate.toFormat('LLL dd') }, ${ shortDayName }`);
 }
 
 export default dateLabel;

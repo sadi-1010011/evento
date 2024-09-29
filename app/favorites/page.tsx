@@ -17,16 +17,14 @@ export default async function FavoritesPage() {
 
 
     return (
-        <div className="flex min-h-screen w-full flex-col pt-2 bg-white text-black dark:bg-black dark:text-white">
+        <div className="flex min-h-screen w-full flex-col pt-2 bg-evento-white text-black dark:bg-black dark:text-white">
 
-            <TopNavbar />
-
-            {/* <h1 className="w-full text-center text-xl capitalize font-bold">favorite events</h1> */}
+            <h1 className="w-full text-left text-3xl capitalize font-medium pl-6 pt-6 pb-4">favorite events</h1>
             
-            <div className="flex w-full flex-col items-center justify-center py-4 px-4">
+            <div className="flex w-full flex-col items-center justify-center py-4 px-6">
                 {
                     data.map((event: any, i: number) =>
-                        i < 3 && <FavoritesCard key={i} title={ event.title } />
+                        i < 1 && <FavoritesCard key={i} data={event}/>
                     )
                 }
             </div>
