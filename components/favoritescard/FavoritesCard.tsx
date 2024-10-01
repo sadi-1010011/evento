@@ -32,7 +32,7 @@ export default function EventCard({ data, checked } :{ data: IEvent, checked: bo
     return (
         <div className="flex z-0 mb-10 w-full flex-col rounded-xl bg-evento-white text-black dark:bg-black dark:text-white relative overflow-hidden">
             <span className="absolute z-50 right-0 my-1 mx-1.5 p-1 inline-flex flex-col gap-5" >
-                <FavoritedBtn checked />
+                <FavoritedBtn checked onclick={()=> console.log('favorited!')} />
                 <RemindMeBtn />
                 {/* <Image src={ShareIcon} width={18} height={18} alt="share icon" /> */}
             </span>

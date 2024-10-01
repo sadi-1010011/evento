@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
@@ -61,10 +61,10 @@ export default function HomePage() {
                         :
                     events.length ?
 
-                        events.map((event,i) => <div className="p-1" key={i}>
+                        events.map((event,i) => <Suspense key={i}>
                             <EventCard data={event} />
                             <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
-                        </div>)
+                        </Suspense>)
                             :
                         <div className="my-8 mx-4">
                         <SkeletonTheme baseColor="#909090" highlightColor="#888">

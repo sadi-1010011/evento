@@ -3,20 +3,20 @@
 import DummyIcon from "@/assets/profile/mishal.jpeg";
 import RatingIcon from "@/assets/icons/star.png";
 import HostIcon from "@/assets/icons/host_dark.png";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import Image from "next/image";
 import React from "react";
 
-export default function ProfileCard({ name, email, joinedyear }: { name: string, email: string, joinedyear: number }) {
+export default function ProfileCard({ id, name, email, joinedyear }: { id: string, name: string, email: string, joinedyear: number }) {
 
-    const router = useRouter()
+    // const router = useRouter()
     
-    if (name) localStorage.setItem('user', name);
+    if (name) localStorage.setItem('user', id);
 
     return (
         <>
         <div className="flex items-center justify-around w-4/5 sm:w-4/5 md:w-4/5 lg:w-2/3 xl:w-2/3 px-2 py-6 bg-evento-white text-black rounded-3xl shadow-evento-shadow mt-2">
-            
+
             {/* PROFILE PIC, NAME */}
             <div className="flex flex-col items-center w-2/3">
                 <Image priority className="w-3/5 h-auto aspect-square border-gray-300 border p-1.5 rounded-full" src={DummyIcon} alt="profile pic" />
