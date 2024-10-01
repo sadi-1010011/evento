@@ -5,7 +5,6 @@ import AddIcon from "@/assets/icons/plus.png";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import TopNavbar from "@/components/topnavbar/TopNavbar";
 import { useFormStatus } from "react-dom";
 import { DateTime } from "luxon";
 // import { put_eventById } from "@/app/(fetchAPI)/restAPI";
@@ -14,16 +13,17 @@ export default function EditEventUI({ data }: { data: any }) {
 
     const [eventdata, setEventData] = useState<any>(data);
     const [dropedImage, setDroppedImage] = useState('');
-    const [formerrors, setFormErrors] = useState([]);
+    const [formerrors, setFormErrors] = useState<any>([]);
     const { pending } = useFormStatus();
     const router = useRouter();
+    let errors:any = [];
 
     function getDroppedImage(event: any) {
         const link = event.target.value;
         console.log(link)
         if (link.length > 8) { // more regExp evaluation soon
             setDroppedImage(link);
-        } else return 0;
+        } else errors.push("Drop image or link!");
     }
 
     // data handlers
@@ -32,7 +32,7 @@ export default function EditEventUI({ data }: { data: any }) {
         if (!e) return
         e.preventDefault();
         const value = e.currentTarget.value;
-        // alert(value)
+        if (!value) errors.push("Title is required!");
         setEventData((previusData: any) => { return { ...previusData, title: value }})
     }
 
@@ -41,6 +41,7 @@ export default function EditEventUI({ data }: { data: any }) {
         if (!e) return
         e.preventDefault();
         const value = e.currentTarget.value;
+        if (!value) errors.push("Location is required!");
         setEventData((previusData: any) => { return { ...previusData, location: value }})
     }
 
@@ -49,6 +50,7 @@ export default function EditEventUI({ data }: { data: any }) {
          if (!e) return
          e.preventDefault();
          const value = e.currentTarget.value;
+         if (!value) errors.push("Host name is required!");
          setEventData((previusData: any) => { return { ...previusData, hostname: value }})
     }
 
@@ -57,6 +59,7 @@ export default function EditEventUI({ data }: { data: any }) {
          if (!e) return
          e.preventDefault();
          const value = e.currentTarget.value;
+         if (!value) errors.push("Description is required!");
          setEventData((previusData: any) => { return { ...previusData, description: value }})
     }
 
@@ -64,7 +67,7 @@ export default function EditEventUI({ data }: { data: any }) {
         if (!e) return
         e.preventDefault();
         const value = e.currentTarget.value;
-        // alert(value)
+        if (!value) errors.push("Date is required!");
         setEventData((previusData:any) => { return { ...previusData, date: value }})
     }
 
@@ -85,7 +88,7 @@ export default function EditEventUI({ data }: { data: any }) {
 
     function handle_Catogory(e: any) {
         if(!e) return
-        const value = e.currentTarget.value;
+        const value = e.currentTarget.value || 'all';
         console.log(e.currentTarget.value)
         setEventData((previusData: any) => { return { ...previusData, catogory: value }})        
     }
@@ -94,27 +97,36 @@ export default function EditEventUI({ data }: { data: any }) {
         if(!e) return
         e.preventDefault();
         console.log('submitting data..');
-        console.table(eventdata);
-        // submit data.. to backend
-        const response = await fetch(`/api/events/${id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ data: eventdata }),
-        })
+        // console.table(eventdata);
+        
+        if (eventdata && errors.length === 0) {
+
+            // submit data.. to backend
+            const response = await fetch(`/api/events/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ data: eventdata }),
+            })
+
             if (response.ok) {
                 console.log('data updated successfully!');
                 router.push('/events');
             }
-            else console.log('something went wrong! in saving to DB ', response.statusText);
+            else {
+                errors.push("something wrong in saving to DB!");
+                console.log('something went wrong! in saving to DB ', response.statusText);
+                setFormErrors(errors);
+            }
+        }
     }
 
     return (
         <div className="flex items-center justify-center w-full min-h-screen py-12 px-2 bg-evento-white text-black dark:bg-black dark:text-white">
 
             <div className="flex flex-col items-center justify-center w-full sm:w-4/5 md:w-4/5 mx-2 px-4 py-8 shadow-evento-shadow bg-evento-white text-black dark:bg-black dark:text-white rounded-3xl overflow-y-scroll">
-            <TopNavbar />
+
                 <h1 className="text-2xl font-bold capitalize">Update event</h1>
                 <h1 className="capitalize text-xs text-center font-light mt-2 mb-2">already have event detail? <Link href="/profile">Scan poster</Link></h1>
 

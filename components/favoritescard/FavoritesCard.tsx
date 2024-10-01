@@ -15,11 +15,11 @@ import { IEvent } from "@/models/event";
 import { FavoritedBtn, RemindMeBtn } from "../animatedbtns/AnimatedBtns";
 
 
-export default function EventCard({ data } :{ data: IEvent }) {
+export default function EventCard({ data, checked } :{ data: IEvent, checked: boolean }) {
 
 
     const router = useRouter();
-    const [favorite, setFavorite] = useState(false);
+    const [favorite, setFavorite] = useState(checked);
     const [thumbnail, setThumbnail] = useState('');
     const [eventdate, setEventdate] = useState('');
     
@@ -32,7 +32,7 @@ export default function EventCard({ data } :{ data: IEvent }) {
     return (
         <div className="flex z-0 mb-10 w-full flex-col rounded-xl bg-evento-white text-black dark:bg-black dark:text-white relative overflow-hidden">
             <span className="absolute z-50 right-0 my-1 mx-1.5 p-1 inline-flex flex-col gap-5" >
-                <FavoritedBtn />
+                <FavoritedBtn checked />
                 <RemindMeBtn />
                 {/* <Image src={ShareIcon} width={18} height={18} alt="share icon" /> */}
             </span>

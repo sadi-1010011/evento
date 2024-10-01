@@ -7,9 +7,11 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import React from "react";
 
-export default function ProfileCard({ name, email }: { name: string, email: string }) {
+export default function ProfileCard({ name, email, joinedyear }: { name: string, email: string, joinedyear: number }) {
 
     const router = useRouter()
+    
+    if (name) localStorage.setItem('user', name);
 
     return (
         <>
@@ -21,26 +23,26 @@ export default function ProfileCard({ name, email }: { name: string, email: stri
                 <h1 className="text-2xl font-bold capitalize text-center pt-2 break-all">{ name || 'name'}</h1>
                 <div className="inline-flex items-center gap-x-0.5">
                     <Image src={HostIcon} width={22} height={22} className="inline p-0.5" alt="host icon" />
-                    <span className="text-sm font-semibold capitalize text-center">{ 'superhost' }</span>
+                    <span className="text-sm font-semibold text-center">{ email || 'superhost' }</span>
                 </div>
             </div>
 
             {/* INFO */}
             <div className="flex flex-col w-1/3 text-left items-left justify-evenly">
                 <div>
-                    <h1 className="text-xl font-bold capitalize pt-2">163</h1>
+                    <h1 className="text-xl font-bold capitalize pt-2">0</h1>
                     <span className="text-sm font-semibold capitalize text-slate-500">reviews</span>
                 </div>
                 <div className="inline-flex flex-col items-start">
                     <h1 className="inline-flex items-center justify-center gap-x-1 text-xl font-bold capitalize pt-2">
-                        4.92
+                        0
                         <Image src={RatingIcon} width={12} height={12} alt="rating icon" />
                     </h1>
                     <span className="text-sm font-semibold capitalize text-slate-500">rating</span>
                 </div>
                 <div>
-                    <h1 className="text-xl font-bold capitalize pt-2">11</h1>
-                    <span className="text-sm font-semibold capitalize text-slate-500">years</span>
+                    <h1 className="text-xl font-bold capitalize pt-2">{ joinedyear || 0 }</h1>
+                    <span className="text-sm font-semibold capitalize text-slate-500">joined</span>
                 </div>
             </div>
 

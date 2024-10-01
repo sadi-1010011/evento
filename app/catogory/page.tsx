@@ -1,10 +1,7 @@
 "use client"
 
-// import SearchBar from "@/components/searchbar/SearchBar";
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
 import CatogoryCard from "@/components/catogorycard/Catogorycard";
-import TopNavbar from "@/components/topnavbar/TopNavbar";
-// import Link from "next/link";
 
 export default function CatogoryPage() {
 

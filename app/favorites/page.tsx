@@ -24,7 +24,7 @@ export default async function FavoritesPage() {
             <div className="flex w-full flex-col items-center justify-center py-4 px-6">
                 {
                     data.map((event: any, i: number) =>
-                        i < 1 && <FavoritesCard key={i} data={event}/>
+                        i < 1 && <FavoritesCard key={i} data={event} checked />
                     )
                 }
             </div>

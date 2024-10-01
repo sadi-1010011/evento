@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import validateEmail from "@/utils/validateMail";
 import { userLogin } from "../serverActions/userLogin";
+import { useState } from "react";
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
 import TopNavbar from "@/components/topnavbar/TopNavbar";
 import { useFormStatus } from "react-dom";
@@ -69,7 +69,11 @@ export default function LoginPage() {
                 setFormErrors(errors);
             } 
             // user data set in cookies
-            else router.replace("/profile");
+            else {
+                // SUCCESS LOGIN!
+                setFormErrors([" "]);
+                router.replace("/profile");
+            }
         }
 
         else {
@@ -89,11 +93,15 @@ export default function LoginPage() {
                 <h1 className="capitalize text-xs text-center font-light mt-2">Dont have an account? <Link className="text-blue-500 hover:underline" href="/register">register</Link></h1>
 
                 <form action={ async () => handleSubmit() } className="w-full flex flex-col gap-2 items-center justify-center my-4 py-2 px-2">
-                    {/* <input onChange={ handleUsername } className="bg-zinc-200 w-full focus:border-2 rounded-full py-2 px-5 outline-none" type="text" placeholder="User Name" value={username} /> */}
-                    <input onChange={ handleEmail } className="bg-zinc-200 dark:bg-zinc-900 w-full focus:border-2 rounded-full py-2 px-5 outline-none" type="email" placeholder="Email" value={email} />
-                    <input onChange={ handlePassword} className="bg-zinc-200 dark:bg-zinc-900 w-full focus:border-2 rounded-full py-2 px-5 outline-none" type="password" placeholder="Password" value={password} />
+                    {/* <input onChange={ handleUsername } className="bg-evento-white border-evento-border-white w-full focus:border-2 rounded-full py-2 px-5 outline-none" type="text" placeholder="User Name" value={username} /> */}
+                    
+                    {/* EMAIL, PASSWORD */}
+                    <input onChange={ handleEmail } className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black w-full rounded-lg py-2 px-5 outline-none" type="email" placeholder="Email" value={email} />
+                    <input onChange={ handlePassword} className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black w-full rounded-lg py-2 px-5 outline-none" type="password" placeholder="Password" value={password} />
+                    
                     <h1 className="capitalize text-xs text-center font-light mt-4">forgot password? <Link className="text-blue-500 hover:underline" href="/profile">recover</Link></h1>
-                    <button type="submit" className="capitalize w-1/2 bg-blue-950 text-white hover:bg-slate-700 rounded-full my-2 py-2 px-5 outline-none border-none">{ pending ? 'verifying' : 'Login' }</button>
+                    
+                    <button type="submit" className="capitalize w-1/2 bg-evento-black text-white dark:bg-evento-white dark:text-black hover:bg-slate-700 rounded-lg my-2 py-2 px-5 outline-none border-none">{ pending ? 'verifying' : 'Login' }</button>
                     {
                         formerrors && (formerrors.map((err: string, i: number) =>
                             <span key={i} className="text-xs -m-1 first-letter:capitalize font-light text-red-400">{ err }</span>))

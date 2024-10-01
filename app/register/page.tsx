@@ -92,12 +92,13 @@ export default function RegisterPage() {
                 }
 
                 if (res.status === 200) {
-                    setFormErrors('');
+                    setFormErrors([" "]); // clear errors
+                    localStorage.setItem('authstatus', email);
                     router.push("/profile");
                 } 
             } catch (error) {
                 console.log('error in saving data: ', error);
-                setFormErrors('');
+                setFormErrors(["error in saving data"]);
             }
 
         }
@@ -110,7 +111,7 @@ export default function RegisterPage() {
     }
 
     return (
-        <div className="flex flex-col items-center bg-evento-white text-black dark:bg-slate-950 dark:text-white">
+        <div className="flex flex-col items-center bg-evento-white text-black dark:bg-evento-black dark:text-white">
         <TopNavbar />
         <div className="flex items-center justify-center w-full h-auto pt-3 px-2 mt-16">
             <div className="flex flex-col items-center justify-center w-full sm:w-4/5 md:w-4/5 mx-2 px-4 py-8 bg-evento-white text-black dark:bg-black dark:text-white rounded-3xl shadow-evento-shadow">
@@ -119,13 +120,13 @@ export default function RegisterPage() {
  
                 <form action={ () => handleSubmit() } className="w-full flex flex-col gap-2 items-center justify-center my-4 py-2 px-2">
                     <div className="flex gap-1">
-                        <input onChange={ handleFirstname } className="bg-evento-white border-2 border-zinc-300 dark:bg-zinc-900 w-1/2 focus:border-2 rounded-l-lg py-3 px-5 outline-none focus:border-evento-black placeholder-slate-500" type="text" placeholder="First Name" value={firstname} />
-                        <input onChange={ handleLastname } className="bg-evento-white border-2 border-zinc-300 dark:bg-zinc-900 w-1/2 focus:border-2 rounded-r-lg py-3 px-5 outline-none focus:border-evento-black placeholder-slate-500" type="text" placeholder="Last Name" value={lastname} />
+                        <input onChange={ handleFirstname } className="bg-evento-white border-2 border-evento-border-white dark:border-evento-black dark:bg-evento-black w-1/2 rounded-l-lg py-3 px-5 outline-none focus:border-evento-black placeholder-slate-500" type="text" placeholder="First Name" value={firstname} />
+                        <input onChange={ handleLastname } className="bg-evento-white border-2 border-evento-border-white dark:border-evento-black dark:bg-evento-black w-1/2 rounded-r-lg py-3 px-5 outline-none focus:border-evento-black placeholder-slate-500" type="text" placeholder="Last Name" value={lastname} />
                     </div>
-                    <input onChange={ handleEmail } className="bg-evento-white border-2 border-zinc-300 dark:bg-zinc-900 w-full focus:border-2 rounded-lg py-3 px-5 outline-none focus:border-evento-black placeholder-slate-500" type="email" placeholder="Email" value={email} />
-                    <input onChange={ handlePassword} className="bg-evento-white border-2 border-zinc-300 dark:bg-zinc-900 w-full focus:border-2 rounded-lg py-3 px-5 outline-none focus:border-evento-black placeholder-slate-500" type="password" placeholder="Password" value={password} />
-                    <input onChange={ handleRePass } className="bg-evento-white border-2 border-zinc-300 dark:bg-zinc-900 w-full focus:border-2 rounded-lg py-3 px-5 outline-none focus:border-evento-black placeholder-slate-500" type="password" placeholder="Confirm password" value={repassword} />
-                    <button type="submit" className="capitalize w-1/2 bg-evento-black text-white hover:bg-evento-black rounded-lg mt-6 mb-2 py-3 px-5 outline-none border-none">{ pending ? 'Submitting' : 'Sign Up' }</button>
+                    <input onChange={ handleEmail } className="bg-evento-white border-2 border-evento-border-white dark:border-evento-black dark:bg-evento-black w-full rounded-lg py-3 px-5 outline-none focus:border-evento-black placeholder-slate-500" type="email" placeholder="Email" value={email} />
+                    <input onChange={ handlePassword} className="bg-evento-white border-2 border-evento-border-white dark:border-evento-black dark:bg-evento-black w-full rounded-lg py-3 px-5 outline-none focus:border-evento-black placeholder-slate-500" type="password" placeholder="Password" value={password} />
+                    <input onChange={ handleRePass } className="bg-evento-white border-2 border-evento-border-white dark:border-evento-black dark:bg-evento-black w-full rounded-lg py-3 px-5 outline-none focus:border-evento-black placeholder-slate-500" type="password" placeholder="Confirm password" value={repassword} />
+                    <button type="submit" className="capitalize w-1/2 bg-evento-black dark:bg-evento-white dark:text-black text-white rounded-lg mt-6 mb-2 py-3 px-5 outline-none border-none">{ pending ? 'Submitting' : 'Sign Up' }</button>
                     {
                         formerrors && (formerrors.map((err: string, i: number) =>
                             <span key={i} className="text-xs first-letter:capitalize font-light text-red-400">{ err }</span>))

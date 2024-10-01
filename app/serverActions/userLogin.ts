@@ -17,7 +17,7 @@ export async function userLogin(formData: any) {
     
     try {
         user = await User.find({email: email});
-        console.log('finding user', user);
+        // console.log('finding user', user);
 
         if (user[0]?.email === email) {
             

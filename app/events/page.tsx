@@ -9,25 +9,39 @@ import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
 import EventCard from "@/app/events/EventCard";
 // import Loading from "@/app/(Loading)/Loading";
 // API
-import { get_allEvents } from "../(fetchAPI)/restAPI";
-import { useRouter } from "next/navigation";
+import { get_allEvents, get_eventsByCatogory } from "../(fetchAPI)/restAPI";
+import { useRouter, useSearchParams } from "next/navigation";
 import EventTabs from "@/components/eventtabs/EventTabs";
 
 
 export default function HomePage() {
 
+
     const [events, setEvents] = useState([]);
     const [isoffline, setOffline] = useState(false);
+    const searchParams = useSearchParams();
     const router = useRouter();
 
     useEffect(()=> {
-        // get events data
-        get_allEvents().then((events) => {
-            if (events.length)
-                setEvents(events);
-            // OFFLINE MODE!
-            else setOffline(true);
-        });
+        // get catogory
+        const catogory = searchParams.get('catogory')
+
+        if(catogory && catogory !== 'all') {
+            get_eventsByCatogory(catogory).then((events) => {
+                if (events.length) setEvents(events);
+                else setOffline(true);
+            });
+        }
+
+        else {
+            // get all events data
+            get_allEvents().then((events) => {
+                if (events.length)
+                    setEvents(events);
+                // OFFLINE MODE!
+                else setOffline(true);
+            });
+        }
     }, []);
 
 
@@ -43,7 +57,7 @@ export default function HomePage() {
                                 
                 {
                     isoffline ? 
-                        <h1 className="my-40 w-full text-center text-lg text-slate-400 capitalize font-bold">Development Mode !</h1>
+                        <h1 className="my-40 w-full text-center text-lg text-slate-400 capitalize font-bold">No events found!</h1>
                         :
                     events.length ?
 

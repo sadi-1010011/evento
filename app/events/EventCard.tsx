@@ -3,9 +3,6 @@
 import Image from "next/image";
 import DummyImage from "@/assets/eventoLogo.jpeg";
 import LocationIcon from "@/assets/icons/location-pin.png";
-import FavIcon from "@/assets/icons/heart-black.png";
-import FavedIcon from "@/assets/icons/fav-red.png";
-import RatingIcon from "@/assets/icons/star.png";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 // image carousel
@@ -33,7 +30,7 @@ export default function EventCard({ data } :{ data: IEvent }) {
     return (
         <div className="flex z-0 mb-10 w-full flex-col rounded-xl bg-evento-white text-black dark:bg-black dark:text-white relative overflow-hidden">
             <span className="absolute z-50 right-0 my-1 mx-1.5 p-1 rounded-full" >
-                <FavoritedBtn />
+                <FavoritedBtn checked={false} />
                 {/* <Image onClick={ ()=> { setFavorite(!favorite); alert('you need to Login to add favorites!') } } src={favorite ? FavedIcon : FavIcon} width={22} height={22} alt="favorite icon" /> */}
             </span>
             <div className="absolute font-medium z-50 border bg-white text-black dark:bg-black dark:text-white text-sm px-3 py-1 shadow-md m-3 rounded-md" >

@@ -15,8 +15,6 @@ import LocationIcon from "@/assets/icons/location-pin.png";
 import connectMongoDB from "@/lib/db";
 import Event from "@/models/event";
 import EditDelete from "@/components/adminFeatures/adminFeature";
-import ProfileCard from "@/components/profilecard/ProfileCard";
-// import EditDelete from "@/components/adminFeatures/adminFeature";
 
 export async function generateStaticParams() {
     const events = await fetch(`https://evento-calicut.vercel.app/api/events`, { method: 'GET', next: { revalidate: 60 } }).then(res => res.json());
@@ -78,10 +76,6 @@ export default async function EventPage({ params }: { params: { id: string }}) {
                 </div>
 
                 <hr style={{ width: '90%', display: 'block', margin: 'auto'}} />
-
-                <div className="flex items-center justify-center mb-10">
-                    <ProfileCard name={event.hostname} email="me@gmail.com" />
-                </div>
                 
                 <p className="my-6 pl-2 text-gray-600 dark:text-slate-200">{ event ? event.description : 'description..'}</p>
                 

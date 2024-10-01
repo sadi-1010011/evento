@@ -28,7 +28,7 @@ const catogories = [
         icon: politicsIcon
     },
     {
-        catogory: 'inaguration',
+        catogory: 'meets',
         icon: InagurationIcon
     }
 ];
