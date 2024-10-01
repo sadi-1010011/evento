@@ -19,29 +19,27 @@ export default function HomePage() {
 
     const [events, setEvents] = useState([]);
     const [isoffline, setOffline] = useState(false);
-    const searchParams = useSearchParams();
+    // const searchParams = useSearchParams();
     const router = useRouter();
 
     useEffect(()=> {
         // get catogory
-        const catogory = searchParams.get('catogory')
+        // const catogory = searchParams.get('catogory')
 
-        if(catogory && catogory !== 'all') {
-            get_eventsByCatogory(catogory).then((events) => {
-                if (events.length) setEvents(events);
-                else setOffline(true);
-            });
-        }
+        // if(catogory && catogory !== 'all') {
+        //     get_eventsByCatogory(catogory).then((events) => {
+        //         if (events.length) setEvents(events);
+        //         else setOffline(true);
+        //     });
+        // }
 
-        else {
-            // get all events data
+            // else get all events data
             get_allEvents().then((events) => {
                 if (events.length)
                     setEvents(events);
                 // OFFLINE MODE!
                 else setOffline(true);
             });
-        }
     }, []);
 
 
