@@ -10,16 +10,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "evento-white": "#e9e9e9",
-        "evento-black": "#121212",
+        "evento-white": "#e8e8e8",
+        "evento-black": "#202124",
       },
       borderColor: {
         "evento-border-white": "#d4d4d8",
         "evento-border-black": "#3C3D37",
       },
       backgroundColor: {
-        "evento-white": "#e9e9e9",
-        "evento-black": "#121212",
+        "evento-white": "#e8e8e8",
+        "evento-black": "#202124",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

@@ -7,7 +7,7 @@ export default function CatogoryPage() {
 
 
     return (
-        <div className="w-full h-screen pt-2 bg-evento-white text-black dark:bg-black dark:text-white">
+        <div className="w-full h-screen pt-2 bg-evento-white text-black dark:bg-evento-black dark:text-white">
 
             <h1 className="w-full text-left text-3xl capitalize font-medium pl-6 pt-6 pb-4">Catogories</h1>
 

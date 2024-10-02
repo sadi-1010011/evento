@@ -30,16 +30,6 @@ export const put_eventById = async (id: string, eventdata: {}) => {
     return response;
 }
 
-export const put_favoritesById = async (id: string, favoritedId: string) => {
-    console.log('updating user favorites! with id:', favoritedId);
-    // update to server
-    const response = await fetch(`/api/user/${id}`, {
-        method: 'PUT',
-        body: favoritedId,
-    })
-    return response;
-}
-
 export const get_allEvents = async () => {
     const res = await fetch("api/events");
     const events = await res.json();

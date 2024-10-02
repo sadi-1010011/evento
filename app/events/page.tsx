@@ -44,7 +44,7 @@ export default function HomePage() {
 
 
     return (
-        <main className="flex min-h-screen flex-col items-center px-3 pt-2 pb-16 bg-evento-white text-black dark:bg-black dark:text-white">
+        <main className="flex min-h-screen flex-col items-center px-3 pt-2 pb-16 bg-evento-white text-black dark:bg-evento-black dark:text-white">
             <div className="inline-flex flex-row w-full px-2 pt-2 items-center justify-between">
                 <h1 className="inline-block text-left w-full mt-1 font-bold text-2xl pl-2">Evento</h1>
             </div>
@@ -61,7 +61,7 @@ export default function HomePage() {
 
                         events.map((event,i) => <Suspense key={i}>
                             <EventCard data={event} />
-                            <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
+                            <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto', borderColor: '#404144'}} />
                         </Suspense>)
                             :
                         <div className="my-8 mx-4">

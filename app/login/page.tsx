@@ -97,7 +97,7 @@ export default function LoginPage() {
                     
                     {/* EMAIL, PASSWORD */}
                     <input onChange={ handleEmail } className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black w-full rounded-lg py-2 px-5 outline-none" type="email" placeholder="Email" value={email} />
-                    <input onChange={ handlePassword} className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black w-full rounded-lg py-2 px-5 outline-none" type="password" placeholder="Password" value={password} />
+                    <input onChange={ handlePassword} className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black w-full rounded-lg py-2 px-5 outline-none" type="password" placeholder="Password" value={password} autoComplete="true" />
                     
                     <h1 className="capitalize text-xs text-center font-light mt-4">forgot password? <Link className="text-blue-500 hover:underline" href="/profile">recover</Link></h1>
                     

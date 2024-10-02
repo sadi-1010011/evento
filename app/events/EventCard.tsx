@@ -11,7 +11,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import dateLabel from "@/utils/dateLabel";
 import { IEvent } from "@/models/event";
 import { FavoritedBtn } from "@/components/animatedbtns/AnimatedBtns";
-import { put_favoritesById } from "../(fetchAPI)/restAPI";
+import { put_favoritesById } from "../(fetchAPI)/userActions";
 
 
 export default function EventCard({ data } :{ data: IEvent }) {
@@ -29,10 +29,11 @@ export default function EventCard({ data } :{ data: IEvent }) {
             console.log('favorited:', data.title)
             // add to user favorites
             // API call!
-            const response = put_favoritesById(userId, favoritedId);
-            console.log(response);
+            put_favoritesById(userId, favoritedId).then((res)=> {
+                console.log(res.statusText);
+            })
             // add to local storage
-            localStorage.setItem('favorited', `${data._id}`); // just for temporary storage in case needed
+            // localStorage.setItem('favorited', `${data._id}`); // just for temporary storage in case needed
             setFavorite(val);
         } else {
             alert('Login to add fovorites');
@@ -46,12 +47,12 @@ export default function EventCard({ data } :{ data: IEvent }) {
     }, [data.thumbnail, data.date]);
 
     return (
-        <div className="flex z-0 mb-10 w-full flex-col rounded-xl bg-evento-white text-black dark:bg-black dark:text-white relative overflow-hidden">
+        <div className="flex z-0 mb-10 w-full flex-col rounded-xl bg-evento-white text-black dark:bg-evento-black dark:text-white relative overflow-hidden">
             <span className="absolute z-50 right-0 my-1 mx-1.5 p-1 rounded-full" >
                 <FavoritedBtn checked={favorite} onclick={(val: boolean)=> val && handleFavorite(val) } />
                 {/* <Image onClick={ ()=> { setFavorite(!favorite); alert('you need to Login to add favorites!') } } src={favorite ? FavedIcon : FavIcon} width={22} height={22} alt="favorite icon" /> */}
             </span>
-            <div className="absolute font-medium z-50 border bg-white text-black dark:bg-black dark:text-white text-sm px-3 py-1 shadow-md m-3 rounded-md" >
+            <div className="absolute font-medium z-50 border bg-evento-white text-black dark:bg-evento-black dark:text-white text-sm px-3 py-1 shadow-md m-3 rounded-md" >
                 { eventdate || 'evnt date' }
             </div>
             
