@@ -1,0 +1,42 @@
+/* app/gallery/gallery.module.css */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90, 1fr));
+  grid-auto-flow: dense;
+  grid-gap: 1px;
+  height: 50vh;
+  overflow: scroll;
+}
+
+.imageContainer {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  aspect-ratio: 1/1; /* Ensure images are square by default */
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.image:hover {
+  transform: scale(1.05);
+}
+
+/* Random spans to create the effect of uneven grid items */
+.span1 {
+  grid-row: span 1;
+  grid-column: span 1;
+}
+
+.span2 {
+  grid-row: span 2;
+  grid-column: span 2;
+}
+
+.span3 {
+  grid-row: span 2;
+  grid-column: span 1;
+}

@@ -44,6 +44,22 @@ export const get_eventsByCatogory = async (catogory: string) => {
     return events;
 }
 
+export const get_eventsByDate = async (date: string) => {
+    const res = await fetch(`api/events/date/${ date }`, {
+        method: 'GET',
+    });
+    const events = await res.json();
+    return events;
+}
+
+export const get_eventsByDateUpcoming = async (date: string) => {
+    const res = await fetch(`api/events/date/upcoming/${ date }`, {
+        method: 'GET',
+    });
+    const events = await res.json();
+    return events;
+}
+
 export const post_event = async (eventdata: {}) => {
     console.log('posting data to server!')
     // upload to server

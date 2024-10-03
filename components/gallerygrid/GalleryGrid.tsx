@@ -1,6 +1,6 @@
 "use client"
 import DummyImg from "@/assets/eventoLogo.jpeg";
-import "./styles.css";
+import styles from './gallery.module.css';
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -15,34 +15,28 @@ export default function GalleryGrid({ images }: { images: string }) {
     }, [images]);
 
     return(
-        <div className="grid-container w-full 3 flex flex-row flex-wrap items-center justify-evenly text-center">
-            <div className="w-1/3 h-auto">
-                <Image src={image ? image : DummyImg} width="300" height="300" className="w-full h-auto" alt="gallery image" />
-            </div>
-            <div className="w-1/3 h-auto">
-                <Image src={image ? image : DummyImg} width="300" height="300" className="w-full h-auto" alt="gallery image" />
-            </div>
-            <div className="w-1/3 h-auto">
-                <Image src={image ? image : DummyImg} width="300" height="300" className="w-full h-auto" alt="gallery image" />
-            </div>
-            <div className="w-1/3 h-auto">
-                <Image src={image ? image : DummyImg} width="300" height="300" className="w-full h-auto" alt="gallery image" />
-            </div>
-            <div className="w-1/3 h-auto">
-                <Image src={image ? image : DummyImg} width="300" height="300" className="w-full h-auto" alt="gallery image" />
-            </div>
-            <div className="w-1/3 h-auto">
-                <Image src={image ? image : DummyImg} width="300" height="300" className="w-full h-auto" alt="gallery image" />
-            </div>
-            <div className="w-1/3 h-auto">
-                <Image src={image ? image : DummyImg} width="300" height="300" className="w-full h-auto" alt="gallery image" />
-            </div>
-            <div className="w-1/3 h-auto">
-                <Image src={image ? image : DummyImg} width="300" height="300" className="w-full h-auto" alt="gallery image" />
-            </div>
-            <div className="w-1/3 h-auto">
-                <Image src={image ? image : DummyImg} width="300" height="300" className="w-full h-auto" alt="gallery image" />
+
+        <div className={styles.gallery}>
+            <div className={`${styles.imageContainer}`}>
+                <Image
+                    src={image}
+                    alt="gallry"
+                    layout="fill"
+                    objectFit="cover"
+                    className={styles.image}
+                />
             </div>
         </div>
+        // <div className={styles.gallery}>
+        //      <div className={styles.imageContainer}>
+        //         <Image src={image ? image : DummyImg} width="300" height="200" className={styles.image} alt="gallery image" />
+        //         <Image src={image ? image : DummyImg} width="300" height="200" className={styles.image} alt="gallery image" />
+        //         <Image src={image ? image : DummyImg} width="300" height="200" className={styles.image} alt="gallery image" />
+        //         <Image src={image ? image : DummyImg} width="300" height="200" className={styles.image} alt="gallery image" />
+        //         <Image src={image ? image : DummyImg} width="300" height="200" className={styles.image} alt="gallery image" />
+        //         <Image src={image ? image : DummyImg} width="300" height="200" className={styles.image} alt="gallery image" />
+        //         <Image src={image ? image : DummyImg} width="300" height="200" className={styles.image} alt="gallery image" />
+        //     </div>
+        // </div>
     );
 }

@@ -8,6 +8,7 @@ function dateLabel(date: string) {
     if (datediff < 3 && datediff > 0) {
         // within 2 days
         switch (datediff) {
+            case 0: return ('Today');
             case 1: return (`Tomorrow`);
             case 2: return (`2 more days`);
             default: return ('today');

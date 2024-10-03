@@ -2,38 +2,48 @@
 
 import { useEffect, useState } from "react";
 import { get_eventById } from "../(fetchAPI)/restAPI";
-import EventCard from "@/components/favoritescard/FavoritesCard";
+import { IEvent } from "@/models/event";
+import FavoritesCard from "@/components/favoritescard/FavoritesCard";
 
 export default function FavoritesContainer({ favorites }: { favorites: []}) {
 
-    const [events, setEvents] = useState<any>([]);
+    const [events, setEvents] = useState<Array<IEvent>>([]);
     let fetchedEvents: any = [];
     
-    useEffect(()=> {
+    function fetchFavorites(favorites: []) {
         if (favorites.length) {
             // fetch here
             favorites.map((favorite: string) => {
-            if (typeof favorite === 'string') {
-                get_eventById(favorite).then(res =>{
-                    if (res) fetchedEvents.push(res); // save in events
-                }).catch(error => {
-                    console.log('error in fetching favorites!');
-                    // err handling
-                });
+                if (typeof favorite === 'string') {
+                    get_eventById(favorite).then(res =>{
+                        if (res.title) fetchedEvents.push(res); // save in list
+                    }).catch(error => {
+                        console.log('error in fetching favorites!');
+                        // err handling
+                    });
+                    return;
+                }
+            }); 
+            if (fetchedEvents) {
+                return (fetchedEvents);
             }
-            setEvents(fetchedEvents);
-        });
-            // if ok save in state
-            // if (fetchedEvents.length) {
-            //     console.log(fetchedEvents);
-            // }
         }
-    }, [favorites]);
+    }
 
+    useEffect(()=> {
+        const favEvents = fetchFavorites(favorites)
+        console.log('favs: ',favEvents)
+        favEvents.length ? setEvents(favEvents) : false;
+    }, []);
+
+    console.log('events: ',events)
+    
     return (
         <div className="w-full h-auto">
+            <h2>{'events'}</h2>
             {
-                events && events.map((event: any) => <EventCard key={event.id} data={event} checked />)
+                // events.map((event: IEvent, i: number) => <h2 key={i}>favorites added! {event.title}</h2>)
+                events.length && events.map((event: IEvent, i: number) => <FavoritesCard key={i} data={event} checked />)
             }
         </div>
     )
