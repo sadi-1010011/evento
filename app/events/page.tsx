@@ -22,18 +22,18 @@ export default function HomePage() {
     const [events, setEvents] = useState([]);
     const [activeEventTab, setActiveEventTab] = useState(2); // 1=today, 2=upcoming; default 2
     const [isoffline, setOffline] = useState(false);
-    const searchParams = useSearchParams();
-    const catogory = searchParams.get('catogory')
+    // const searchParams = useSearchParams();
+    // const catogory = searchParams.get('catogory')
     const router = useRouter();
 
     useEffect(()=> {
-        if(catogory && catogory !== 'all') {
-            get_eventsByCatogory(catogory).then((events) => {
-                if (events.length) setEvents(events);
-                else setOffline(true);
-            });
-        }
-        else {
+        // if(catogory && catogory !== 'all') {
+        //     get_eventsByCatogory(catogory).then((events) => {
+        //         if (events.length) setEvents(events);
+        //         else setOffline(true);
+        //     });
+        // }
+        // else {
             // else get all events data
             get_allEvents().then((events) => {
                 if (events.length)
@@ -41,8 +41,8 @@ export default function HomePage() {
                 // OFFLINE MODE!
                 else setOffline(true);
             });
-        }
-    }, [catogory]);
+        // }
+    }, []);
 
 
     useEffect(() => {
