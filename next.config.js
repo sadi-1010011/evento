@@ -13,6 +13,7 @@ const nextConfig = {
   },
   experimental: {
     serverComponentsExternalPackages: ["mongoose"],
+    missingSuspenseWithCSRBailout: false,
   },
   webpack(config) {
     config.experiments = {

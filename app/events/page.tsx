@@ -1,6 +1,6 @@
 "use client"
 
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
@@ -12,8 +12,6 @@ import EventCard from "@/app/events/EventCard";
 import { get_allEvents, get_eventsByCatogory, get_eventsByDate, get_eventsByDateUpcoming } from "../(fetchAPI)/restAPI";
 import { useRouter, useSearchParams } from "next/navigation";
 import EventTabs from "@/components/eventtabs/EventTabs";
-import { IEvent } from "@/models/event";
-import dateLabel from "@/utils/dateLabel";
 import { DateTime } from "luxon";
 
 
@@ -22,18 +20,18 @@ export default function HomePage() {
     const [events, setEvents] = useState([]);
     const [activeEventTab, setActiveEventTab] = useState(2); // 1=today, 2=upcoming; default 2
     const [isoffline, setOffline] = useState(false);
-    // const searchParams = useSearchParams();
-    // const catogory = searchParams.get('catogory')
+    const searchParams = useSearchParams();
+    const catogory = searchParams.get('catogory')
     const router = useRouter();
 
     useEffect(()=> {
-        // if(catogory && catogory !== 'all') {
-        //     get_eventsByCatogory(catogory).then((events) => {
-        //         if (events.length) setEvents(events);
-        //         else setOffline(true);
-        //     });
-        // }
-        // else {
+        if(catogory && catogory !== 'all') {
+            get_eventsByCatogory(catogory).then((events) => {
+                if (events.length) setEvents(events);
+                else setOffline(true);
+            });
+        }
+        else {
             // else get all events data
             get_allEvents().then((events) => {
                 if (events.length)
@@ -41,12 +39,11 @@ export default function HomePage() {
                 // OFFLINE MODE!
                 else setOffline(true);
             });
-        // }
+        }
     }, []);
 
 
     useEffect(() => {
-        let sortedEvents:any = [];
         let todayDate = DateTime.local().toISO().split('T')[0];
         if (activeEventTab === 1 && events.length) { // today events only
             get_eventsByDate(todayDate).then(res => {
@@ -86,10 +83,8 @@ export default function HomePage() {
                         :
                     events.length ?
 
-                        events.map((event,i) => <Suspense key={i}>
-                            <EventCard data={event} />
-                            {/* <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto', borderColor: '#404144'}} /> */}
-                        </Suspense>)
+                                events.map((event,i) => <EventCard key={i} data={event} />)
+
                             :
                         <div className="my-8 mx-4">
                         <SkeletonTheme baseColor="#909090" highlightColor="#888">

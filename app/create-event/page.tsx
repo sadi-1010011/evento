@@ -7,8 +7,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { post_event } from "../(fetchAPI)/restAPI";
 import { DateTime } from "luxon";
-import { useFormStatus } from "react-dom";
-import TopNavbar from "@/components/topnavbar/TopNavbar";
 
 export default function CreateEvent() {
 
@@ -19,15 +17,14 @@ export default function CreateEvent() {
         location: '',
         description: '',
         ticketprice: '',
+        ticketlink: '', // only if ticket price
         thumbnail: '',
         paid: false, // default to free event
         date: DateTime.now().toFormat('ff') // event date
     });
     const [dropedImage, setDropedImage] = useState('');
     const [formerrors, setFormErrors] = useState<any>([]);
-    const { pending } = useFormStatus();
     const router = useRouter();
-    let errors:any = [];
 
     useEffect(() => {
         console.log('image upload coming soon..');
@@ -46,7 +43,7 @@ export default function CreateEvent() {
         // console.log(link)
         if (link.length > 8) { // more regExp evaluation soon
             setDropedImage(link);
-        } else errors.push("Drop image or link!");
+        }// else setFormErrors(["Drop image or link!"]);
     }
 
     // data handlers
@@ -55,7 +52,6 @@ export default function CreateEvent() {
         if (!e) return
         e.preventDefault();
         const value = e.currentTarget.value;
-        if (!value) errors.push("Title is required!");
         setEventData(previusData => { return { ...previusData, title: value }})
     }
 
@@ -64,7 +60,6 @@ export default function CreateEvent() {
         if (!e) return
         e.preventDefault();
         const value = e.currentTarget.value;
-        if (!value) errors.push("Location is required!");
         setEventData(previusData => { return { ...previusData, location: value }})
     }
 
@@ -73,7 +68,6 @@ export default function CreateEvent() {
          if (!e) return
          e.preventDefault();
          const value = e.currentTarget.value;
-        if (!value) errors.push("Host name is required!");
          setEventData(previusData => { return { ...previusData, hostname: value }})
     }
 
@@ -82,7 +76,6 @@ export default function CreateEvent() {
          if (!e) return
          e.preventDefault();
          const value = e.currentTarget.value;
-        if (!value) errors.push("Description is required!");
          setEventData(previusData => { return { ...previusData, description: value }})
     }
 
@@ -91,7 +84,6 @@ export default function CreateEvent() {
         e.preventDefault();
         const value = e.currentTarget.value;
         // alert(value)
-        if (!value) errors.push("Date is required!");
         setEventData(previusData => { return { ...previusData, date: value }})
     }
 
@@ -106,8 +98,14 @@ export default function CreateEvent() {
         if (!e) return
         e.preventDefault();
         const value = e.currentTarget.value;
-        // if (!value) errors.push("Title is required!");
         setEventData(previusData => { return { ...previusData, ticketprice: value }})        
+    }
+
+    function handle_TicketLink(e: any) {
+        if (!e) return
+        e.preventDefault();
+        const value = e.currentTarget.value;
+        setEventData(previusData => { return { ...previusData, ticketlink: value }})        
     }
 
     function handle_Catogory(e: any) {
@@ -119,14 +117,25 @@ export default function CreateEvent() {
     function handle_Submit(e: any) {
         if(!e) return
         e.preventDefault();
-        console.log('uploading new event..');
+        let errors = [];
+        console.log('validatig form..');
         
-        // submit data.. to backend
+        // form validation!
+        if (!eventdata.title) errors.push("Title is required!");
+        if (!eventdata.location) errors.push("Location is required!");
+        if (!eventdata.hostname) errors.push("Host name is required!");
+        if (!eventdata.description) errors.push("Description is required!");
+        if (!eventdata.date) errors.push("Date is required!");
+        // if (!eventdata.ticketprice) 
+        
         // set image thumbnail
         if (dropedImage && eventdata) eventdata.thumbnail = dropedImage;
         // console.table(eventdata);
+        
+        if (errors.length) setFormErrors(errors);
 
-        if (eventdata && errors.length === 0) {
+        // submit data.. to backend only if 0 errors
+        else 
             post_event(eventdata).then(res => {
                 if (res.ok) {
                     console.log('data saved successfully!');
@@ -134,9 +143,9 @@ export default function CreateEvent() {
                 }
                 else console.log('something went wrong! in saving to DB ', res.statusText);
             })
-        }
+        // otherwise show err!
+        // else setFormErrors(errors);
 
-        else setFormErrors(errors)
     }
     
     return (
@@ -206,10 +215,13 @@ export default function CreateEvent() {
                 {/* TICKET PRICE */}
                 <input onChange={ (e)=> handle_Ticketprice(e)} className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black placeholder-slate-500 w-full focus:border-2 rounded-lg focus:border-evento-black py-3 px-5 outline-none" name="ticketprice" type="number" placeholder="ticket price" value={eventdata.ticketprice} />
 
+                {/* PAYMENT LINK */}
+                { eventdata.ticketprice  && <input onChange={ (e)=> handle_TicketLink(e)} className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black placeholder-slate-500 w-full focus:border-2 rounded-lg focus:border-evento-black py-3 px-5 outline-none" name="ticketlink" type="text" placeholder="Payment Link" value={eventdata.ticketlink} /> }
+
                 {/* ADDITIONAL INFO */}
                 <input className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black placeholder-slate-500 w-full focus:border-2 rounded-lg focus:border-evento-black py-3 px-5 outline-none" type="text" placeholder="Additional Info .." />
 
-                <button type="submit" onClick={ (e)=> handle_Submit(e) } className="font-semibold capitalize w-1/2 bg-evento-black text-white dark:bg-evento-white dark:text-black rounded-lg focus:border-evento-black mt-6 mb-2 py-3 px-5 outline-none border-none">{ pending ? 'saving..' : 'save event' }</button>
+                <button type="submit" onClick={ (e)=> handle_Submit(e) } className="font-semibold capitalize w-1/2 bg-evento-black text-white dark:bg-evento-white dark:text-black rounded-lg focus:border-evento-black mt-6 mb-2 py-3 px-5 outline-none border-none">{'save event' }</button>
                 {
                     formerrors && (formerrors.map((err: string, i: number) => <span key={i} className="text-sm -m-1 first-letter:capitalize font-light text-red-400">{ err }</span>))
                 }

@@ -4,47 +4,47 @@ import { useEffect, useState } from "react";
 import { get_eventById } from "../(fetchAPI)/restAPI";
 import { IEvent } from "@/models/event";
 import FavoritesCard from "@/components/favoritescard/FavoritesCard";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 export default function FavoritesContainer({ favorites }: { favorites: []}) {
 
     const [events, setEvents] = useState<Array<IEvent>>([]);
-    let fetchedEvents: any = [];
+    const [isoffline, setOffline] = useState(false);
     
-    function fetchFavorites(favorites: []) {
-        if (favorites.length) {
-            // fetch here
-            favorites.map((favorite: string) => {
-                if (typeof favorite === 'string') {
-                    get_eventById(favorite).then(res =>{
-                        if (res.title) fetchedEvents.push(res); // save in list
-                    }).catch(error => {
-                        console.log('error in fetching favorites!');
-                        // err handling
-                    });
-                    return;
-                }
-            }); 
-            if (fetchedEvents) {
-                return (fetchedEvents);
-            }
-        }
-    }
-
-    useEffect(()=> {
-        const favEvents = fetchFavorites(favorites)
-        console.log('favs: ',favEvents)
-        favEvents.length ? setEvents(favEvents) : false;
-    }, []);
-
-    console.log('events: ',events)
+    useEffect(() => {
+        const fetchEvents = async () => {
+            const events = await Promise.all(
+                favorites.map((favorite: string) => get_eventById(favorite).then(res => res
+                ))
+            );
+            // console.log('events: ',events);
+            events.length ? setEvents(events) : setOffline(true);
+        }; 
+        // API calls start!
+        fetchEvents();
+    }, [favorites]);
     
     return (
         <div className="w-full h-auto">
-            <h2>{'events'}</h2>
             {
-                // events.map((event: IEvent, i: number) => <h2 key={i}>favorites added! {event.title}</h2>)
-                events.length && events.map((event: IEvent, i: number) => <FavoritesCard key={i} data={event} checked />)
+                isoffline ?
+                    <h1 className="my-40 w-full text-center text-lg text-slate-400 capitalize font-bold">No events found!</h1>
+                    :
+                !events.length ?
+
+                    <div className="my-8 mx-4">
+                        <SkeletonTheme baseColor="#909090" highlightColor="#888">
+                            <Skeleton height={130} className="my-2 rounded-md" count={1} />
+                            <Skeleton height={20} className="w-1/2" count={1} />
+                            <Skeleton height={50} width={50} className="m-2" borderRadius="50%" count={1} />
+                            <Skeleton height={25} className="w-1/3" count={1} />
+                            <Skeleton height={25} className="" count={1} />
+                        </SkeletonTheme>
+                    </div>
+                        :
+                    events.map((event: IEvent, i: number) => <FavoritesCard key={i} data={event} />)
             }
         </div>
+
     )
 }

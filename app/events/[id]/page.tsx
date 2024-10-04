@@ -15,6 +15,7 @@ import LocationIcon from "@/assets/icons/location-pin.png";
 import connectMongoDB from "@/lib/db";
 import Event from "@/models/event";
 import EditDelete from "@/components/adminFeatures/adminFeature";
+import EventReviews from "@/components/eventreviews/EventReviews";
 
 export async function generateStaticParams() {
     const events = await fetch(`https://evento-calicut.vercel.app/api/events`, { method: 'GET', next: { revalidate: 60 } }).then(res => res.json());
@@ -109,75 +110,18 @@ export default async function EventPage({ params }: { params: { id: string }}) {
                 <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
 
 
-                <h1 className="pl-2 my-4 text-lg font-semibold first-letter:capitalize" >What this event offers</h1>
-                
-                <div className="pl-2 my-6 flex-col items-start capitalize">
-                    <div>Mountain view</div>
-                    <div>Garden view</div>
-                    <div>ice orathi</div>
-                    <div>drinks, snacks</div>
-                    <div>wifi</div>
-                </div>
-
-                <div className="flex my-6 mx-4 py-3 items-center justify-center rounded-md border-2 border-slate-800 hover:bg-slate-700 hover:text-white transition-all">
-                    <h2 className="capitalize ">show all 23 amenities</h2>
-                </div>
-
-
-                <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
-
-
-                <div className="pl-2 my-6 flex-col items-start capitalize">
-                    <h1 className="text-lg font-semibold first-letter:capitalize">Guest Favorite</h1>
-                    <span>This event is in top 10% of eligible listings based on ratings, reviews and reliability</span>
-                </div>
-
-
-                <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
-
-
                 <div className="my-4 pl-2">
-                    <h1 className="text-lg font-semibold first-letter:capitalize">Event rules</h1>
+                    <h1 className="text-lg font-semibold first-letter:capitalize">Event Timing</h1>
                     <span className="text-gray-600 dark:text-slate-200">start time: 4 pm</span>
                     <span className="text-gray-600 dark:text-slate-200">end time: 12 am</span>
                 </div>
 
-                <div className="flex my-6 mx-4 py-3 items-center justify-center rounded-md border-2 border-slate-800 hover:bg-slate-700 hover:text-white transition-all">
-                    <h2 className="capitalize ">show all 47 reviews</h2>
-                </div>
+                <EventReviews />
 
 
-                <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
-
-
-                <div className="my-4 pl-2">
-                    <h1 className="text-lg font-semibold first-letter:capitalize">Cancellation Policy</h1>
-                    <span className="text-gray-600 dark:text-slate-200">This reservation in non-refundable.</span>
-                    <br />
-                    <span className="text-gray-600 dark:text-slate-200">Review this Host full policy for details.</span>
-                </div>
-
-
-                <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
-
-
-                
-                <div className="my-4 pl-2">
-                    <h1 className="text-lg font-semibold first-letter:capitalize">Safety & security</h1>
-                    <span className="text-gray-600 dark:text-slate-200">smoke alarm</span>
-                    <span className="text-gray-600 dark:text-slate-200">security guards</span>
-                    <span className="text-gray-600 dark:text-slate-200">some spaces are shared</span>
-                </div>
-
-                <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
-
-
-                <div className="my-4 pl-2">
+                {/* <div className="my-4 pl-2">
                     <h1 className="text-md font-semibold text-gray-600 dark:text-slate-200 first-letter:capitalize">Report this event!</h1>
-                </div>
-
-
-                <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
+                </div> */}
 
 
             </div>
