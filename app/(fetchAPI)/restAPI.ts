@@ -53,7 +53,7 @@ export const get_eventsByDate = async (date: string) => {
 }
 
 export const get_eventsByDateUpcoming = async (date: string) => {
-    const res = await fetch(`api/events/date/upcoming/${ date }`, {
+    const res = await fetch(`https://evento-calicut.vercel.app/api/events/date/upcoming/${date}`, {
         method: 'GET',
     });
     const events = await res.json();
