@@ -11,7 +11,7 @@ import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
 import EventCard from "@/app/events/EventCard";
 // import Loading from "@/app/(Loading)/Loading";
 // API
-import { get_allEvents, get_eventsByCatogory, get_eventsByDate, get_eventsByDateUpcoming } from "../(fetchAPI)/restAPI";
+import { get_allEvents, get_eventsByDate, get_eventsByDateUpcoming } from "../(fetchAPI)/restAPI";
 import { useRouter, useSearchParams } from "next/navigation";
 import EventTabs from "@/components/eventtabs/EventTabs";
 import { DateTime } from "luxon";
@@ -26,13 +26,18 @@ export default function HomePage() {
     const catogory = searchParams.get('catogory')
     const router = useRouter();
 
-    useEffect(()=> {
-        if(catogory && catogory !== 'all') {
-            get_eventsByCatogory(catogory).then((events) => {
-                if (events.length) setEvents(events);
-                else setOffline(true);
+    useEffect(() => {
+        const get_eventsByCatogory = async (catogory: string) => {
+            console.log('fetching : ', catogory)
+            const res = await fetch(`api/events/catogory/${catogory}`, {
+                method: 'GET',
             });
+            console.log(res)
+            const events = await res.json();
+            setEvents(events);
         }
+        if (catogory && catogory !== 'all')
+            get_eventsByCatogory(catogory)
         else {
             // else get all events data
             get_allEvents().then((events) => {
@@ -42,7 +47,7 @@ export default function HomePage() {
                 else setOffline(true);
             });
         }
-    }, [catogory]);
+    }, []);
 
 
     useEffect(() => {
