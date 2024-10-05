@@ -40,6 +40,7 @@ export const get_eventsByCatogory = async (catogory: string) => {
     console.log('fetching : ', catogory)
     const res = await fetch(`https://evento-calicut.vervel.app/api/events/catogory/${catogory}`, {
         method: 'GET',
+        mode: "no-cors"
     });
     const events = await res.json();
     return events;
@@ -48,6 +49,7 @@ export const get_eventsByCatogory = async (catogory: string) => {
 export const get_eventsByDate = async (date: string) => {
     const res = await fetch(`https://evento-calicut.vervel.app/api/events/date/${date}`, {
         method: 'GET',
+        mode: "no-cors"
     });
     const events = await res.json();
     return events;
@@ -56,6 +58,7 @@ export const get_eventsByDate = async (date: string) => {
 export const get_eventsByDateUpcoming = async (date: string) => {
     const res = await fetch(`https://evento-calicut.vervel.app/api/events/date/upcoming/${date}`, {
         method: 'GET',
+        mode: "no-cors"
     });
     const events = await res.json();
     return events;
