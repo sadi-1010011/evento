@@ -26,28 +26,20 @@ export default function HomePage() {
     const catogory = searchParams.get('catogory')
     const router = useRouter();
 
+
     useEffect(() => {
-        const get_eventsByCatogory = async (catogory: string) => {
-            console.log('fetching : ', catogory)
-            const res = await fetch(`api/events/catogory/${catogory}`, {
-                method: 'GET',
-            });
-            console.log(res)
-            const events = await res.json();
-            setEvents(events);
+        async function fetchEventsByCatogory() {
+          let res = await fetch(`/api/events/catogory/${catogory}`)
+          let data = await res.json()
+          setEvents(data)
         }
-        if (catogory && catogory !== 'all')
-            get_eventsByCatogory(catogory)
-        else {
-            // else get all events data
-            get_allEvents().then((events) => {
-                if (events.length)
-                    setEvents(events);
+        (catogory && catogory !== 'all') ? fetchEventsByCatogory() : get_allEvents().then((events) => {
+            if (events.length)
+                setEvents(events);
                 // OFFLINE MODE!
-                else setOffline(true);
-            });
-        }
-    }, []);
+            else setOffline(true);
+        });
+      }, [])
 
 
     useEffect(() => {
