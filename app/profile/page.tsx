@@ -23,7 +23,7 @@ export default async function ProfilePage() {
         
             <TopNavbar />
 
-            <ProfileCard id={ user.id } name={ user.username } email= { user.email} joinedyear={ joinedyear } />
+            <ProfileCard id={ user._id } name={ user.username } email= { user.email} joinedyear={ joinedyear } />
 
             {/* <pre>
                 { JSON.stringify(session, null, 2) }

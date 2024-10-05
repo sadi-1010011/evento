@@ -13,29 +13,31 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 // import dateLabel from "@/utils/dateLabel";
 import { IEvent } from "@/models/event";
 import { FavoritedBtn, RemindMeBtn } from "../animatedbtns/AnimatedBtns";
-import { delete_favoritesById } from "@/app/(fetchAPI)/userActions";
+import { deleteFavoritesAction } from "@/app/serverActions/user/deleteFavoritesAction";
 
 
 export default function FavoritesCard({ data } :{ data: IEvent }) {
 
     const router = useRouter();
-    const [favorite, setFavorite] = useState(true);
+    const [favorite, setFavorite] = useState<boolean>(true); // default favorited
     
     useEffect(() => {
+        console.log('unfavorite clicked: ', favorite)
         // Perform cleanup to remove from favorites list of user in server!
-        return () => {
+        if (favorite) return
+        else {
             const userId = localStorage.getItem('user');
             const favoritedId = `${data._id}`;
             if (userId) {
-                console.log('Unfavorited:', data.title)
-                // delete from user favorites
-                // API call!
-                delete_favoritesById(userId, favoritedId).then((res)=> {
-                    console.log(res.statusText);
+                // SERVER ACTION
+                deleteFavoritesAction(userId, favoritedId).then(res => {
+                    console.log(res);
+                    // CUSTOM MODAL ALERT BOX HERE.. 
                 })
             } else {
+                // CUSTOM MODAL ALERT BOX HERE..
                 router.replace('/login');
-                console.log('Login to add favorites!');
+                console.log('Oops you were logged out!');
             }
         }
     }, [favorite]);
@@ -45,7 +47,7 @@ export default function FavoritesCard({ data } :{ data: IEvent }) {
         {
         favorite && <div className="flex z-0 mb-10 w-full flex-col rounded-xl bg-evento-white text-black dark:bg-evento-black dark:text-white relative">
             <span className="absolute z-50 right-0 my-1 mx-1.5 p-1 inline-flex flex-col gap-5" >
-                <FavoritedBtn checked={favorite} onclick={(val: boolean) => setFavorite(val) } />
+                <FavoritedBtn checked={true} onclick={() => setFavorite(false) } />
                 <RemindMeBtn />
                 {/* <Image src={ShareIcon} width={18} height={18} alt="share icon" /> */}
             </span>

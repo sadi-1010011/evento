@@ -5,14 +5,15 @@ import RatingIcon from "@/assets/icons/star.png";
 import HostIcon from "@/assets/icons/host_dark.png";
 // import { useRouter } from "next/navigation";
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function ProfileCard({ id, name, email, joinedyear }: { id: string, name: string, email: string, joinedyear: number }) {
 
+    const [userId, setUserId] = useState(id);
     // const router = useRouter()
     useEffect(() => {
-        if (id) localStorage.setItem('user', id);
-    }, [id]);
+        if (id !== undefined) localStorage.setItem('user', id);
+    }, [userId]);
 
     return (
         <>

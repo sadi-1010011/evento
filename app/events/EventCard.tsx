@@ -12,6 +12,7 @@ import dateLabel from "@/utils/dateLabel";
 import { IEvent } from "@/models/event";
 import { FavoritedBtn } from "@/components/animatedbtns/AnimatedBtns";
 import { put_favoritesById } from "../(fetchAPI)/userActions";
+import { addFavoritesAction } from "../serverActions/user/addFavoritesAction";
 
 
 export default function EventCard({ data } :{ data: IEvent }) {
@@ -26,22 +27,23 @@ export default function EventCard({ data } :{ data: IEvent }) {
         const userId = localStorage.getItem('user');
         const favoritedId = `${data._id}`;
         if (userId) {
-            console.log('favorited:', data.title)
-            // add to user favorites
-            // API call!
-            put_favoritesById(userId, favoritedId).then((res)=> {
-                console.log(res.statusText);
+            // SERVER ACTION
+            addFavoritesAction(userId, favoritedId).then(res => {
+                console.log(res);
+                // CUSTOM MODAL ALERT BOX HERE..
             })
-            // add to local storage
-            // localStorage.setItem('favorited', `${data._id}`); // just for temporary storage in case needed
             setFavorite(val);
-        } else {
+        }
+            // LOGIN TO ADD FAV
+        else {
+            // CUSTOM MODAL ALERT BOX HERE..
             console.log('Login to add favorites!');
             router.replace('/login');
         }
     }
 
     useEffect(() => {
+        // insert data after render!
         setThumbnail(data.thumbnail);
         if (typeof data.date === 'string') setEventdate(dateLabel(data.date))
     }, [data]);
