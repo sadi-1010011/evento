@@ -11,11 +11,12 @@ import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
 import EventCard from "@/app/events/EventCard";
 // import Loading from "@/app/(Loading)/Loading";
 // API
-import { get_allEvents, get_eventsByDate, get_eventsByDateUpcoming } from "../(fetchAPI)/restAPI";
+import { get_allEvents } from "../(fetchAPI)/restAPI";
 import { useRouter, useSearchParams } from "next/navigation";
 import EventTabs from "@/components/eventtabs/EventTabs";
 import { DateTime } from "luxon";
 import { getEventsByDateAction } from "../serverActions/events/getEventsByDateAction";
+import { getEventsByDateUpcomingAction } from "../serverActions/events/getEventsByDateUpcomingAction";
 
 
 export default function HomePage() {
@@ -46,22 +47,20 @@ export default function HomePage() {
     useEffect(() => {
         let todayDate = DateTime.local().toISO().split('T')[0]; // current date
         if (activeEventTab === 1 && events.length) { // today events only
-
+            // SERVER ACTION
             getEventsByDateAction(todayDate).then(result => {
                 console.log(result)
                 setEvents(result);
-            })
-            // if (todayEvents) setEvents(todayEvents);
-            // get_eventsByDate(todayDate).then(res => {
-            //     setEvents(res);
-            // }).catch(error => {
-            //     console.log('error in sorting todays events!', error);
-            // })
+            }).catch((error: any) => {
+                console.log('error in sorting todays events!',error);
+            });
         }
         if (activeEventTab === 2 && events.length) { // upcoming events only
-            get_eventsByDateUpcoming(todayDate).then(res => {
-                setEvents(res);
-            }).catch(error => {
+            // SERVER ACTION
+            getEventsByDateUpcomingAction(todayDate).then(result => {
+                console.log(result);
+                setEvents(result);
+            }).catch((error: any) => {
                 console.log('error in sorting todays events!',error);
             })
         }

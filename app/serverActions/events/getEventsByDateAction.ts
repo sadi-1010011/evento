@@ -2,8 +2,8 @@
 
 import connectMongoDB from "@/lib/db";
 import Event from "@/models/event";
-import { NextResponse } from "next/server";
 
+// SERVER ACTION TO FIND TODAY EVENTS
  
 export async function getEventsByDateAction(date: string) {
     console.log('server action - get events by date: ',date);
