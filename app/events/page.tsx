@@ -17,6 +17,7 @@ import EventTabs from "@/components/eventtabs/EventTabs";
 import { DateTime } from "luxon";
 import { getEventsByDateAction } from "../serverActions/events/getEventsByDateAction";
 import { getEventsByDateUpcomingAction } from "../serverActions/events/getEventsByDateUpcomingAction";
+import { getEventsByCatogory } from "../serverActions/events/getEventsByCatogory";
 
 
 export default function HomePage() {
@@ -30,18 +31,22 @@ export default function HomePage() {
 
     // CATOGORY EVENTS
     useEffect(() => {
-        async function fetchEventsByCatogory() {
-          let res = await fetch(`/api/events/catogory/${catogory}`)
-          let data = await res.json()
-          setEvents(data)
-        }
-        (catogory && catogory !== 'all') ? fetchEventsByCatogory() : get_allEvents().then((events) => {
-            if (events.length)
-                setEvents(events);
-                // OFFLINE MODE!
-            else setOffline(true);
-        });
-      }, [])
+        if (catogory && catogory !== 'all')
+            // SERVER ACTION
+            getEventsByCatogory(catogory).then(result => {
+                setEvents(result);
+            }).catch((error: any) => {
+                console.log('error in sorting events by catogory!',error);
+            });
+        else
+            // API CALL
+            get_allEvents().then((events) => {
+                if (events.length)
+                    setEvents(events);
+                    // OFFLINE MODE!
+                else setOffline(true);
+            });
+      }, [catogory])
 
     // TODAY-UPCOMING EVENTS
     useEffect(() => {
@@ -49,7 +54,6 @@ export default function HomePage() {
         if (activeEventTab === 1 && events.length) { // today events only
             // SERVER ACTION
             getEventsByDateAction(todayDate).then(result => {
-                console.log(result)
                 setEvents(result);
             }).catch((error: any) => {
                 console.log('error in sorting todays events!',error);
@@ -58,7 +62,6 @@ export default function HomePage() {
         if (activeEventTab === 2 && events.length) { // upcoming events only
             // SERVER ACTION
             getEventsByDateUpcomingAction(todayDate).then(result => {
-                console.log(result);
                 setEvents(result);
             }).catch((error: any) => {
                 console.log('error in sorting todays events!',error);
