@@ -15,6 +15,7 @@ import { get_allEvents, get_eventsByDate, get_eventsByDateUpcoming } from "../(f
 import { useRouter, useSearchParams } from "next/navigation";
 import EventTabs from "@/components/eventtabs/EventTabs";
 import { DateTime } from "luxon";
+import { getEventsByDateAction } from "../serverActions/events/getEventsByDateAction";
 
 
 export default function HomePage() {
@@ -26,7 +27,7 @@ export default function HomePage() {
     const catogory = searchParams.get('catogory')
     const router = useRouter();
 
-
+    // CATOGORY EVENTS
     useEffect(() => {
         async function fetchEventsByCatogory() {
           let res = await fetch(`/api/events/catogory/${catogory}`)
@@ -41,15 +42,21 @@ export default function HomePage() {
         });
       }, [])
 
-
+    // TODAY-UPCOMING EVENTS
     useEffect(() => {
-        let todayDate = DateTime.local().toISO().split('T')[0];
+        let todayDate = DateTime.local().toISO().split('T')[0]; // current date
         if (activeEventTab === 1 && events.length) { // today events only
-            get_eventsByDate(todayDate).then(res => {
-                setEvents(res);
-            }).catch(error => {
-                console.log('error in sorting todays events!', error);
+
+            getEventsByDateAction(todayDate).then(result => {
+                console.log(result)
+                setEvents(result);
             })
+            // if (todayEvents) setEvents(todayEvents);
+            // get_eventsByDate(todayDate).then(res => {
+            //     setEvents(res);
+            // }).catch(error => {
+            //     console.log('error in sorting todays events!', error);
+            // })
         }
         if (activeEventTab === 2 && events.length) { // upcoming events only
             get_eventsByDateUpcoming(todayDate).then(res => {
@@ -60,6 +67,7 @@ export default function HomePage() {
         }
     }, [activeEventTab]);
 
+    // change TODAY-UPCOMING tabs
     function handle_activeTabs (active: number) {
         setActiveEventTab(active);
     }
