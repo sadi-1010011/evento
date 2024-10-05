@@ -41,7 +41,7 @@ export default async function FavoritesPage() {
             
             <div className="flex w-full flex-col items-center justify-center py-4 px-6">
                 {
-                    loginStatus ? <div className="w-full text-center"> <h2>{loginStatus}</h2><button className="capitalize w-1/2 bg-evento-black text-white dark:bg-evento-white dark:text-black hover:bg-slate-700 rounded-lg my-6 py-2 px-5 outline-none border-none"><Link className="w-full h-full block" href="/login">Login</Link></button></div>
+                    loginStatus ? <div className="w-full text-center text-slate-600"> <h2>{loginStatus}</h2><button className="capitalize w-1/2 bg-evento-black text-white dark:bg-evento-white dark:text-black hover:bg-slate-700 rounded-lg my-6 py-2 px-5 outline-none border-none"><Link className="w-full h-full block" href="/login">Login</Link></button></div>
                         :
                     fetchedfavorites && <FavoritesContainer favorites={ fetchedfavorites } />
                 }

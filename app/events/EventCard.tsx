@@ -36,15 +36,15 @@ export default function EventCard({ data } :{ data: IEvent }) {
             // localStorage.setItem('favorited', `${data._id}`); // just for temporary storage in case needed
             setFavorite(val);
         } else {
-            router.replace('/login');
             console.log('Login to add favorites!');
+            router.replace('/login');
         }
     }
 
     useEffect(() => {
         setThumbnail(data.thumbnail);
         if (typeof data.date === 'string') setEventdate(dateLabel(data.date))
-    }, [data.thumbnail, data.date]);
+    }, [data]);
 
     return (
         <div className="flex z-0 mb-10 w-full flex-col rounded-xl bg-evento-white text-black dark:bg-evento-black dark:text-white relative overflow-hidden">
@@ -62,7 +62,7 @@ export default function EventCard({ data } :{ data: IEvent }) {
 
                     {/* IMG CAROUSEL */}
 
-                    <Carousel preventMovementUntilSwipeScrollTolerance swipeScrollTolerance={20} showThumbs={false} autoPlay={false} infiniteLoop swipeable={true} stopOnHover interval={3000} showArrows={false} showStatus={false}>
+                    <Carousel preventMovementUntilSwipeScrollTolerance swipeScrollTolerance={20} showThumbs={false} autoPlay={false} infiniteLoop swipeable={true} stopOnHover showArrows={false} showStatus={false}>
                         <Image className="rounded-xl aspect-square w-full h-auto" src={thumbnail || DummyImage} width={500} height={500} placeholder="empty" alt="event picture" />
                         <Image className="rounded-xl aspect-square w-full h-auto" src={ DummyImage} width={500} height={500} placeholder="empty" alt="event picture" />
                         <Image className="rounded-xl aspect-square w-full h-auto" src={ DummyImage} width={500} height={500} placeholder="empty" alt="event picture" />

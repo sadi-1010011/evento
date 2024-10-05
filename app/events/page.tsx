@@ -49,16 +49,14 @@ export default function HomePage() {
             get_eventsByDate(todayDate).then(res => {
                 setEvents(res);
             }).catch(error => {
-                console.log('error in sorting todays events!');
-                return 0;
+                console.log('error in sorting todays events!', error);
             })
         }
         if (activeEventTab === 2 && events.length) { // upcoming events only
             get_eventsByDateUpcoming(todayDate).then(res => {
                 setEvents(res);
             }).catch(error => {
-                console.log('error in sorting todays events!');
-                return 0;
+                console.log('error in sorting todays events!',error);
             })
         }
     }, [activeEventTab]);
