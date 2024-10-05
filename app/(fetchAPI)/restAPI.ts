@@ -1,5 +1,7 @@
 // API CALLS 
 
+export const dynamic =true;
+
 export const get_eventById = async (id: string) => {
     // console.log('fetch req to /api/events/[id]');
     const res = await fetch(`/api/events/${id}`, { method: 'GET' });
@@ -37,6 +39,7 @@ export const get_allEvents = async () => {
 }
 
 export const get_eventsByCatogory = async (catogory: string) => {
+    console.log('fetching : ', catogory)
     const res = await fetch(`api/events/catogory/${ catogory }`, {
         method: 'GET',
     });

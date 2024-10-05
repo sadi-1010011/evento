@@ -29,6 +29,7 @@ export default function HomePage() {
     useEffect(()=> {
         if(catogory && catogory !== 'all') {
             get_eventsByCatogory(catogory).then((events) => {
+                console.log('dynamic searchparam: ',catogory)
                 if (events.length) setEvents(events);
                 else setOffline(true);
             });
@@ -42,7 +43,7 @@ export default function HomePage() {
                 else setOffline(true);
             });
         }
-    }, []);
+    }, [catogory]);
 
 
     useEffect(() => {
