@@ -22,7 +22,6 @@ export default function FavoritesCard({ data } :{ data: IEvent }) {
     const [favorite, setFavorite] = useState<boolean>(true); // default favorited
     
     useEffect(() => {
-        console.log('unfavorite clicked: ', favorite)
         // Perform cleanup to remove from favorites list of user in server!
         if (favorite) return
         else {
@@ -61,7 +60,7 @@ export default function FavoritesCard({ data } :{ data: IEvent }) {
 
                     {/* IMG CAROUSEL */}
 
-                    <Carousel preventMovementUntilSwipeScrollTolerance swipeScrollTolerance={20} showThumbs={false} autoPlay infiniteLoop swipeable={true} stopOnHover interval={3000} showArrows={false} showStatus={false}>
+                    <Carousel preventMovementUntilSwipeScrollTolerance swipeScrollTolerance={20} showThumbs={false} autoPlay={false} infiniteLoop swipeable={true} stopOnHover interval={3000} showArrows={false} showStatus={false}>
                         <Image className="rounded-xl aspect-square w-full h-auto" src={ data.thumbnail || DummyImage} width={500} height={500} placeholder="empty" alt="event picture" />
                         <Image className="rounded-xl aspect-square w-full h-auto" src={ DummyImage} width={500} height={500} placeholder="empty" alt="event picture" />
                     </Carousel>

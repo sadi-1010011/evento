@@ -48,22 +48,22 @@ export default function BottomNavBar({ active = 'Explore'}) {
     return (
         <div className="flex fixed bottom-0 left-0 right-0 bg-evento-white text-black dark:bg-evento-black dark:text-white rounded-md z-30 w-full flex-row items-center justify-evenly shadow-evento-shadow">
 
-            <div onClick={ () => changeActiveTab('Explore') } className={`flex w-full rounded-md flex-col items-center pb-1 pt-2 transition-all ${ activeTab  === 'Explore' ? 'font-bold' : 'font-normal text-zinc-500' }`}>
+            <div onClick={ () => changeActiveTab('Explore') } className={`flex w-full rounded-md flex-col items-center pb-1 pt-2 hover:cursor-pointer transition-all ${ activeTab  === 'Explore' ? 'font-bold' : 'font-normal text-zinc-500' }`}>
                 <Image src={ !darkTheme ? HomeDarkIcon : HomeLightIcon} width={22} height={22} alt="Home tab" />
                 <span className={`text-xs capitalize my-1 ${ activeTab === 'Explore' ? 'font-bold' : 'font-normal' }`}>Explore</span>
             </div>
 
-            <div onClick={ () => changeActiveTab('Favorites') } className={`flex w-full rounded-md flex-col items-center pb-1 pt-2 transition-all ${ activeTab === 'Favorites' ? 'font-bold' : 'font-normal text-zinc-500' }`}>
+            <div onClick={ () => changeActiveTab('Favorites') } className={`flex w-full rounded-md flex-col items-center pb-1 pt-2 hover:cursor-pointer transition-all ${ activeTab === 'Favorites' ? 'font-bold' : 'font-normal text-zinc-500' }`}>
                 <Image src={ !darkTheme ? FavoritesDarkIcon : FavoritesLIghtIcon} width={22} height={22} alt="Favorites tab" />
                 <span className={`text-xs capitalize my-1 ${ activeTab === 'Favorites' ? 'font-bold' : 'font-normal' }`}>Favorites</span>
             </div>
 
-            <div onClick={ () => changeActiveTab('Catogory') } className={`flex w-full rounded-md flex-col items-center pb-1 pt-2 transition-all ${ activeTab === 'Catogory' ? 'font-bold' : 'font-normal text-zinc-500' }`}>
+            <div onClick={ () => changeActiveTab('Catogory') } className={`flex w-full rounded-md flex-col items-center pb-1 pt-2 hover:cursor-pointer transition-all ${ activeTab === 'Catogory' ? 'font-bold' : 'font-normal text-zinc-500' }`}>
                 <Image src={ !darkTheme ? CatogoryDarkIcon : CatogoryLightIcon} width={22} height={22} alt="Catogory tab" />
                 <span className={`text-xs capitalize my-1 ${ activeTab === 'Catogory' ? 'font-bold' : 'font-normal' }`}>Catogory</span>
             </div>
 
-            <div onClick={ () => changeActiveTab('Profile') } className={`flex w-full rounded-md flex-col items-center pb-1 pt-2 transition-all ${ activeTab === 'Profile' ? 'font-bold' : 'font-normal text-zinc-500' }`}>
+            <div onClick={ () => changeActiveTab('Profile') } className={`flex w-full rounded-md flex-col items-center pb-1 pt-2 hover:cursor-pointer transition-all ${ activeTab === 'Profile' ? 'font-bold' : 'font-normal text-zinc-500' }`}>
                 <Image src={ !darkTheme ? ProfileDarkIcon : ProfileLightIcon} width={22} height={22} alt="profile tab" />
                 <span className={`text-xs capitalize my-1 ${ activeTab === 'Profile' ? 'font-bold' : 'font-normal' }`}>Profile</span>
             </div>

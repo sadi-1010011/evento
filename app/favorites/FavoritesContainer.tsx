@@ -5,6 +5,7 @@ import { get_eventById } from "../(fetchAPI)/restAPI";
 import { IEvent } from "@/models/event";
 import FavoritesCard from "@/components/favoritescard/FavoritesCard";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { getFavoritesAction } from "../serverActions/user/getFavoritesAction";
 
 export default function FavoritesContainer({ favorites }: { favorites: []}) {
 
@@ -14,13 +15,11 @@ export default function FavoritesContainer({ favorites }: { favorites: []}) {
     useEffect(() => {
         const fetchEvents = async () => {
             const events = await Promise.all(
-                favorites.map((favorite: string) => get_eventById(favorite).then(res => res
-                ))
+                favorites.map((favorite: string) => getFavoritesAction(favorite).then(res => res))
             );
-            // console.log('events: ',events);
             events.length ? setEvents(events) : setOffline(true);
         }; 
-        // API calls start!
+        // SERVER ACTION start!
         fetchEvents();
     }, [favorites]);
     

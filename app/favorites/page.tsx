@@ -21,7 +21,6 @@ export default async function FavoritesPage() {
         // user is logged in !
         const user = session.user[0];
         const userId = `${user._id}`;
-        console.log(userId)
 
         try {
             const user = await User.findById({ _id: userId }); // find user
@@ -42,7 +41,7 @@ export default async function FavoritesPage() {
                 {
                     loginStatus ? <div className="w-full text-center text-slate-600"> <h2>{loginStatus}</h2><button className="capitalize w-1/2 bg-evento-black text-white dark:bg-evento-white dark:text-black hover:bg-slate-700 rounded-lg my-6 py-2 px-5 outline-none border-none"><Link className="w-full h-full block" href="/login">Login</Link></button></div>
                         :
-                    fetchedfavorites && <FavoritesContainer favorites={ fetchedfavorites } />
+                    fetchedfavorites.length && <FavoritesContainer favorites={ fetchedfavorites } />
                 }
             </div>
 
