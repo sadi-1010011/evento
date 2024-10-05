@@ -1,5 +1,6 @@
 // API calls to user route
 
+export const dynamicParams = true // dynamic params ON!
 
 export const get_favoritesById = async (userId: string) => {
     console.log(`fetching favorites of ${userId}`);
