@@ -45,7 +45,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
 
     return (
-        <main className="flex min-h-screen flex-col bg-evento-white text-black dark:bg-black dark:text-white">
+        <main className="flex min-h-screen flex-col bg-evento-white text-black dark:bg-black dark:text-white pb-12">
 
             {/* Share, Favorite Btn */}
             <div className="flex gap-2 m-2 absolute right-2 top-2 z-10">
@@ -116,7 +116,9 @@ export default async function EventPage({ params }: { params: { id: string }}) {
                     <span className="text-gray-600 dark:text-slate-200">end time: 12 am</span>
                 </div>
 
-                <EventReviews />
+                <div className="mt-8 mb-12">
+                    <EventReviews />
+                </div>
 
 
                 {/* <div className="my-4 pl-2">
@@ -131,13 +133,11 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
             {/* ADMIN ONLY FEATURE !!! */}
 
-                <div className="w-full mb-20">
-                    <EditDelete id={event._id} />
-                </div>
+                <EditDelete id={event._id} />
 
             {/* -- END -- */}
 
-            <div className="fixed bottom-0 w-full flex items-center justify-between py-4 px-4 bg-gray-700 text-white">
+            <div className="fixed bottom-0 left-0 right-0 w-full flex items-center justify-between py-4 px-4 bg-gray-700 text-white">
                 <h2 className="font-bold text-lg">Total price</h2>
                 <span className="font-bold text-lg">{ event ? event.ticketprice : 'free '} $</span>
             </div>  

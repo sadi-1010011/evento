@@ -7,12 +7,13 @@ import HostIcon from "@/assets/icons/host_dark.png";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
-export default function ProfileCard({ id, name, email, joinedyear }: { id: string, name: string, email: string, joinedyear: number }) {
+export default function ProfileCard({ id, isadmin, name, email, joinedyear }: { id: string, isadmin: boolean, name: string, email: string, joinedyear: number }) {
 
     const [userId, setUserId] = useState(id);
     // const router = useRouter()
     useEffect(() => {
         if (id !== undefined) localStorage.setItem('user', id);
+        if (id && isadmin) localStorage.setItem('isAdmin', name);
     }, [userId]);
 
     return (

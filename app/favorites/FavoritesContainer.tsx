@@ -19,8 +19,8 @@ export default function FavoritesContainer({ favorites }: { favorites: []}) {
             );
             events.length ? setEvents(events) : setOffline(true);
         }; 
-        // SERVER ACTION start!
-        fetchEvents();
+        // SERVER ACTION
+        fetchEvents()
     }, [favorites]);
     
     return (

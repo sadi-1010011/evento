@@ -25,6 +25,7 @@ export default function HomePage() {
     const [events, setEvents] = useState([]);
     const [activeEventTab, setActiveEventTab] = useState(2); // 1=today, 2=upcoming; default 2
     const [isoffline, setOffline] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false); // admin features!
     const searchParams = useSearchParams();
     const catogory = searchParams.get('catogory')
     const router = useRouter();
@@ -69,6 +70,12 @@ export default function HomePage() {
         }
     }, [activeEventTab]);
 
+    // ISADMIN USER?
+    useEffect(() => {
+        const isAdmin = localStorage.getItem('isAdmin'); // value is admin name or username!
+        if (isAdmin) setIsAdmin(true);
+    }, []);
+
     // change TODAY-UPCOMING tabs
     function handle_activeTabs (active: number) {
         setActiveEventTab(active);
@@ -106,11 +113,11 @@ export default function HomePage() {
 
                 {/* ADMIN ONLY FEATURE! */}
 
-                <div onClick={ () => router.push("/create-event") } className="flex m-4 p-2 items-center justify-center rounded-md border-2 border-slate-500 hover:bg-evento-black hover:text-white transition-all">
+                { isAdmin && <div onClick={ () => router.push("/create-event") } className="flex m-4 p-2 items-center justify-center rounded-md border-2 border-slate-500 hover:bg-evento-black hover:text-white transition-all">
                     <h2 className="capitalize font-bold">add event</h2>
                     <span className="rounded-50 p-2 font-semibold text-xl capitalize">+</span>
                     <span className="d-block font-light text-xs">{ `(admin only!)` }</span>
-                </div>
+                </div> }
 
                 {/* END */}
 

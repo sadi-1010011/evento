@@ -1,5 +1,6 @@
 import connectMongoDB from "@/lib/db";
 import Event from "@/models/event";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 // cache the events req
@@ -35,6 +36,8 @@ export async function POST(req: Request) {
         // wait to store data
         await Event.create(data);
 
+        // update path
+        revalidatePath('/api/events/[id]')
         return NextResponse.json({message: "successful post api"},{status: 201});
     }
 

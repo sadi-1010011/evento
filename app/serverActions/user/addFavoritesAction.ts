@@ -4,6 +4,7 @@
 
 import connectMongoDB from "@/lib/db";
 import User from "@/models/user";
+import { revalidatePath } from "next/cache";
 
  
 export async function addFavoritesAction(userId: string, favoritedId: string) {
@@ -24,6 +25,7 @@ export async function addFavoritesAction(userId: string, favoritedId: string) {
             if (alreadyfavorite.length) return 'already favorited!'
             favorites.push(favoritedId)  // push new eventid
             const updatedUser = await User.findByIdAndUpdate(userId, { favorites: favorites }, { upsert: false });
+            revalidatePath('/favorites');
             return JSON.parse(JSON.stringify(updatedUser.favorites));
         }
         else {

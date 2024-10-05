@@ -8,13 +8,22 @@ import { delete_eventById } from "@/app/(fetchAPI)/restAPI";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function EditDelete({ id }: { id: string }) {
 
+    const [isAdmin, setIsAdmin] = useState(false); // admin features!
     const router = useRouter();
 
+     // ISADMIN USER?
+     useEffect(() => {
+        const isAdmin = localStorage.getItem('isAdmin'); // value is admin name or username!
+        if (isAdmin) setIsAdmin(true);
+    }, []);
+
     return (
-        <div className="bg-evento-white text-slate-400 flex items-center justify-evenly py-2.5 mb-10 w-full">
+        isAdmin &&
+        (<div className="bg-evento-white text-slate-400 flex items-center justify-evenly py-2.5 mb-20 w-full">
         <button className="bg-red-500 text-white capitalize text-sm font-semibold rounded-full p-2 px-3">
         <Link href={`/edit-event/${id}`}>
             <Image className="block m-auto" src={EditIcon} width={30} height={30} alt="edit icon" />
@@ -28,6 +37,6 @@ export default function EditDelete({ id }: { id: string }) {
             <Image className="block m-auto" src={DeleteIcon} width={30} height={30} alt="edit icon" />
         </span>
         </button>
-        </div>
+        </div>)
     )
 }

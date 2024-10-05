@@ -3,6 +3,7 @@ import connectMongoDB from "@/lib/db";
 import Event from "@/models/event";
 import EditEventUI from "./uicomponent";
 
+export const dynamic = 'force-dynamic';
 
 export async function generateStaticParams() {
     const events = await fetch(`https://evento-calicut.vercel.app/api/events`, { method: 'GET', next: { revalidate: 60 } }).then(res => res.json());
