@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic' // dynamic route
 export async function GET(req: Request, {params} : { params: { catogory: string } }) {
     
     const catogory = params.catogory; // get catogory
-    console.log('dynamic catogory route: ', catogory);
+    console.log('Route handler - fetch catogory: ',catogory)
     
     // self explanatory
     await connectMongoDB();

@@ -4,7 +4,6 @@ import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
 import { getSession } from "@/utils/getsession";
 import FavoritesContainer from "./FavoritesContainer";
 import Link from "next/link";
-import { get_favoritesById } from "../(fetchAPI)/userActions";
 import User from "@/models/user";
 
 export default async function FavoritesPage() {

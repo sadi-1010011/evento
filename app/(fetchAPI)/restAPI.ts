@@ -1,7 +1,5 @@
 // API CALLS 
 
-export const dynamic =true;
-
 export const get_eventById = async (id: string) => {
     // console.log('fetch req to /api/events/[id]');
     const res = await fetch(`/api/events/${id}`, { method: 'GET' });
@@ -40,7 +38,7 @@ export const get_allEvents = async () => {
 
 export const get_eventsByCatogory = async (catogory: string) => {
     console.log('fetching : ', catogory)
-    const res = await fetch(`api/events/catogory/${ catogory }`, {
+    const res = await fetch(`https://evento-calicut.vervel.app/api/events/catogory/${catogory}`, {
         method: 'GET',
     });
     const events = await res.json();
@@ -48,7 +46,7 @@ export const get_eventsByCatogory = async (catogory: string) => {
 }
 
 export const get_eventsByDate = async (date: string) => {
-    const res = await fetch(`api/events/date/${ date }`, {
+    const res = await fetch(`https://evento-calicut.vervel.app/api/events/date/${date}`, {
         method: 'GET',
     });
     const events = await res.json();
@@ -56,7 +54,7 @@ export const get_eventsByDate = async (date: string) => {
 }
 
 export const get_eventsByDateUpcoming = async (date: string) => {
-    const res = await fetch(`api/events/date/upcoming/${date}`, {
+    const res = await fetch(`https://evento-calicut.vervel.app/api/events/date/upcoming/${date}`, {
         method: 'GET',
     });
     const events = await res.json();
