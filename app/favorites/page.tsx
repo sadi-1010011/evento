@@ -5,8 +5,8 @@ import { getSession } from "@/utils/getsession";
 import FavoritesContainer from "./FavoritesContainer";
 import Link from "next/link";
 import User from "@/models/user";
-import Event from "@/models/event";
 import { getFavoritesAction } from "../serverActions/user/getFavoritesAction";
+import connectMongoDB from "@/lib/db";
 
 export default async function FavoritesPage() {
 
@@ -23,6 +23,9 @@ export default async function FavoritesPage() {
         // user is logged in !
         const user = session.user[0];
         const userId = `${user._id}`;
+
+    // connect to DB!
+    await connectMongoDB();
 
         try {
              // find user
