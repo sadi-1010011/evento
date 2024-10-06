@@ -12,7 +12,7 @@ export default function FavoritesContainer({ favorites }: { favorites: []}) {
     const [events, setEvents] = useState<any>(favorites);
     const [isoffline, setOffline] = useState(false);
 
-    
+    console.log(events)
     // useEffect(() => {
     //     const fetchEvents = async () => {
     //         const events = await Promise.all(

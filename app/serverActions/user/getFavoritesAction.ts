@@ -5,17 +5,19 @@
 import connectMongoDB from "@/lib/db";
 import Event from "@/models/event";
  
-export async function getFavoritesAction(eventId: string ) {
+export async function getFavoritesAction(eventId: [] ) {
     console.log('server action - get event by id: ',eventId);
 
     // self explanatory
     await connectMongoDB();
 
     try {
+        
+        // find event
+        const events = await Event.find({ '_id': { $in: eventId } });
 
-        const event = await Event.findById(eventId); // find event
-        if (event) { // check event exist
-            return JSON.parse(JSON.stringify(event));
+        if (events) { // check events exist
+            return JSON.parse(JSON.stringify(events));
         }
         else {
             return 'event unavailable!'
