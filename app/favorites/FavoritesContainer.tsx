@@ -1,22 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { IEvent } from "@/models/event";
 import FavoritesCard from "@/components/favoritescard/FavoritesCard";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import { getFavoritesAction } from "../serverActions/user/getFavoritesAction";
 
-export const revalidate = 0;
 export default function FavoritesContainer({ favorites }: { favorites: []}) {
 
     const [events, setEvents] = useState<any>([]);
     const [isoffline, setOffline] = useState(false);
 
-    console.log(events)
+    console.log(favorites)
     useEffect(() => {
-        // SERVER ACTION
-        getFavoritesAction(favorites).then(res => setEvents(res));
-    }, []);
+        if (favorites.length) setEvents(favorites);
+    }, [favorites]);
     
     return (
         <div className="w-full h-auto">

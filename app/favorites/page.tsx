@@ -5,6 +5,7 @@ import { getSession } from "@/utils/getsession";
 import FavoritesContainer from "./FavoritesContainer";
 import Link from "next/link";
 import User from "@/models/user";
+import Event from "@/models/event";
 import { getFavoritesAction } from "../serverActions/user/getFavoritesAction";
 
 export default async function FavoritesPage() {
@@ -31,7 +32,7 @@ export default async function FavoritesPage() {
              // find favorites
             // fetchedfavorites = await Event.find({ '_id': { $in: favorites } });
             // fetchedfavorites = JSON.parse(JSON.stringify(fetchedfavorites));
-            fetchedfavorites = favorites;
+            fetchedfavorites = await getFavoritesAction(favorites); 
         } catch (error) {
             console.log('Error fetching user favorites!');
         }
