@@ -6,9 +6,10 @@ import FavoritesCard from "@/components/favoritescard/FavoritesCard";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { getFavoritesAction } from "../serverActions/user/getFavoritesAction";
 
+export const revalidate = 0;
 export default function FavoritesContainer({ favorites }: { favorites: []}) {
 
-    const [events, setEvents] = useState<any>(favorites);
+    const [events, setEvents] = useState<any>([]);
     const [isoffline, setOffline] = useState(false);
 
     console.log(events)
