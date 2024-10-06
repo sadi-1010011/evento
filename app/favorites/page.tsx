@@ -5,11 +5,12 @@ import { getSession } from "@/utils/getsession";
 import FavoritesContainer from "./FavoritesContainer";
 import Link from "next/link";
 import User from "@/models/user";
+import { getFavoritesAction } from "../serverActions/user/getFavoritesAction";
 
 export default async function FavoritesPage() {
 
     let loginStatus = null;
-    let fetchedfavorites: any = [];
+    let fetchedfavorites:any = [];
 
 
     const session = await getSession();
@@ -25,8 +26,10 @@ export default async function FavoritesPage() {
         try {
             const user = await User.findById({ _id: userId }); // find user
             if (!user) return loginStatus = 'Not a valid User Id!';
-            const { favorites } = user;
+            const { favorites } = user;            
+            
             fetchedfavorites = favorites;
+            
         } catch (error) {
             console.log('Error fetching user favorites!');
         }
@@ -41,7 +44,7 @@ export default async function FavoritesPage() {
                 {
                     loginStatus ? <div className="w-full text-center text-slate-600"> <h2>{loginStatus}</h2><button className="capitalize w-1/2 bg-evento-black text-white dark:bg-evento-white dark:text-black hover:bg-slate-700 rounded-lg my-6 py-2 px-5 outline-none border-none"><Link className="w-full h-full block" href="/login">Login</Link></button></div>
                         :
-                    fetchedfavorites.length && <FavoritesContainer favorites={ fetchedfavorites } />
+                    fetchedfavorites && <FavoritesContainer favorites={ fetchedfavorites } />
                 }
             </div>
 

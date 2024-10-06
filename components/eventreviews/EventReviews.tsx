@@ -21,7 +21,7 @@ export default function EventReviews() {
         }
 
         {
-            showreviews && <input type="text" className="my-2 w-full py-2 rounded-md border-none outline-none text-center placeholder-gray-400 dark:text-slate-200" placeholder="Leave a review.." />
+            showreviews && <input type="text" className="my-2 w-full py-2 rounded-md border-none outline-none text-center placeholder-gray-400 bg-evento-white dark:bg-evento-black dark:text-slate-200" placeholder="Leave a review.." />
         }
 
         </div>
