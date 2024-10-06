@@ -6,6 +6,7 @@ import FavoritesContainer from "./FavoritesContainer";
 import Link from "next/link";
 import User from "@/models/user";
 import { getFavoritesAction } from "../serverActions/user/getFavoritesAction";
+import Event from "@/models/event";
 
 export default async function FavoritesPage() {
 
@@ -24,12 +25,13 @@ export default async function FavoritesPage() {
         const userId = `${user._id}`;
 
         try {
-            const user = await User.findById({ _id: userId }); // find user
+             // find user
+            const user = await User.findById({ _id: userId });
             if (!user) return loginStatus = 'Not a valid User Id!';
             const { favorites } = user;            
-            
-            fetchedfavorites = favorites;
-            
+             // find favorites
+            fetchedfavorites = await Event.find({ '_id': { $in: favorites } });
+            fetchedfavorites = JSON.parse(JSON.stringify(fetchedfavorites));
         } catch (error) {
             console.log('Error fetching user favorites!');
         }

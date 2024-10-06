@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { get_eventById } from "../(fetchAPI)/restAPI";
 import { IEvent } from "@/models/event";
 import FavoritesCard from "@/components/favoritescard/FavoritesCard";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
@@ -10,21 +9,22 @@ import { getFavoritesAction } from "../serverActions/user/getFavoritesAction";
 export const dynamic = 'force-static';
 export default function FavoritesContainer({ favorites }: { favorites: []}) {
 
-    const [events, setEvents] = useState<Array<IEvent>>([]);
+    const [events, setEvents] = useState<any>(favorites);
     const [isoffline, setOffline] = useState(false);
+
     
-    useEffect(() => {
-        const fetchEvents = async () => {
-            const events = await Promise.all(
-                favorites.map((favorite: string) => getFavoritesAction(favorite).then(res => res))
-            );
-            events.length ? setEvents(events) : setOffline(true);
-        }; 
-        // SERVER ACTION
-        setTimeout(()=> {
-            fetchEvents()
-        }, 1000);
-    }, [favorites]);
+    // useEffect(() => {
+    //     const fetchEvents = async () => {
+    //         const events = await Promise.all(
+    //             favorites.map((favorite: string) => getFavoritesAction(favorite).then(res => res))
+    //         );
+    //         events.length ? setEvents(events) : setOffline(true);
+    //     }; 
+    //     // SERVER ACTION
+    //     setTimeout(()=> {
+    //         fetchEvents()
+    //     }, 1000);
+    // }, [favorites]);
     
     return (
         <div className="w-full h-auto">
