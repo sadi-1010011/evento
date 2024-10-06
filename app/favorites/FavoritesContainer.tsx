@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IEvent } from "@/models/event";
 import FavoritesCard from "@/components/favoritescard/FavoritesCard";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import { getFavoritesAction } from "../serverActions/user/getFavoritesAction";
 
 export const dynamic = 'force-static';
 export default function FavoritesContainer({ favorites }: { favorites: []}) {

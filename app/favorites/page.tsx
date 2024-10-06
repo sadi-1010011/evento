@@ -5,7 +5,6 @@ import { getSession } from "@/utils/getsession";
 import FavoritesContainer from "./FavoritesContainer";
 import Link from "next/link";
 import User from "@/models/user";
-import Event from "@/models/event";
 import { getFavoritesAction } from "../serverActions/user/getFavoritesAction";
 
 export default async function FavoritesPage() {
