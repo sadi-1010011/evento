@@ -6,7 +6,6 @@ import FavoritesCard from "@/components/favoritescard/FavoritesCard";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { getFavoritesAction } from "../serverActions/user/getFavoritesAction";
 
-export const dynamic = 'force-static';
 export default function FavoritesContainer({ favorites }: { favorites: []}) {
 
     const [events, setEvents] = useState<any>(favorites);
@@ -14,15 +13,9 @@ export default function FavoritesContainer({ favorites }: { favorites: []}) {
 
     console.log(events)
     useEffect(() => {
-        // const fetchEvents = async () => {
-        //     const events = await Promise.all(
-        //         favorites.map((favorite: string) => getFavoritesAction(favorite).then(res => res))
-        //     );
-        //     events.length ? setEvents(events) : setOffline(true);
-        // }; 
         // SERVER ACTION
         getFavoritesAction(favorites).then(res => setEvents(res));
-    }, [favorites]);
+    }, []);
     
     return (
         <div className="w-full h-auto">
