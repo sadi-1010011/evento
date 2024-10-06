@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { post_event } from "../(fetchAPI)/restAPI";
 import { DateTime } from "luxon";
+import { addEvent } from "../serverActions/events/addEvent";
 
 export default function CreateEvent() {
 
@@ -135,16 +136,23 @@ export default function CreateEvent() {
         if (errors.length) setFormErrors(errors);
 
         // submit data.. to backend only if 0 errors
-        else 
-            post_event(eventdata).then(res => {
-                if (res.ok) {
-                    console.log('data saved successfully!');
-                    router.push('/');
+        else // SERVER ACTION!
+            addEvent(eventdata).then(result => {
+                if (result) {
+                    console.log('event added successfully!')
+                    router.push('/events');
                 }
-                else console.log('something went wrong! in saving to DB ', res.statusText);
-            })
-        // otherwise show err!
-        // else setFormErrors(errors);
+                else console.log('something went wrong! in saving to DB ');
+            });
+            // API CALL!
+            // post_event(eventdata).then(res => {
+            //     if (res.ok) {
+            //         console.log('data saved successfully!');
+            //         router.push('/');
+            //     }
+            //     else console.log('something went wrong! in saving to DB ', res.statusText);
+            // })
+    
 
     }
     

@@ -1,4 +1,5 @@
 // export const dynamic = 'force-dynamic'; // force dynamic route
+export const revalidate = 60;
 export const dynamicParams = true // dynamic params ON!
 
 import Image from "next/image";
@@ -16,6 +17,7 @@ import connectMongoDB from "@/lib/db";
 import Event from "@/models/event";
 import EditDelete from "@/components/adminFeatures/adminFeature";
 import EventReviews from "@/components/eventreviews/EventReviews";
+
 
 export async function generateStaticParams() {
     const events = await fetch(`https://evento-calicut.vercel.app/api/events`, { method: 'GET', next: { revalidate: 60 } }).then(res => res.json());
@@ -52,7 +54,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
                 <Image className="rounded-full bg-white p-1.5" src={ShareIcon} width={32} height={32} alt="share icon" />
                 <Image className="rounded-full bg-white p-1.5" src={FavIcon} width={32} height={32} alt="favorite icon" />
             </div>
-            <GalleryGrid images={ event.thumbnail } />
+            <GalleryGrid images={ event.thumbnail || '' } />
             {
                 !event ? 
                 (<div className="my-4 px-6">

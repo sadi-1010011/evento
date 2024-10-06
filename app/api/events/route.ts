@@ -36,8 +36,6 @@ export async function POST(req: Request) {
         // wait to store data
         await Event.create(data);
 
-        // update path
-        revalidatePath('/api/events/[id]')
         return NextResponse.json({message: "successful post api"},{status: 201});
     }
 
