@@ -32,9 +32,9 @@ export default async function FavoritesPage() {
              // find favorites
             // fetchedfavorites = await Event.find({ '_id': { $in: favorites } });
             // fetchedfavorites = JSON.parse(JSON.stringify(fetchedfavorites));
-            fetchedfavorites = await getFavoritesAction(favorites); 
+            fetchedfavorites = await getFavoritesAction(favorites) 
         } catch (error) {
-            console.log('Error fetching user favorites!');
+            console.log('Error fetching user favorites!', error);
         }
     } 
         
