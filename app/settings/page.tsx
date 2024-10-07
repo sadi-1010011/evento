@@ -1,9 +1,7 @@
 "use client"
 // import SearchBar from "@/components/searchbar/SearchBar";
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
-import ThemeToggle from "@/components/themetoggle/themeToggle";
 import { userLogout } from "../serverActions/userLogout";
-import TopNavbar from "@/components/topnavbar/TopNavbar";
 
 export default function SettingsPage() {
 

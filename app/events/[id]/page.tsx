@@ -1,6 +1,6 @@
 // export const dynamic = 'force-dynamic'; // force dynamic route
-export const revalidate = 60;
-export const dynamicParams = true // dynamic params ON!
+// export const revalidate = 60;
+// export const dynamicParams = true // dynamic params ON!
 
 import Image from "next/image";
 import GalleryGrid from "@/components/gallerygrid/GalleryGrid";
@@ -19,13 +19,13 @@ import EditDelete from "@/components/adminFeatures/adminFeature";
 import EventReviews from "@/components/eventreviews/EventReviews";
 
 
-export async function generateStaticParams() {
-    const events = await fetch(`https://evento-calicut.vercel.app/api/events`, { method: 'GET', next: { revalidate: 60 } }).then(res => res.json());
+// export async function generateStaticParams() {
+//     const events = await fetch(`https://evento-calicut.vercel.app/api/events`, { method: 'GET', next: { revalidate: 60 } }).then(res => res.json());
    
-    return events.map((event: any) => ({
-      id: event._id,
-    }))
-}
+//     return events.map((event: any) => ({
+//       id: event.id,
+//     }))
+// }
 
 export default async function EventPage({ params }: { params: { id: string }}) {
 
@@ -67,12 +67,13 @@ export default async function EventPage({ params }: { params: { id: string }}) {
                     </SkeletonTheme>
                 </div>)
                 :
-            
             (
             <div>
-            <div className="px-4">
+                <div className="px-4">
+                
+                {/* TITLE, HOST */}
                 <h1 className="text-left my-6 pt-2 text-2xl font-semibold capitalize">{ event ? event.title : 'Title here..' }</h1>
-                <div className="flex items-center my-6">
+                <div className="flex items-center my-4">
                     <Image className="rounded-full mr-3 bg-white p-0.5" src={HostIcon} width={50} height={50} alt="host icon" />
                     <h3 className="capitalize">{ event ? `hosted by ${event.hostname}` : 'host name'}</h3>
                     <Image className="rounded-full bg-white px-0.5 ml-1.5" src={VerifyIcon} width={22} height={22} alt="verify icon" />
@@ -80,45 +81,42 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
                 <hr style={{ width: '90%', display: 'block', margin: 'auto'}} />
                 
-                <p className="my-6 pl-2 text-gray-600 dark:text-slate-200">{ event ? event.description : 'description..'}</p>
-                
-
+                {/* DESCRIPTION */}
+                <p className="my-6 pl-2 text-gray-600 dark:text-slate-200">{ event ? event.description : 'description..'}</p>               
                 <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
 
-
-                <div className="flex items-center m-2">
+                {/* LOCATION */}
+                <div className="flex items-center -my-3">
                     <Image className="bg-white p-1.5 rounded-full" src={LocationIcon} width={35} height={35} alt="location icon" />
                     <span className="px-2">{ event ? event.location : 'location..'}</span>
 
                     {/* google map plot */}
 
                 </div>
-
                 <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
 
-                <div className="pl-2 my-8">
+                {/* DATE */}
+                <div className="pl-2 my-0">
                     <h2>Date</h2>
                     <h1>{ event ? event.date : 'Date..' }</h1>
                 </div>
-
                 <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
 
-                <div className="my-4 pl-2">
+
+                {/* <div className="my-4 pl-2">
                     <h1 className="text-lg font-semibold first-letter:capitalize">Availability</h1>
                     <span className="text-gray-600 dark:text-slate-200">1-6 Sept</span>
                 </div>
+                <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} /> */}
 
 
-                <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
-
-
-                <div className="my-4 pl-2">
+                <div className="my-0 pl-2">
                     <h1 className="text-lg font-semibold first-letter:capitalize">Event Timing</h1>
-                    <span className="text-gray-600 dark:text-slate-200">start time: 4 pm</span>
-                    <span className="text-gray-600 dark:text-slate-200">end time: 12 am</span>
+                    <span className="text-gray-600 dark:text-slate-200">start time: 4 pm</span> &nbsp;
+                    {/* <span className="text-gray-600 dark:text-slate-200">end time: 12 am</span> */}
                 </div>
 
-                <div className="mt-8 mb-12">
+                <div className="mt-8 mb-2">
                     <EventReviews />
                 </div>
 
@@ -127,11 +125,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
                     <h1 className="text-md font-semibold text-gray-600 dark:text-slate-200 first-letter:capitalize">Report this event!</h1>
                 </div> */}
 
-
             </div>
-
-
-
 
             {/* ADMIN ONLY FEATURE !!! */}
 

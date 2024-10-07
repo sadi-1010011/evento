@@ -29,7 +29,7 @@ export default function EventCard({ data } :{ data: IEvent }) {
         if (userId) {
             // SERVER ACTION
             addFavoritesAction(userId, favoritedId).then(res => {
-                console.log(res);
+                // console.log(res);
                 // CUSTOM MODAL ALERT BOX HERE..
             })
             setFavorite(val);

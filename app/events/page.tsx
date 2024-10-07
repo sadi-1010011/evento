@@ -23,7 +23,7 @@ import { getEventsByCatogory } from "../serverActions/events/getEventsByCatogory
 export default function HomePage() {
 
     const [events, setEvents] = useState([]);
-    const [activeEventTab, setActiveEventTab] = useState(2); // 1=today, 2=upcoming; default 2
+    const [activeEventTab, setActiveEventTab] = useState(0); // 1=today, 2=upcoming; default 2
     const [isoffline, setOffline] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false); // admin features!
     const searchParams = useSearchParams();
@@ -51,6 +51,7 @@ export default function HomePage() {
 
     // TODAY-UPCOMING EVENTS
     useEffect(() => {
+        setEvents([]); // empty events for loading skeleton!
         let todayDate = DateTime.local().toISO().split('T')[0]; // current date
         if (activeEventTab === 1 && events.length) { // today events only
             // SERVER ACTION
@@ -74,6 +75,15 @@ export default function HomePage() {
     useEffect(() => {
         const isAdmin = localStorage.getItem('isAdmin'); // value is admin name or username!
         if (isAdmin) setIsAdmin(true);
+    }, []);
+
+    // THEME AUTOSET
+    useEffect(() => {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'dark')
+			document.documentElement.classList.add('dark');
+        else 
+            document.documentElement.classList.remove('dark');
     }, []);
 
     // change TODAY-UPCOMING tabs

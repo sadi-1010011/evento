@@ -4,19 +4,27 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import validateEmail from "@/utils/validateMail";
 import { userLogin } from "../serverActions/userLogin";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
 import TopNavbar from "@/components/topnavbar/TopNavbar";
-import { useFormStatus } from "react-dom";
 
 export default function LoginPage() {
 
     const router = useRouter();
-    const { pending } = useFormStatus();
+    const [pending, setPending] = useState(false);
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPass] = useState('')
     const [formerrors, setFormErrors] = useState<any>([]);
+
+    // Theme auto setting!
+    useEffect(() => {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'dark')
+			document.documentElement.classList.add('dark');
+        else 
+            document.documentElement.classList.remove('dark');
+    }, []);
 
     // function handleUsername(e: any) {
     //     e.preventDefault();
@@ -40,6 +48,7 @@ export default function LoginPage() {
 
     async function handleSubmit() {
 
+        setPending(true);
         // data validation
         let errors = []; // empty array for errs
         // fill array if errs
@@ -101,7 +110,7 @@ export default function LoginPage() {
                     
                     <h1 className="capitalize text-xs text-center font-light mt-4">forgot password? <Link className="text-blue-500 hover:underline" href="/profile">recover</Link></h1>
                     
-                    <button type="submit" className="capitalize w-1/2 bg-evento-black text-white dark:bg-evento-white dark:text-black hover:bg-slate-700 rounded-lg my-2 py-2 px-5 outline-none border-none">{ pending ? 'verifying' : 'Login' }</button>
+                    <button type="submit" className="capitalize w-1/2 bg-evento-black text-white dark:bg-evento-white dark:text-black hover:bg-slate-700 rounded-lg my-2 py-2 px-5 outline-none border-none" disabled={pending}>{ (pending) ? 'logging..' : 'Login' }</button>
                     {
                         formerrors && (formerrors.map((err: string, i: number) =>
                             <span key={i} className="text-xs -m-1 first-letter:capitalize font-light text-red-400">{ err }</span>))

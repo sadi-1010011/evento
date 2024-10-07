@@ -1,6 +1,6 @@
 "use client"
 
-import DummyIcon from "@/assets/profile/mishal.jpeg";
+import DummyIcon from "@/assets/icons/bottomnavbar/userDark.png";
 import RatingIcon from "@/assets/icons/star.png";
 import HostIcon from "@/assets/icons/host_dark.png";
 // import { useRouter } from "next/navigation";
@@ -22,7 +22,7 @@ export default function ProfileCard({ id, isadmin, name, email, joinedyear }: { 
 
             {/* PROFILE PIC, NAME */}
             <div className="flex flex-col items-center w-2/3">
-                <Image priority className="w-3/5 h-auto aspect-square border-gray-300 border p-1.5 rounded-full" src={DummyIcon} alt="profile pic" />
+                <Image priority className="w-3/5 h-auto aspect-square border-gray-300 border p-1.5 rounded-full opacity-20" src={DummyIcon} alt="profile pic" />
                 <h1 className="text-2xl font-bold capitalize text-center pt-2 break-all">{ name || 'name'}</h1>
                 <div className="inline-flex items-center gap-x-0.5">
                     <Image src={HostIcon} width={22} height={22} className="inline p-0.5" alt="host icon" />

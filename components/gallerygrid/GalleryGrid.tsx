@@ -1,4 +1,5 @@
 "use client"
+
 import DummyImg from "@/assets/eventoLogo.jpeg";
 import styles from "./gallery.module.css";
 import Image from "next/image";
@@ -13,6 +14,7 @@ export default function GalleryGrid({ images }: { images: string }) {
             setImage(images);
         }
     }, [images]);
+
 
     return(
 

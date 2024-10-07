@@ -7,7 +7,7 @@ import Event from "@/models/event";
  
 
 export async function getFavoritesAction(eventId: [] ) {
-    console.log('server action - get event by id: ',eventId);
+    console.log('server action - get favorite events!: ', eventId);
 
     // self explanatory
     await connectMongoDB();

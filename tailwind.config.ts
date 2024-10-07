@@ -18,7 +18,7 @@ const config: Config = {
         "evento-border-black": "#3C3D37",
       },
       backgroundColor: {
-        "evento-white": "#e8e8e8",
+        "evento-white": "#f2f2f2",
         "evento-black": "#202124",
       },
       backgroundImage: {

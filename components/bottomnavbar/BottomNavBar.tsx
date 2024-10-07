@@ -32,6 +32,7 @@ export default function BottomNavBar({ active = 'Explore'}) {
 		}
 	}, [active]);
 
+
     function changeActiveTab(item: string) {
         setActiveTab(item);
         // routing
@@ -48,8 +49,8 @@ export default function BottomNavBar({ active = 'Explore'}) {
     return (
         <div className="flex fixed bottom-0 left-0 right-0 bg-evento-white text-black dark:bg-evento-black dark:text-white rounded-md z-30 w-full flex-row items-center justify-evenly shadow-evento-shadow">
 
-            <div onClick={ () => changeActiveTab('Explore') } className={`flex w-full rounded-md flex-col items-center pb-1 pt-2 hover:cursor-pointer transition-all ${ activeTab  === 'Explore' ? 'font-bold' : 'font-normal text-zinc-500' }`}>
-                <Image src={ !darkTheme ? HomeDarkIcon : HomeLightIcon} width={22} height={22} alt="Home tab" />
+            <div onClick={ () => changeActiveTab('Explore') } className={`flex w-full rounded-md flex-col items-center pb-1 pt-2 hover:cursor-pointer drop transition-all ${ activeTab  === 'Explore' ? 'font-bold' : 'font-normal text-zinc-500' }`}>
+                <Image src={ !darkTheme ? HomeDarkIcon : HomeLightIcon} width={22} height={22}  alt="Home tab" />
                 <span className={`text-xs capitalize my-1 ${ activeTab === 'Explore' ? 'font-bold' : 'font-normal' }`}>Explore</span>
             </div>
 

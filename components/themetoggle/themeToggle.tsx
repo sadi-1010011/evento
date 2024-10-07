@@ -6,7 +6,7 @@ import styles from "./themebtn.module.css";
 
 export default function ThemeToggle() {
 
-	const [darkTheme, setDarkTheme] = useState(false);
+	const [darkTheme, setDarkTheme] = useState<boolean|null>(false);
 
 	useEffect(() => {
 		const theme = localStorage.getItem('theme');
