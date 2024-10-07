@@ -1,6 +1,6 @@
-// export const dynamic = 'force-dynamic'; // force dynamic route
-// export const revalidate = 60;
-// export const dynamicParams = true // dynamic params ON!
+export const dynamic = 'force-dynamic'; // force dynamic route
+export const revalidate = 60;
+export const dynamicParams = true // dynamic params ON!
 
 import Image from "next/image";
 import GalleryGrid from "@/components/gallerygrid/GalleryGrid";
@@ -19,25 +19,25 @@ import EditDelete from "@/components/adminFeatures/adminFeature";
 import EventReviews from "@/components/eventreviews/EventReviews";
 
 
-// export async function generateStaticParams() {
-//     const events = await fetch(`https://evento-calicut.vercel.app/api/events`, { method: 'GET', next: { revalidate: 60 } }).then(res => res.json());
+export async function generateStaticParams() {
+    const events = await fetch(`https://evento-calicut.vercel.app/api/events`, { method: 'GET', next: { revalidate: 60 } }).then(res => res.json());
    
-//     return events.map((event: any) => ({
-//       id: event.id,
-//     }))
-// }
+    return events.map((event: any) => ({
+      id: event.id,
+    }))
+}
 
 export default async function EventPage({ params }: { params: { id: string }}) {
 
-    let id = params.id;
     let event: any;
 
+    console.log('dynamic page! eventId: ', params.id);
     // self explanatory
     await connectMongoDB();
 
     // try to get items
     try {
-        let data = await Event.findById(id);
+        let data = await Event.findById(params.id);
         event = JSON.parse(JSON.stringify(data));
     }
     // err handling here..
