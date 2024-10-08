@@ -29,7 +29,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
     let event: any;
 
-    const res = await fetch(`http://localhost:3000/api/events/${params.id}`, { method: 'GET' });
+    const res = await fetch(`https://evento-calicut.vercel.app/api/events/${params.id}`, { method: 'GET' });
     event = await res.json();
     
     console.log('dynamic page! eventId: ', params.id);
