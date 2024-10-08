@@ -10,7 +10,7 @@ export default function GalleryGrid({ images }: { images: string }) {
     const [image, setImage] = useState('')
 
     useEffect(() => {
-        if (images.length) {
+        if (images) {
             setImage(images);
         }
     }, [images]);

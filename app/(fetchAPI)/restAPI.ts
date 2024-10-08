@@ -2,7 +2,7 @@
 
 export const get_eventById = async (id: string) => {
     // console.log('fetch req to /api/events/[id]');
-    const res = await fetch(`/api/events/${id}`, { method: 'GET' });
+    const res = await fetch(`http://localhost:3000/api/events/${id}`, { method: 'GET' });
     const event = await res.json();
     return event;
 }

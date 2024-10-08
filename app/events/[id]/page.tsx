@@ -1,11 +1,11 @@
-export const dynamic = 'force-dynamic'; // force dynamic route
-export const revalidate = 60;
-export const dynamicParams = true // dynamic params ON!
+// export const dynamic = 'force-dynamic'; // force dynamic route
+// export const revalidate = 60;
+// export const dynamicParams = true // dynamic params ON!
 
 import Image from "next/image";
 import GalleryGrid from "@/components/gallerygrid/GalleryGrid";
 // Loading skeleton
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+// import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 // ICONS
 import VerifyIcon from "@/assets/icons/verify.png";
@@ -13,8 +13,6 @@ import HostIcon from "@/assets/icons/host_dark.png";
 import FavIcon from "@/assets/icons/heart-black.png";
 import ShareIcon from "@/assets/icons/share-black.png";
 import LocationIcon from "@/assets/icons/location-pin.png";
-import connectMongoDB from "@/lib/db";
-import Event from "@/models/event";
 import EditDelete from "@/components/adminFeatures/adminFeature";
 import EventReviews from "@/components/eventreviews/EventReviews";
 
@@ -31,19 +29,13 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
     let event: any;
 
+    const res = await fetch(`http://localhost:3000/api/events/${params.id}`, { method: 'GET' });
+    event = await res.json();
+    
     console.log('dynamic page! eventId: ', params.id);
-    // self explanatory
-    await connectMongoDB();
-
-    // try to get items
-    try {
-        let data = await Event.findById(params.id);
-        event = JSON.parse(JSON.stringify(data));
-    }
-    // err handling here..
-    catch (error: any) {
-        console.log(error);
-    }
+    
+    // SERVER ACTION
+    // getEventById(params.id).then(res => event = res);
 
 
     return (
@@ -54,19 +46,10 @@ export default async function EventPage({ params }: { params: { id: string }}) {
                 <Image className="rounded-full bg-white p-1.5" src={ShareIcon} width={32} height={32} alt="share icon" />
                 <Image className="rounded-full bg-white p-1.5" src={FavIcon} width={32} height={32} alt="favorite icon" />
             </div>
-            <GalleryGrid images={ event.thumbnail || '' } />
+            <GalleryGrid images={ event ? event.thumbnail : '' } />
             {
-                !event ? 
-                (<div className="my-4 px-6">
-                    <SkeletonTheme baseColor="#202020" highlightColor="#444">
-                        <Skeleton height={120} className="my-2 rounded-md" count={1} />
-                        <Skeleton height={20} className="w-1/2" count={1} />
-                        <Skeleton height={50} width={50} className="m-2" borderRadius="50%" count={1} />
-                        <Skeleton height={25} className="w-1/3" count={1} />
-                        <Skeleton height={25} className="" count={1} />
-                    </SkeletonTheme>
-                </div>)
-                :
+                event &&
+                   
             (
             <div>
                 <div className="px-4">
@@ -140,6 +123,18 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
             </div>
             )
+
+            // :
+
+            // (<div className="my-4 px-6">
+            //     <SkeletonTheme baseColor="#202020" highlightColor="#444">
+            //         <Skeleton height={120} className="my-2 rounded-md" count={1} />
+            //         <Skeleton height={20} className="w-1/2" count={1} />
+            //         <Skeleton height={50} width={50} className="m-2" borderRadius="50%" count={1} />
+            //         <Skeleton height={25} className="w-1/3" count={1} />
+            //         <Skeleton height={25} className="" count={1} />
+            //     </SkeletonTheme>
+            // </div>)
         }
         </main>
     );
