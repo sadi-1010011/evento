@@ -5,9 +5,9 @@ import AddIcon from "@/assets/icons/plus.png";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { post_event } from "../(fetchAPI)/restAPI";
 import { DateTime } from "luxon";
 import { addEvent } from "../serverActions/events/addEvent";
+import { revalidatePath } from "next/cache";
 
 export default function CreateEvent() {
 
@@ -140,6 +140,7 @@ export default function CreateEvent() {
             addEvent(eventdata).then(result => {
                 if (result) {
                     console.log('event added successfully!')
+                    revalidatePath('/events/[id]', 'page');
                     router.push('/events');
                 }
                 else console.log('something went wrong! in saving to DB ');
