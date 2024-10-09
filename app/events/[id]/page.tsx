@@ -14,21 +14,21 @@ import EventReviews from "@/components/eventreviews/EventReviews";
 import Event from "@/models/event";
 import connectMongoDB from "@/lib/db";
 
-export const dynamic = 'force-dynamic'; // force dynamic route
+// export const dynamic = 'force-dynamic'; // force dynamic route
 export const revalidate = 60;
 export const dynamicParams = true // dynamic params ON!
 
 export async function generateStaticParams() {
-    const events = await fetch(`https://evento-calicut.vercel.app/api/events`, { method: 'GET' }).then(res => res.json());
+    const events = await fetch(`https://evento-calicut.vercel.app/api/events`).then(res => res.json());
    
     return events.map((event: any) => ({
-      id: event._id.toString(),
+      id: event._id,
     }))
 }
 
 export default async function EventPage({ params }: { params: { id: string }}) {
 
-    let event: any;
+    let event: any = [];
     const id = params.id;
 
     console.log('dynamic page! eventId: ', id);
@@ -40,6 +40,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
     try {
         const data = await Event.findById(id);
         event = JSON.parse(JSON.stringify(data));
+        console.log(event);
     }
     // err handling here..
     catch (error: any) {
