@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 export default function GalleryGrid({ images }: { images: string }) {
 
     const [image, setImage] = useState('')
+    const dataset = ['tall', 'taller', 'tallest', 'short'];
 
     useEffect(() => {
         if (images) {
@@ -19,7 +20,31 @@ export default function GalleryGrid({ images }: { images: string }) {
     return(
 
         <div className={styles.grid_gallery}>
-            <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
+            <div className={`${styles.grid_item} ${styles.short}`}>
+                <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
+            </div>
+            <div className={`${styles.grid_item} ${styles.taller}`}>
+                <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
+            </div>
+            <div className={`${styles.grid_item} ${styles.short}`}>
+                <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
+            </div>
+            <div className={`${styles.grid_item} ${styles.tallest}`}>
+                <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
+            </div>
+            <div className={`${styles.grid_item} ${styles.short}`}>
+                <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
+            </div>
+            <div className={`${styles.grid_item} ${styles.taller}`}>
+                <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
+            </div>
+            <div className={`${styles.grid_item} ${styles.short}`}>
+                <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
+            </div>
+            <div className={`${styles.grid_item} ${styles.short}`}>
+                <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
+            </div>
+            {/* <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" /> */}
         </div>
     
     );
