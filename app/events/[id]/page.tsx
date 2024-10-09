@@ -20,7 +20,7 @@ import connectMongoDB from "@/lib/db";
 
 
 export async function generateStaticParams() {
-    const events = await fetch(`https://evento-calicut.vercel.app/api/events`, { method: 'GET', next: { revalidate: false } }).then(res => res.json());
+    const events = await fetch(`https://evento-calicut.vercel.app/api/events`, { method: 'GET' }).then(res => res.json());
    
     return events.map((event: any) => ({
       id: event.id,
