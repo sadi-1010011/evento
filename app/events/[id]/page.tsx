@@ -64,7 +64,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
             </div>
             <GalleryGrid images={ event ? event.thumbnail : '' } />
             {
-                !event ?
+                !event.length ?
 
                 (<div className="my-4 px-6">
                     <SkeletonTheme baseColor="#202020" highlightColor="#444">
