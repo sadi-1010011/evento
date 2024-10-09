@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 // cache the events req
-export const dynamic = 'force-static';
+export const dynamic = 'force-dynamic';
 export const revalidate = 60; // new data in 1 mints
 
 export async function GET() {
@@ -13,6 +13,7 @@ export async function GET() {
     // try to get items
     try {
         const events = await Event.find({});
+        revalidatePath('/events/[id]', 'page');
         if (events) return NextResponse.json(events);
         else return NextResponse.json({ message: 'no events available' });
     }
