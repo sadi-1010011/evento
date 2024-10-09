@@ -60,7 +60,7 @@ export default function EventCard({ data } :{ data: IEvent }) {
             
             {/* LINKS TO EVENT PAGE BY ID */}
 
-                <div onClick={ (event) => { event.preventDefault(); router.push(`events/${data._id}`); }} className="w-full" >
+                <div onClick={ (event) => { event.preventDefault(); router.push(`/events/${data._id}`); }} className="w-full" >
 
                     {/* IMG CAROUSEL */}
 
