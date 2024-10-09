@@ -23,13 +23,13 @@ export default async function Page({ params }: { params: { id: string }}) {
     }
     // err handling here..
     catch (error: any) {
-        console.log(error);
+        console.log('err finding item in daynamic test: ',error);
     }
-    console.log('event', event);
 
     return (
-        <div>
+        <div className="flex flex-col items-center justify-around">
             <h1>test number: {id}</h1>
+            { event && <div>test result: {(JSON.stringify(event))}</div>}
         </div>
     )
 }

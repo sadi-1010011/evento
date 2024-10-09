@@ -23,7 +23,7 @@ export async function generateStaticParams() {
     const events = await fetch(`https://evento-calicut.vercel.app/api/events`, { method: 'GET' }).then(res => res.json());
    
     return events.map((event: any) => ({
-      id: event.id,
+      id: event._id,
     }))
 }
 
@@ -39,8 +39,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
     // try to get items
     try {
-        let data = await Event.findById(id);
-        event = JSON.parse(JSON.stringify(data));
+        event = await Event.findById(id);
     }
     // err handling here..
     catch (error: any) {
@@ -65,7 +64,19 @@ export default async function EventPage({ params }: { params: { id: string }}) {
             </div>
             <GalleryGrid images={ event ? event.thumbnail : '' } />
             {
-                event ?
+                !event ?
+
+                (<div className="my-4 px-6">
+                    <SkeletonTheme baseColor="#202020" highlightColor="#444">
+                        <Skeleton height={120} className="my-2 rounded-md" count={1} />
+                        <Skeleton height={20} className="w-1/2" count={1} />
+                        <Skeleton height={50} width={50} className="m-2" borderRadius="50%" count={1} />
+                        <Skeleton height={25} className="w-1/3" count={1} />
+                        <Skeleton height={25} className="" count={1} />
+                    </SkeletonTheme>
+                </div>)
+
+                :
                    
             (
             <div>
@@ -140,18 +151,6 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
             </div>
             )
-
-            :
-
-            (<div className="my-4 px-6">
-                <SkeletonTheme baseColor="#202020" highlightColor="#444">
-                    <Skeleton height={120} className="my-2 rounded-md" count={1} />
-                    <Skeleton height={20} className="w-1/2" count={1} />
-                    <Skeleton height={50} width={50} className="m-2" borderRadius="50%" count={1} />
-                    <Skeleton height={25} className="w-1/3" count={1} />
-                    <Skeleton height={25} className="" count={1} />
-                </SkeletonTheme>
-            </div>)
         }
         </main>
     );

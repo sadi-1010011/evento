@@ -2,7 +2,6 @@ import connectMongoDB from "@/lib/db";
 import Event from "@/models/event";
 import { NextResponse } from "next/server";
 
- 
 export const dynamic = 'force-dynamic' // dynamic route 
 export async function GET(req: Request, {params} : { params: { id: string } }) {
     
