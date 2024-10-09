@@ -1,4 +1,4 @@
-// export const dynamic = 'force-dynamic'; // force dynamic route
+export const dynamic = 'force-dynamic'; // force dynamic route
 export const revalidate = false;
 export const dynamicParams = true // dynamic params ON!
 
@@ -19,13 +19,13 @@ import Event from "@/models/event";
 import connectMongoDB from "@/lib/db";
 
 
-export async function generateStaticParams() {
-    const events = await fetch(`https://evento-calicut.vercel.app/api/events`, { method: 'GET' }).then(res => res.json());
+// export async function generateStaticParams() {
+//     const events = await fetch(`https://evento-calicut.vercel.app/api/events`, { method: 'GET' }).then(res => res.json());
    
-    return events.map((event: any) => ({
-      id: event._id,
-    }))
-}
+//     return events.map((event: any) => ({
+//       id: event._id,
+//     }))
+// }
 
 export default async function EventPage({ params }: { params: { id: string }}) {
 
