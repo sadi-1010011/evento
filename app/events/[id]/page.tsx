@@ -1,7 +1,3 @@
-export const dynamic = 'force-dynamic'; // force dynamic route
-export const revalidate = false;
-export const dynamicParams = true // dynamic params ON!
-
 import Image from "next/image";
 import GalleryGrid from "@/components/gallerygrid/GalleryGrid";
 // Loading skeleton
@@ -18,6 +14,9 @@ import EventReviews from "@/components/eventreviews/EventReviews";
 import Event from "@/models/event";
 import connectMongoDB from "@/lib/db";
 
+export const dynamic = 'force-dynamic'; // force dynamic route
+export const revalidate = 60;
+export const dynamicParams = true // dynamic params ON!
 
 export async function generateStaticParams() {
     const events = await fetch(`https://evento-calicut.vercel.app/api/events`, { method: 'GET' }).then(res => res.json());
@@ -39,7 +38,8 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
     // try to get items
     try {
-        event = await Event.findById(id);
+        const data = await Event.findById(id);
+        event = JSON.parse(JSON.stringify(data));
     }
     // err handling here..
     catch (error: any) {
@@ -88,7 +88,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
                     <Image className="rounded-full mr-3 bg-white p-0.5" src={HostIcon} width={50} height={50} alt="host icon" />
                     <h3 className="capitalize">{ event ? `hosted by ${event.hostname}` : 'host name'}</h3>
                     <Image className="rounded-full bg-white px-0.5 ml-1.5" src={VerifyIcon} width={22} height={22} alt="verify icon" />
-                </div>
+                </div> 
 
                 <hr style={{ width: '90%', display: 'block', margin: 'auto'}} />
                 

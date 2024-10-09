@@ -2,8 +2,8 @@ import connectMongoDB from "@/lib/db";
 import Event from "@/models/event";
 import { NextResponse } from "next/server";
 
-export const revalidate = false;
-export const dynamic = 'force-dynamic' // dynamic route 
+export const revalidate = 60;
+export const dynamic = 'force-dynamic' // dynamic route
 export async function GET(req: Request, {params} : { params: { id: string } }) {
     
     const id = params.id; // get id

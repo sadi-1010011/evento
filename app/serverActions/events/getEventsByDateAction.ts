@@ -14,8 +14,9 @@ export async function getEventsByDateAction(date: string) {
     // try to get items
     try {
         const events = await Event.find({ date: date });
+        console.log(events);
         if (events) return JSON.parse(JSON.stringify(events));
-        else return false;
+        else return { result: false}
     }
 
     // err handling here..

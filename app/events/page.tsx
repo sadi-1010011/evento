@@ -56,7 +56,8 @@ export default function HomePage() {
         if (activeEventTab === 1 && events.length) { // today events only
             // SERVER ACTION
             getEventsByDateAction(todayDate).then(result => {
-                setEvents(result);
+                if (result.title) setEvents(result)
+                else setOffline(true);
             }).catch((error: any) => {
                 console.log('error in sorting todays events!',error);
             });
@@ -64,7 +65,7 @@ export default function HomePage() {
         if (activeEventTab === 2 && events.length) { // upcoming events only
             // SERVER ACTION
             getEventsByDateUpcomingAction(todayDate).then(result => {
-                setEvents(result);
+                result.length ? setEvents(result) : setOffline(true);
             }).catch((error: any) => {
                 console.log('error in sorting todays events!',error);
             })
