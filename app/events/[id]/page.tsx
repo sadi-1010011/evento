@@ -1,11 +1,11 @@
 // export const dynamic = 'force-dynamic'; // force dynamic route
-// export const revalidate = 60;
-// export const dynamicParams = true // dynamic params ON!
+export const revalidate = false;
+export const dynamicParams = true // dynamic params ON!
 
 import Image from "next/image";
 import GalleryGrid from "@/components/gallerygrid/GalleryGrid";
 // Loading skeleton
-// import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 // ICONS
 import VerifyIcon from "@/assets/icons/verify.png";
@@ -15,10 +15,12 @@ import ShareIcon from "@/assets/icons/share-black.png";
 import LocationIcon from "@/assets/icons/location-pin.png";
 import EditDelete from "@/components/adminFeatures/adminFeature";
 import EventReviews from "@/components/eventreviews/EventReviews";
+import Event from "@/models/event";
+import connectMongoDB from "@/lib/db";
 
 
 export async function generateStaticParams() {
-    const events = await fetch(`https://evento-calicut.vercel.app/api/events`, { method: 'GET', next: { revalidate: 60 } }).then(res => res.json());
+    const events = await fetch(`https://evento-calicut.vercel.app/api/events`, { method: 'GET', next: { revalidate: false } }).then(res => res.json());
    
     return events.map((event: any) => ({
       id: event.id,
@@ -28,12 +30,27 @@ export async function generateStaticParams() {
 export default async function EventPage({ params }: { params: { id: string }}) {
 
     let event: any;
+    const id = params.id;
 
-    const res = await fetch(`https://evento-calicut.vercel.app/api/events/${params.id}`, { method: 'GET' });
-    event = await res.json();
-    
-    console.log('dynamic page! eventId: ', params.id);
-    
+    console.log('dynamic page! eventId: ', id);
+
+    // self explanatory
+    await connectMongoDB();
+
+    // try to get items
+    try {
+        let data = await Event.findById(id);
+        event = JSON.parse(JSON.stringify(data));
+    }
+    // err handling here..
+    catch (error: any) {
+        console.log(error);
+    }
+
+    // API CALL
+    // const res = await fetch(`https://evento-calicut.vercel.app/api/events/${params.id}`, { method: 'GET' });
+    // event = await res.json();
+        
     // SERVER ACTION
     // getEventById(params.id).then(res => event = res);
 
@@ -48,7 +65,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
             </div>
             <GalleryGrid images={ event ? event.thumbnail : '' } />
             {
-                event &&
+                event ?
                    
             (
             <div>
@@ -124,17 +141,17 @@ export default async function EventPage({ params }: { params: { id: string }}) {
             </div>
             )
 
-            // :
+            :
 
-            // (<div className="my-4 px-6">
-            //     <SkeletonTheme baseColor="#202020" highlightColor="#444">
-            //         <Skeleton height={120} className="my-2 rounded-md" count={1} />
-            //         <Skeleton height={20} className="w-1/2" count={1} />
-            //         <Skeleton height={50} width={50} className="m-2" borderRadius="50%" count={1} />
-            //         <Skeleton height={25} className="w-1/3" count={1} />
-            //         <Skeleton height={25} className="" count={1} />
-            //     </SkeletonTheme>
-            // </div>)
+            (<div className="my-4 px-6">
+                <SkeletonTheme baseColor="#202020" highlightColor="#444">
+                    <Skeleton height={120} className="my-2 rounded-md" count={1} />
+                    <Skeleton height={20} className="w-1/2" count={1} />
+                    <Skeleton height={50} width={50} className="m-2" borderRadius="50%" count={1} />
+                    <Skeleton height={25} className="w-1/3" count={1} />
+                    <Skeleton height={25} className="" count={1} />
+                </SkeletonTheme>
+            </div>)
         }
         </main>
     );
