@@ -16,7 +16,7 @@ export async function addEvent(data: {}) {
     try {
         // wait to store data
         let postresult = await Event.create(data);
-        revalidatePath(`/events/${postresult._id}`);
+        revalidatePath('/events/[id]', 'page')
         if (postresult) return true;
         else return false;
     }
