@@ -4,9 +4,9 @@ import Image from "next/image";
 import AddIcon from "@/assets/icons/plus.png";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { DateTime } from "luxon";
 import { addEvent } from "../serverActions/events/addEvent";
+import { useRouter } from "next/navigation";
 
 export default function CreateEvent() {
 
@@ -18,8 +18,10 @@ export default function CreateEvent() {
         description: '',
         ticketprice: '',
         ticketlink: '', // only if ticket price
+        additionalinfo: '',
         thumbnail: '',
         paid: false, // default to free event
+        time: '',
         date: DateTime.now().toFormat('ff') // event date
     });
     const [dropedImage, setDropedImage] = useState('');
@@ -87,12 +89,20 @@ export default function CreateEvent() {
         setEventData(previusData => { return { ...previusData, date: value }})
     }
 
-    function handle_Paid(e: any) {
+    function handle_Time(e: any) {
         if (!e) return
-        const value = e.currentTarget.checked;
-        // console.log(value)
-        setEventData(previusData => { return { ...previusData, paid: value }})    // for bool value !
+        e.preventDefault();
+        const value = e.currentTarget.value;
+        console.log(value)
+        setEventData(previusData => { return { ...previusData, time: value }})
     }
+
+    // function handle_Paid(e: any) {
+    //     if (!e) return
+    //     const value = e.currentTarget.checked;
+    //     // console.log(value)
+    //     setEventData(previusData => { return { ...previusData, paid: value }})    // for bool value !
+    // }
 
     function handle_Ticketprice(e: any) {
         if (!e) return
@@ -114,6 +124,12 @@ export default function CreateEvent() {
         setEventData(previusData => { return { ...previusData, catogory: value }})        
     }
 
+    function handle_AdditionalInfo(e: any) {
+        if(!e) return
+        const value = e.currentTarget.value;
+        setEventData(previusData => { return { ...previusData, additionalinfo: value }})        
+    }
+
     function handle_Submit(e: any) {
         if(!e) return
         e.preventDefault();
@@ -130,10 +146,16 @@ export default function CreateEvent() {
         
         // set image thumbnail
         if (dropedImage && eventdata) eventdata.thumbnail = dropedImage;
-        // console.table(eventdata);
+        // evaluate ticket related info
+        if (eventdata.ticketprice.length) {
+            const ticketpriceinNumber = Number(eventdata.ticketprice);
+            const paymentlink = String(eventdata.ticketlink); // evaluate payment link!
+            ticketpriceinNumber > 0 ? setEventData(prevdata => { return { ...prevdata, paid: true, ticketlink: paymentlink } }) : setEventData(prevdata => { return { ...prevdata, paid: false, ticketlink: paymentlink || '' } });
+        }
         
         if (errors.length) setFormErrors(errors);
-
+        
+        // else console.table(eventdata);
         // submit data.. to backend only if 0 errors
         else // SERVER ACTION!
             addEvent(eventdata).then(result => {
@@ -143,14 +165,16 @@ export default function CreateEvent() {
                 }
                 else console.log('something went wrong! in saving to DB ');
             });
-            // API CALL!
-            // post_event(eventdata).then(res => {
-            //     if (res.ok) {
-            //         console.log('data saved successfully!');
-            //         router.push('/');
-            //     }
-            //     else console.log('something went wrong! in saving to DB ', res.statusText);
-            // })
+
+
+        // API CALL!
+        // post_event(eventdata).then(res => {
+        //     if (res.ok) {
+        //         console.log('data saved successfully!');
+        //         router.push('/');
+        //     }
+        //     else console.log('something went wrong! in saving to DB ', res.statusText);
+        // })
     
 
     }
@@ -181,7 +205,7 @@ export default function CreateEvent() {
                 
                 <div className="flex gap-1 w-full text-center">
                     <input onChange={ (e)=> handle_Date(e)} className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black placeholder-slate-500 w-1/2 focus:border-2 rounded-l-full py-3 px-5 outline-none border-none" type="date" defaultValue={ DateTime.now().toISODate() } />
-                    <input onChange={ (e)=> console.log('handle event time input')} className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black placeholder-slate-500 w-1/2 focus:border-2 rounded-r-full py-3 px-5 outline-none border-none" type="time" defaultValue="12:00" />
+                    <input onChange={ (e)=> handle_Time(e)} className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black placeholder-slate-500 w-1/2 focus:border-2 rounded-r-full py-3 px-5 outline-none border-none" type="time" defaultValue="12:00" />
                 </div>
 
                 {/* EVENT LOCATION */}
@@ -206,11 +230,12 @@ export default function CreateEvent() {
                 <input onChange={ (e)=> handle_Description(e)} className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black placeholder-slate-500 w-full focus:border-2 rounded-lg focus:border-evento-black py-3 px-5 outline-none" type="text" placeholder="event description" value={eventdata.description} />
                 
                 {/* EVENT AMINITIES */}
-                <input className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black placeholder-slate-500 w-full focus:border-2 rounded-lg focus:border-evento-black py-3 px-5 outline-none" type="text" placeholder="features / aminities" />
+                {/* <input className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black placeholder-slate-500 w-full focus:border-2 rounded-lg focus:border-evento-black py-3 px-5 outline-none" type="text" placeholder="features / aminities" /> */}
 
                 {/* EVENT TYPE */}
                 <div className="block bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black placeholder-slate-500 w-full focus:border-2 rounded-lg focus:border-evento-black py-3 px-5 outline-none">
                     <select onChange={ (e)=> handle_Catogory(e)} className="w-full text-left bg-evento-white dark:bg-evento-black placeholder-slate-500 rounded-md text-sm capitalize outline-none">
+                        <option>all</option>
                         <option>music</option>
                         <option>dance</option>
                         <option>sports</option>
@@ -223,10 +248,10 @@ export default function CreateEvent() {
                 <input onChange={ (e)=> handle_Ticketprice(e)} className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black placeholder-slate-500 w-full focus:border-2 rounded-lg focus:border-evento-black py-3 px-5 outline-none" name="ticketprice" type="number" placeholder="ticket price" value={eventdata.ticketprice} />
 
                 {/* PAYMENT LINK */}
-                { eventdata.ticketprice  && <input onChange={ (e)=> handle_TicketLink(e)} className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black placeholder-slate-500 w-full focus:border-2 rounded-lg focus:border-evento-black py-3 px-5 outline-none" name="ticketlink" type="text" placeholder="Payment Link" value={eventdata.ticketlink} /> }
+                { Number(eventdata.ticketprice) !== 0  && <input onChange={ (e)=> handle_TicketLink(e)} className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black placeholder-slate-500 w-full focus:border-2 rounded-lg focus:border-evento-black py-3 px-5 outline-none" name="ticketlink" type="text" placeholder="Payment Link" value={eventdata.ticketlink} /> }
 
                 {/* ADDITIONAL INFO */}
-                <input className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black placeholder-slate-500 w-full focus:border-2 rounded-lg focus:border-evento-black py-3 px-5 outline-none" type="text" placeholder="Additional Info .." />
+                <input onChange={ (e) => handle_AdditionalInfo(e) } className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black placeholder-slate-500 w-full focus:border-2 rounded-lg focus:border-evento-black py-3 px-5 outline-none" type="text" placeholder="Additional Info .." value={eventdata.additionalinfo} />
 
                 <button type="submit" onClick={ (e)=> handle_Submit(e) } className="font-semibold capitalize w-1/2 bg-evento-black text-white dark:bg-evento-white dark:text-black rounded-lg focus:border-evento-black mt-6 mb-2 py-3 px-5 outline-none border-none">{'save event' }</button>
                 {

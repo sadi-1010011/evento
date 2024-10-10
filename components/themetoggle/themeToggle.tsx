@@ -35,7 +35,6 @@ export default function ThemeToggle() {
 					<svg className={`${styles.slider_icon}`} viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation"><path fill="none" d="m4 16.5 8 8 16-16"></path></svg> 
 				</span>
 			</label>
-			{/* <button onClick={() => setDarkTheme(!darkTheme)}>Toggle Theme</button> */}
 		</div>
 	);
 };

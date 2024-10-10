@@ -1,12 +1,11 @@
 "use server"
+
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
 import ProfileCard from "@/components/profilecard/ProfileCard";
 import TopNavbar from "@/components/topnavbar/TopNavbar";
 import { getSession } from "@/utils/getsession";
 import { DateTime } from "luxon";
 import { redirect } from "next/navigation";
-// SIGN IN PROVIDERS
-// import { signIn } from "next-auth/react";
 
 export default async function ProfilePage() {
 

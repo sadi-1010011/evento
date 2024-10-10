@@ -14,7 +14,6 @@ import EventReviews from "@/components/eventreviews/EventReviews";
 import Event from "@/models/event";
 import connectMongoDB from "@/lib/db";
 
-// export const dynamic = 'force-dynamic'; // force dynamic route
 export const revalidate = 60;
 export const dynamicParams = true // dynamic params ON!
 
@@ -56,7 +55,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
 
     return (
-        <main className="flex min-h-screen flex-col bg-evento-white text-black dark:bg-black dark:text-white pb-12">
+        <main className="flex min-h-screen flex-col bg-evento-white text-black dark:bg-evento-black dark:text-white pb-12">
 
             {/* Share, Favorite Btn */}
             <div className="flex gap-2 m-2 absolute right-2 top-2 z-10">
@@ -98,7 +97,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
                 <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
 
                 {/* LOCATION */}
-                <div className="flex items-center -my-3">
+                <div className="flex items-center -my-1">
                     <Image className="bg-white p-1.5 rounded-full" src={LocationIcon} width={35} height={35} alt="location icon" />
                     <span className="px-2">{ event ? event.location : 'location..'}</span>
 
@@ -124,8 +123,14 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
                 <div className="my-0 pl-2">
                     <h1 className="text-lg font-semibold first-letter:capitalize">Event Timing</h1>
-                    <span className="text-gray-600 dark:text-slate-200">start time: 4 pm</span> &nbsp;
+                    <span className="text-gray-600 dark:text-slate-200">start time: { event.time? event.time : 'Not provided' }</span> &nbsp;
                     {/* <span className="text-gray-600 dark:text-slate-200">end time: 12 am</span> */}
+                </div>
+                <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
+
+                <div className="my-0 pl-2">
+                    <h1 className="text-lg font-semibold first-letter:capitalize">Additional Info</h1>
+                    <span className="text-gray-600 dark:text-slate-200">{ event.additionalinfo ? event.additionalinfo : 'No additional info' }</span> &nbsp;
                 </div>
 
                 <div className="mt-8 mb-2">

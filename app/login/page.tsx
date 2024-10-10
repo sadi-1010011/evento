@@ -80,7 +80,7 @@ export default function LoginPage() {
             // user data set in cookies
             else {
                 // SUCCESS LOGIN!
-                setFormErrors([" "]);
+                setFormErrors([""]);
                 router.replace("/profile");
             }
         }
@@ -93,8 +93,10 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="flex flex-col items-center bg-evento-white text-black dark:bg-evento-black dark:text-white">
+        <div className="flex flex-col items-center bg-evento-white text-black dark:bg-evento-black dark:text-white transition">
+        
         <TopNavbar />
+        
         <div className="flex items-center justify-center w-full h-auto pt-2 px-2 mt-20">
 
             <div className="flex flex-col items-center justify-center w-full sm:w-4/5 md:w-4/5 mx-2 px-4 py-8 bg-evento-white text-black dark:bg-black dark:text-white rounded-3xl shadow-evento-shadow border-slate-100">
@@ -105,8 +107,8 @@ export default function LoginPage() {
                     {/* <input onChange={ handleUsername } className="bg-evento-white border-evento-border-white w-full focus:border-2 rounded-full py-2 px-5 outline-none" type="text" placeholder="User Name" value={username} /> */}
                     
                     {/* EMAIL, PASSWORD */}
-                    <input onChange={ handleEmail } className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black w-full rounded-lg py-2 px-5 outline-none" type="email" placeholder="Email" value={email} />
-                    <input onChange={ handlePassword} className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black w-full rounded-lg py-2 px-5 outline-none" type="password" placeholder="Password" value={password} autoComplete="true" />
+                    <input onChange={ handleEmail } className="bg-evento-white border-2 border-evento-border-white focus:border-evento-black dark:focus:border-evento-white dark:border-evento-border-black dark:bg-evento-black w-full rounded-lg py-2 px-5 outline-none" type="email" placeholder="Email" value={email} />
+                    <input onChange={ handlePassword} className="bg-evento-white border-2 border-evento-border-white focus:border-evento-black dark:focus:border-evento-white dark:border-evento-border-black dark:bg-evento-black w-full rounded-lg py-2 px-5 outline-none" type="password" placeholder="Password" value={password} autoComplete="true" />
                     
                     <h1 className="capitalize text-xs text-center font-light mt-4">forgot password? <Link className="text-blue-500 hover:underline" href="/profile">recover</Link></h1>
                     
@@ -119,7 +121,9 @@ export default function LoginPage() {
                     }
                 </form>
             </div>
+            
             <BottomNavBar active="Profile" />
+
         </div>
         </div>
     )
