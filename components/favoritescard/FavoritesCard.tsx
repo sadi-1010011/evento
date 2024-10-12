@@ -45,7 +45,7 @@ export default function FavoritesCard({ data } :{ data: IEvent }) {
         <>
         {
         favorite && <div className="flex z-0 mb-10 w-full flex-col rounded-xl bg-evento-white text-black dark:bg-evento-black dark:text-white relative">
-            <span className="absolute z-50 right-0 my-1 mx-1.5 p-1 inline-flex flex-col gap-5" >
+            <span className="absolute z-50 right-0 m-0.5 inline-flex flex-col gap-5" >
                 <FavoritedBtn checked={true} onclick={() => setFavorite(false) } />
                 <RemindMeBtn />
                 {/* <Image src={ShareIcon} width={18} height={18} alt="share icon" /> */}

@@ -50,7 +50,7 @@ export default function EventCard({ data } :{ data: IEvent }) {
 
     return (
         <div className="flex z-0 mb-10 w-full flex-col rounded-xl bg-evento-white text-black dark:bg-evento-black dark:text-white relative overflow-hidden">
-            <span className="absolute z-50 right-0 my-1 mx-1.5 p-1 rounded-full" >
+            <span className="absolute z-50 right-0 m-0.5 rounded-full" >
                 <FavoritedBtn checked={favorite} onclick={(val: boolean)=> val && handleFavorite(val) } />
                 {/* <Image onClick={ ()=> { setFavorite(!favorite); alert('you need to Login to add favorites!') } } src={favorite ? FavedIcon : FavIcon} width={22} height={22} alt="favorite icon" /> */}
             </span>
@@ -77,7 +77,7 @@ export default function EventCard({ data } :{ data: IEvent }) {
                             4.9
                         </span> */}
                     </div>
-                    <div className="flex items-center -mt-0.5 pr-2 text-gray-600">
+                    <div className="flex items-center -mt-0.5 pr-2 text-gray-600 dark:text-gray-400">
                         <span>Hosted By&nbsp;</span><h3 className="capitalize">{data.hostname || 'host name'}</h3>
                     </div>
                     <Image className="inline pr-1" src={LocationIcon} width={24} height={24} alt="location icon" />

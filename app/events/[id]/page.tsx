@@ -7,7 +7,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import VerifyIcon from "@/assets/icons/verify.png";
 import HostIcon from "@/assets/icons/host_dark.png";
 import FavIcon from "@/assets/icons/heart-black.png";
-import ShareIcon from "@/assets/icons/share-black.png";
+import ShareIcon from "@/assets/icons/sendDark.png";
 import LocationIcon from "@/assets/icons/location-pin.png";
 import EditDelete from "@/components/adminFeatures/adminFeature";
 import EventReviews from "@/components/eventreviews/EventReviews";
@@ -39,7 +39,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
     try {
         const data = await Event.findById(id);
         event = JSON.parse(JSON.stringify(data));
-        console.log(event);
+        // console.log(event);
     }
     // err handling here..
     catch (error: any) {
@@ -126,7 +126,8 @@ export default async function EventPage({ params }: { params: { id: string }}) {
                     <span className="text-gray-600 dark:text-slate-200">start time: { event.time? event.time : 'Not provided' }</span> &nbsp;
                     {/* <span className="text-gray-600 dark:text-slate-200">end time: 12 am</span> */}
                 </div>
-                <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto'}} />
+                {/* HR IN DARK THEME! borderColor: '#4b3563' */}
+                <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto' }} /> 
 
                 <div className="my-0 pl-2">
                     <h1 className="text-lg font-semibold first-letter:capitalize">Additional Info</h1>

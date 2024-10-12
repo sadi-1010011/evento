@@ -41,6 +41,15 @@
 }
 
 
+.wide {
+  grid-column: span 1;
+}
+
+.wider {
+  grid-column: span 2;
+}
+
+
 /* RESPONSIVE GRID GALLERY */
 
 

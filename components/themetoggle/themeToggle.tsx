@@ -21,6 +21,7 @@ export default function ThemeToggle() {
 		if (darkTheme) {
 			document.documentElement.classList.add('dark');
 			localStorage.setItem('theme', 'dark');
+			// window.location.reload();
 		} else {
 			document.documentElement.classList.remove('dark');
 			localStorage.setItem('theme', 'light');

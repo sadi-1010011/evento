@@ -7,6 +7,7 @@ import { userLogin } from "../serverActions/userLogin";
 import { useEffect, useState } from "react";
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
 import TopNavbar from "@/components/topnavbar/TopNavbar";
+import dynamic from "next/dynamic";
 
 export default function LoginPage() {
 

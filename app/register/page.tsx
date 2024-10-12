@@ -5,13 +5,11 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import validateEmail from "@/utils/validateMail";
 import TopNavbar from "@/components/topnavbar/TopNavbar";
-import { useFormStatus } from "react-dom";
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
 
 export default function RegisterPage() {
 
     const router = useRouter();
-    const { pending } = useFormStatus();
     const [firstname, setFirstname] = useState('')
     const [lastname, setLastname] = useState('')
     const [email, setEmail] = useState('')
@@ -126,7 +124,7 @@ export default function RegisterPage() {
                     <input onChange={ handleEmail } className="bg-evento-white border-2 border-evento-border-white dark:border-evento-black dark:bg-evento-black w-full rounded-lg py-3 px-5 outline-none focus:border-evento-black dark:focus:border-evento-white placeholder-slate-500" type="email" placeholder="Email" value={email} />
                     <input onChange={ handlePassword} className="bg-evento-white border-2 border-evento-border-white dark:border-evento-black dark:bg-evento-black w-full rounded-lg py-3 px-5 outline-none focus:border-evento-black dark:focus:border-evento-white placeholder-slate-500" type="password" placeholder="Password" value={password} />
                     <input onChange={ handleRePass } className="bg-evento-white border-2 border-evento-border-white dark:border-evento-black dark:bg-evento-black w-full rounded-lg py-3 px-5 outline-none focus:border-evento-black dark:focus:border-evento-white placeholder-slate-500" type="password" placeholder="Confirm password" value={repassword} />
-                    <button type="submit" className="capitalize w-1/2 bg-evento-black dark:bg-evento-white dark:text-black text-white rounded-lg mt-6 mb-2 py-3 px-5 outline-none border-none">{ pending ? 'Submitting' : 'Sign Up' }</button>
+                    <button type="submit" className="capitalize w-1/2 bg-evento-black dark:bg-evento-white dark:text-black text-white rounded-lg mt-6 mb-2 py-3 px-5 outline-none border-none">Sign Up</button>
                     {
                         formerrors && (formerrors.map((err: string, i: number) =>
                             <span key={i} className="text-xs first-letter:capitalize font-light text-red-400">{ err }</span>))

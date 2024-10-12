@@ -26,11 +26,19 @@ export default function BottomNavBar({ active = 'Explore'}) {
 	useEffect(() => {
 		const theme = localStorage.getItem('theme');
 		if (theme === 'dark') {
-			setDarkTheme(true);
+			setDarkTheme(true); 
 		} else {
 			setDarkTheme(false);
 		}
 	}, [active]);
+
+    // useEffect(() => {
+	// 	if (document.documentElement.classList.contains('dark')) {
+	// 		setDarkTheme(true);
+	// 	} else {
+	// 		setDarkTheme(false);
+	// 	}
+	// }, []);
 
 
     function changeActiveTab(item: string) {

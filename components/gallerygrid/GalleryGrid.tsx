@@ -23,25 +23,31 @@ export default function GalleryGrid({ images }: { images: string }) {
             <div className={`${styles.grid_item} ${styles.short}`}>
                 <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
             </div>
-            <div className={`${styles.grid_item} ${styles.taller}`}>
+            <div className={`${styles.grid_item} ${styles.tall}`}>
                 <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
             </div>
             <div className={`${styles.grid_item} ${styles.short}`}>
                 <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
             </div>
-            <div className={`${styles.grid_item} ${styles.tallest}`}>
+            <div className={`${styles.grid_item} ${styles.tall}`}>
+                <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
+            </div>
+            <div className={`${styles.grid_item} ${styles.tall}`}>
                 <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
             </div>
             <div className={`${styles.grid_item} ${styles.short}`}>
                 <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
             </div>
-            <div className={`${styles.grid_item} ${styles.taller}`}>
+            <div className={`${styles.grid_item} ${styles.tall}`}>
                 <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
+            </div>
+            <div className={`${styles.grid_item} ${styles.short}`}>
+              <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
             </div>
             <div className={`${styles.grid_item} ${styles.short}`}>
                 <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
             </div>
-            <div className={`${styles.grid_item} ${styles.short}`}>
+            <div className={`${styles.grid_item} ${styles.wider}`}>
                 <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
             </div>
             {/* <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" /> */}
