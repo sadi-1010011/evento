@@ -236,11 +236,15 @@ export default function CreateEvent() {
                 <div className="block bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black placeholder-slate-500 w-full focus:border-2 rounded-lg focus:border-evento-black py-3 px-5 outline-none">
                     <select onChange={ (e)=> handle_Catogory(e)} className="w-full text-left bg-evento-white dark:bg-evento-black placeholder-slate-500 rounded-md text-sm capitalize outline-none">
                         <option>all</option>
-                        <option>music</option>
-                        <option>dance</option>
+                        <option>technology</option>
                         <option>sports</option>
+                        <option>music</option>
                         <option>arts</option>
-                        <option>meets</option>
+                        <option>books</option>
+                        <option>dj</option>
+                        <option>games</option>
+                        <option>autoexpo</option>
+                        <option>movies</option>
                     </select>
                 </div>
 

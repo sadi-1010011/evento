@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`bg-evento-white dark:bg-evento-black md:w-2/3 lg:w-1/2 block m-auto text-black ${inter.className}`}>
-        {children}
+        <Suspense fallback={<div className="flex w-full h-screen items-center justify-center">loading..</div>}>
+          {children}
+        </Suspense>
       </body>
     </html>
   );

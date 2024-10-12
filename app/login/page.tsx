@@ -7,7 +7,6 @@ import { userLogin } from "../serverActions/userLogin";
 import { useEffect, useState } from "react";
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
 import TopNavbar from "@/components/topnavbar/TopNavbar";
-import dynamic from "next/dynamic";
 
 export default function LoginPage() {
 
@@ -68,6 +67,7 @@ export default function LoginPage() {
         // login if everything fine
         if (data && errors.length === 0) {
             // api call
+            
             console.log('submiting login data to backend!!')
 
             // login with data

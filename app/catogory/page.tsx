@@ -13,11 +13,7 @@ export default function CatogoryPage() {
 
             <div className="flex-col items-center justify-evenly px-2 py-4">
 
-                {/* <div className="mb-4">
-                    <SearchBar />
-                </div> */}
-
-                <div className="flex items-center gap-x-2 justify-center w-full flex-wrap">
+                <div className="flex items-center pb-10 gap-x-2 justify-center w-full flex-wrap">
                     <CatogoryCard active="All" />
                 </div>
 

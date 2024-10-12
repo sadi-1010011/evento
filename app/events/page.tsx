@@ -5,6 +5,8 @@ export const dynamicParams = true // dynamic params ON!
 import { useEffect, useState } from "react";
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import ProfilIcon from "@/assets/icons/profile-blue.png";
+import LoginIcon from "@/assets/icons/login.png";
 
 // components
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
@@ -18,6 +20,7 @@ import { DateTime } from "luxon";
 import { getEventsByDateAction } from "../serverActions/events/getEventsByDateAction";
 import { getEventsByDateUpcomingAction } from "../serverActions/events/getEventsByDateUpcomingAction";
 import { getEventsByCatogory } from "../serverActions/events/getEventsByCatogory";
+import Image from "next/image";
 
 
 export default function HomePage() {
@@ -25,6 +28,7 @@ export default function HomePage() {
     const [events, setEvents] = useState([]);
     const [activeEventTab, setActiveEventTab] = useState(0); // 1=today, 2=upcoming; default 2
     const [isoffline, setOffline] = useState(false);
+    const [login, setLogin] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false); // admin features!
     const searchParams = useSearchParams();
     const catogory = searchParams.get('catogory')
@@ -35,7 +39,7 @@ export default function HomePage() {
         if (catogory && catogory !== 'all')
             // SERVER ACTION
             getEventsByCatogory(catogory).then(result => {
-                setEvents(result);
+                result.length ? setEvents(result) : setOffline(true)
             }).catch((error: any) => {
                 console.log('error in sorting events by catogory!',error);
             });
@@ -79,13 +83,17 @@ export default function HomePage() {
         if (isAdmin) setIsAdmin(true);
     }, []);
 
-    // THEME AUTOSET
+    // AUTO SET
     useEffect(() => {
+        // THEME
         const theme = localStorage.getItem('theme');
         if (theme === 'dark')
 			document.documentElement.classList.add('dark');
         else 
             document.documentElement.classList.remove('dark');
+        // LOGIN STATUS
+        const loginstatus = localStorage.getItem('user');
+        loginstatus ? setLogin(true) : setLogin(false);
     }, []);
 
     // change TODAY-UPCOMING tabs
@@ -95,8 +103,19 @@ export default function HomePage() {
 
     return (
         <main className="flex min-h-screen flex-col items-center px-3 pt-2 pb-16 bg-evento-white text-black dark:bg-evento-black dark:text-white">
-            <div className="inline-flex flex-row w-full px-2 pt-2 items-center justify-between">
-                <h1 className="inline-block text-left w-full mt-1 font-bold text-2xl pl-2">Evento</h1>
+            <div className="inline-flex w-full mt-1 px-2 pt-2 items-center justify-between">
+                <h1 className="inline-block text-left w-full font-bold text-2xl pl-1">Pluto</h1>
+                {
+                    login ?
+                        <span className="overflow-hidden pr-1" onClick={ () => alert(`hi, welcome back!`)}>
+                            <Image src={ProfilIcon} width={22} height={22} alt="user" />
+                        </span>
+                        :
+                        <span className="overflow-hidden pr-1" onClick={ () => router.push('/login')}>
+                            <Image src={LoginIcon} width={40} height={20} className="w-auto h-auto" alt="login" />
+                        </span>
+
+                }
             </div>
             
             <EventTabs active={activeEventTab} clickhandler={ handle_activeTabs } />
