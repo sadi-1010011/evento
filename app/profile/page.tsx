@@ -1,10 +1,7 @@
-"use server"
-
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
 import ProfileCard from "@/components/profilecard/ProfileCard";
 import TopNavbar from "@/components/topnavbar/TopNavbar";
 import { getSession } from "@/utils/getsession";
-import { DateTime } from "luxon";
 import { redirect } from "next/navigation";
 
 export default async function ProfilePage() {
@@ -15,14 +12,13 @@ export default async function ProfilePage() {
     
     const user = session.user[0];
     const isAdmin = user.isAdmin || false;
-    const joinedyear = DateTime.fromISO(user.createdAt).localWeekYear;
 
     return (
         <div className="flex items-center min-h-screen w-full pt-2 overflow-x-hidden flex-col bg-evento-white dark:bg-evento-black dark:text-white transition-all">
         
             <TopNavbar />
 
-            <ProfileCard id={ user._id } isadmin={isAdmin} name={ user.username } email= { user.email} joinedyear={ joinedyear } />
+            <ProfileCard id={ user._id } isadmin={isAdmin} name={ user.username } email= { user.email} likedEvents={ 0 } />
 
             {/* <pre>
                 { JSON.stringify(session, null, 2) }

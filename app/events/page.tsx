@@ -60,7 +60,9 @@ export default function HomePage() {
         if (activeEventTab === 1 && events.length) { // today events only
             // SERVER ACTION
             getEventsByDateAction(todayDate).then(result => {
-                if (result) setEvents(result)
+                console.log(result)
+                const data = result.data;
+                if (data) setEvents(data)
                 else setOffline(true);
             }).catch((error: any) => {
                 console.log('error in sorting todays events!',error);
@@ -69,7 +71,8 @@ export default function HomePage() {
         if (activeEventTab === 2 && events.length) { // upcoming events only
             // SERVER ACTION
             getEventsByDateUpcomingAction(todayDate).then(result => {
-                if (result) setEvents(result)
+                const data = result.data;
+                if (data) setEvents(data)
                 else setOffline(true);
             }).catch((error: any) => {
                 console.log('error in sorting todays events!',error);
@@ -104,7 +107,7 @@ export default function HomePage() {
     return (
         <main className="flex min-h-screen flex-col items-center px-3 pt-2 pb-16 bg-evento-white text-black dark:bg-evento-black dark:text-white">
             <div className="inline-flex w-full mt-1 px-2 pt-2 items-center justify-between">
-                <h1 className="inline-block text-left w-full font-bold text-2xl pl-1">Pluto</h1>
+                <h1 className="inline-block text-left w-full font-extrabold text-2xl pl-1">Pluto</h1>
                 {
                     login ?
                         <span className="overflow-hidden pr-1" onClick={ () => alert(`hi, welcome back!`)}>
@@ -120,11 +123,15 @@ export default function HomePage() {
             
             <EventTabs active={activeEventTab} clickhandler={ handle_activeTabs } />
 
-            <div className="w-full min-h-screen overflow-auto mt-0 px-2">
+            <div className="w-full min-h-screen overflow-auto mt-0 px-3">
                                 
                 {
                     isoffline ? 
-                        <h1 className="my-40 w-full text-center text-lg text-slate-400 capitalize font-bold">No events found!</h1>
+                        <h1 className="my-40 w-full text-center text-lg text-slate-400 capitalize font-bold">
+                            No events found!
+                            { catogory && <br />}
+                            { catogory && <span onClick={ () => router.replace('/catogory') } className="capitalize underline underline-offset-auto font-extrabold cursor-pointer">{` in ${catogory}`}</span>}
+                        </h1>
                         :
                     events.length ?
 

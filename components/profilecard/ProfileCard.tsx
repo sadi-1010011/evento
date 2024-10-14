@@ -1,13 +1,13 @@
 "use client"
 
 import DummyIcon from "@/assets/icons/bottomnavbar/userDark.png";
-import RatingIcon from "@/assets/icons/star.png";
 import HostIcon from "@/assets/icons/host_dark.png";
+// import RatingIcon from "@/assets/icons/star.png";
 // import { useRouter } from "next/navigation";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
-export default function ProfileCard({ id, isadmin, name, email, joinedyear }: { id: string, isadmin: boolean, name: string, email: string, joinedyear: number }) {
+export default function ProfileCard({ id, isadmin, name, email, likedEvents }: { id: string, isadmin: boolean, name: string, email: string, likedEvents: number }) {
 
     const [userId, setUserId] = useState(id);
     // const router = useRouter()
@@ -24,9 +24,9 @@ export default function ProfileCard({ id, isadmin, name, email, joinedyear }: { 
             <div className="flex flex-col items-center w-2/3">
                 <Image priority className="w-3/5 h-auto aspect-square border-gray-300 border p-1.5 rounded-full opacity-20" src={DummyIcon} alt="profile pic" />
                 <h1 className="text-2xl font-bold capitalize text-center pt-2 break-all">{ name || 'name'}</h1>
-                <div className="inline-flex items-center gap-x-0.5">
+                <div className="inline-flex items-center gap-x-0.5 w-11/12">
                     <Image src={HostIcon} width={22} height={22} className="inline p-0.5" alt="host icon" />
-                    <span className="text-sm font-semibold text-center">{ email || 'superhost' }</span>
+                    <span className="text-sm font-semibold text-center overflow-x-scroll">{ email || 'superhost' }</span>
                 </div>
             </div>
 
@@ -34,18 +34,18 @@ export default function ProfileCard({ id, isadmin, name, email, joinedyear }: { 
             <div className="flex flex-col w-1/3 text-left items-left justify-evenly">
                 <div>
                     <h1 className="text-xl font-bold capitalize pt-2">0</h1>
-                    <span className="text-sm font-semibold capitalize text-slate-500">reviews</span>
+                    <span className="text-xs font-semibold capitalize text-slate-500">attended</span>
                 </div>
                 <div className="inline-flex flex-col items-start">
                     <h1 className="inline-flex items-center justify-center gap-x-1 text-xl font-bold capitalize pt-2">
                         0
-                        <Image src={RatingIcon} width={12} height={12} alt="rating icon" />
+                        {/* <Image src={RatingIcon} width={12} height={12} alt="rating icon" /> */}
                     </h1>
-                    <span className="text-sm font-semibold capitalize text-slate-500">rating</span>
+                    <span className="text-xs font-semibold capitalize text-slate-500">shared</span>
                 </div>
                 <div>
-                    <h1 className="text-xl font-bold capitalize pt-2">{ joinedyear || 0 }</h1>
-                    <span className="text-sm font-semibold capitalize text-slate-500">joined</span>
+                    <h1 className="text-xl font-bold capitalize pt-2">{ likedEvents || 0 }</h1>
+                    <span className="text-xs font-semibold capitalize text-slate-500">liked</span>
                 </div>
             </div>
 

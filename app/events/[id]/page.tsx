@@ -58,9 +58,9 @@ export default async function EventPage({ params }: { params: { id: string }}) {
         <main className="flex min-h-screen flex-col bg-evento-white text-black dark:bg-evento-black dark:text-white pb-12">
 
             {/* Share, Favorite Btn */}
-            <div className="flex gap-2 m-2 absolute right-2 top-2 z-10">
-                <Image className="rounded-full bg-white p-1.5" src={ShareIcon} width={32} height={32} alt="share icon" />
-                <Image className="rounded-full bg-white p-1.5" src={FavIcon} width={32} height={32} alt="favorite icon" />
+            <div className="flex items-center justify-center gap-2 m-2 absolute right-2 top-2 z-10">
+                <Image className="rounded-full bg-white p-1 bg-center" src={ShareIcon} width={32} height={32} alt="share" />
+                <Image className="rounded-full bg-white p-1" src={FavIcon} width={32} height={32} alt="favorite" />
             </div>
             <GalleryGrid images={ event ? event.thumbnail : '' } />
             {
@@ -75,6 +75,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
                         <Skeleton height={25} className="" count={1} />
                     </SkeletonTheme>
                 </div>)
+
 
                 :
                    
@@ -154,7 +155,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
             <div className="fixed bottom-0 left-0 right-0 w-full flex items-center justify-between py-4 px-4 bg-gray-700 text-white">
                 <h2 className="font-bold text-lg">Total price</h2>
                 <span className="font-bold text-lg">{ event ? event.ticketprice : 'free '} $</span>
-            </div>  
+            </div>
 
             </div>
             )

@@ -6,27 +6,21 @@ import { useState } from "react";
 import validateEmail from "@/utils/validateMail";
 import TopNavbar from "@/components/topnavbar/TopNavbar";
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
+import { userLogin } from "../serverActions/userLogin";
 
 export default function RegisterPage() {
 
     const router = useRouter();
-    const [firstname, setFirstname] = useState('')
-    const [lastname, setLastname] = useState('')
+    const [fullname, setFullname] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPass] = useState('')
     const [repassword, setRePass] = useState('')
     const [formerrors, setFormErrors] = useState<any>([]);
 
-    function handleFirstname(e: any) {
+    function handleFullname(e: any) {
         e.preventDefault();
         const value = e.currentTarget.value;
-        setFirstname(value);
-    }
-
-    function handleLastname(e: any) {
-        e.preventDefault();
-        const value = e.currentTarget.value;
-        setLastname(value);
+        setFullname(value);
     }
 
     function handleEmail(e: any) {
@@ -51,7 +45,7 @@ export default function RegisterPage() {
 
         // data validation
         let errors = []; // empty array for errs
-        const username = `${firstname} ${lastname}`.replaceAll(' ', '');
+        const username = fullname; // `${firstname} ${lastname}`.replaceAll(' ', '');
         // fill array if errs
         if (!username) errors.push("username is required!");
         if (!email) errors.push("email is required!")
@@ -91,8 +85,12 @@ export default function RegisterPage() {
 
                 if (res.status === 200) {
                     setFormErrors([" "]); // clear errors
-                    localStorage.setItem('authstatus', email);
-                    router.push("/profile");
+                    // auto login!
+                    userLogin(data).then(res => {
+                        // console.log(res);
+                        // CHECK LOGIN IF OK -> PROFILE PAGE!
+                        router.push("/profile")
+                    })
                 } 
             } catch (error) {
                 console.log('error in saving data: ', error);
@@ -117,10 +115,7 @@ export default function RegisterPage() {
                 <h1 className="capitalize text-xs text-center font-light mt-2 mb-2">already have account? <Link className="text-blue-500 hover:underline" href="/login">Log in</Link></h1>
  
                 <form action={ () => handleSubmit() } className="w-full flex flex-col gap-2 items-center justify-center my-4 py-2 px-2">
-                    <div className="flex gap-1">
-                        <input onChange={ handleFirstname } className="bg-evento-white border-2 border-evento-border-white dark:border-evento-black dark:bg-evento-black w-1/2 rounded-l-lg py-3 px-5 outline-none focus:border-evento-black dark:focus:border-evento-white placeholder-slate-500" type="text" placeholder="First Name" value={firstname} />
-                        <input onChange={ handleLastname } className="bg-evento-white border-2 border-evento-border-white dark:border-evento-black dark:bg-evento-black w-1/2 rounded-r-lg py-3 px-5 outline-none focus:border-evento-black dark:focus:border-evento-white placeholder-slate-500" type="text" placeholder="Last Name" value={lastname} />
-                    </div>
+                    <input onChange={ handleFullname } className="bg-evento-white border-2 border-evento-border-white dark:border-evento-black dark:bg-evento-black w-full rounded-lg py-3 px-5 outline-none focus:border-evento-black dark:focus:border-evento-white placeholder-slate-500" type="text" placeholder="User name" value={fullname} />
                     <input onChange={ handleEmail } className="bg-evento-white border-2 border-evento-border-white dark:border-evento-black dark:bg-evento-black w-full rounded-lg py-3 px-5 outline-none focus:border-evento-black dark:focus:border-evento-white placeholder-slate-500" type="email" placeholder="Email" value={email} />
                     <input onChange={ handlePassword} className="bg-evento-white border-2 border-evento-border-white dark:border-evento-black dark:bg-evento-black w-full rounded-lg py-3 px-5 outline-none focus:border-evento-black dark:focus:border-evento-white placeholder-slate-500" type="password" placeholder="Password" value={password} />
                     <input onChange={ handleRePass } className="bg-evento-white border-2 border-evento-border-white dark:border-evento-black dark:bg-evento-black w-full rounded-lg py-3 px-5 outline-none focus:border-evento-black dark:focus:border-evento-white placeholder-slate-500" type="password" placeholder="Confirm password" value={repassword} />

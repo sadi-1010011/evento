@@ -1,7 +1,7 @@
 // available catogories as of now!
 // import  AllIcon from "@/assets/icons/categories-transparent.png"
 import  SportsIcon from "@/assets/icons/catogory/sportsDark.png"
-import  SportsDIcon from "@/assets/icons/catogory/sportsDark.png"
+import  SportsDIcon from "@/assets/icons/catogory/sports.png"
 import  ArtsIcon from "@/assets/icons/catogory/artDark.png"
 import  ArtsDIcon from "@/assets/icons/catogory/artLight.png"
 import  BooksIcon from "@/assets/icons/catogory/bookDark.png"

@@ -8,7 +8,7 @@ export async function updateSession(req: NextRequest) {
     if (!session) return;
     
     // refresh the session
-    const duration = 60 * 60 * 24;
+    const duration = 60 * 60 * 24 * 7 * 1000; // 1 week
     const parsed = await decrypt(session);
     parsed.expires = new Date(Date.now() + duration);
 

@@ -2,8 +2,7 @@ import { jwtVerify } from "jose";
 
 export async function decrypt(input: string): Promise<any> {
     
-    const secretkey = 'jeff mishal musk ibnu zukker the rocket scientist';
-    const key = new TextEncoder().encode(secretkey);
+    const key = new TextEncoder().encode(process.env.SESSION_ENCRYPT_SECRET);
 
     try {
         const { payload } = await jwtVerify(input, key, {

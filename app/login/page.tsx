@@ -71,7 +71,6 @@ export default function LoginPage() {
             console.log('submiting login data to backend!!')
 
             // login with data
-            // userLogin(data);
             const res = await userLogin(data);
             // error string
             if (typeof res === 'string') {

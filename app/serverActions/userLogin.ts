@@ -4,6 +4,7 @@ import connectMongoDB from "@/lib/db";
 import User from "@/models/user";
 import { encrypt } from "@/utils/encrypt";
 import { cookies } from "next/headers";
+import bcrypt from "bcrypt";
 
 export async function userLogin(formData: any) {
     
@@ -17,14 +18,14 @@ export async function userLogin(formData: any) {
     
     try {
         user = await User.find({email: email});
-        // console.log('finding user', user);
 
+        // user exists !
         if (user[0]?.email === email) {
             
-            // user exists !
-            if (password === user[0]?.password) {
+            const passwordMatch = await bcrypt.compare(password, user[0].password);
+            if (passwordMatch) {
                 // create the session
-                const duration = 60 * 60 * 24 * 7; // one week
+                const duration = 24 * 60 * 60 * 1000 * 7; // one week
                 const expires = new Date(Date.now() + duration); // expiry date
                 const session = await encrypt({ user, expires }); // encrypt
             

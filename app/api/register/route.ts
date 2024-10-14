@@ -1,7 +1,7 @@
 import connectMongoDB from "@/lib/db";
 import User from "@/models/user";
 import { NextResponse } from "next/server";
-// import bcrypt from "bcrypt";
+import bcrypt from "bcrypt";
 
 
 export async function POST(req: Request) {
@@ -16,12 +16,12 @@ export async function POST(req: Request) {
     const existingUser = await User.findOne({ email })
     if (existingUser) return new NextResponse("Email is already registered!", { status: 400});
 
-    // const hashedPassword = await bcrypt.hash(data.password, 5);
+    const hashedPassword = await bcrypt.hash(password, 5); // SECURE PASSWORD BEFORE STORING!
 
     const newUser = new User({
         username,
         email,
-        password
+        password: hashedPassword
     });
         
 
@@ -32,7 +32,7 @@ export async function POST(req: Request) {
     }
 
     catch (error: any) {
-        console.log('catch block!')
+        console.log('catch block!', error)
         return NextResponse.json({ error: 'couldnt save to DB - server error!!'}, { status: 500});
     }
 

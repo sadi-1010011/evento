@@ -31,6 +31,7 @@ export default function FavoritesCard({ data } :{ data: IEvent }) {
                 // SERVER ACTION
                 deleteFavoritesAction(userId, favoritedId).then(res => {
                     console.log(res);
+                    router.refresh();
                     // CUSTOM MODAL ALERT BOX HERE.. 
                 })
             } else {

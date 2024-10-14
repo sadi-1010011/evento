@@ -1,7 +1,4 @@
 
-
-// export { auth as middleware } from "@/app/auth";
-
 import { updateSession } from "@/utils/updatesession";
 import { NextRequest } from "next/server";
 

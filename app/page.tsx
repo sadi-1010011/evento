@@ -24,9 +24,9 @@ export default function Home() {
   }, []);
 
   return (
-    <main id="evento" className="flex min-h-screen flex-col items-center justify-center">
+    <main id="evento" className="flex min-h-screen bg-evento-white flex-col items-center justify-center">
       <Image className={styles.eventoLogo} priority src={Logo} width={100} height={100} alt="brand logo" />
-      <h1 className="text-lg font-extrabold text-center pt-2">Evento</h1>
+      <h1 className="text-lg font-extrabold text-center pt-2">Pluto</h1>
     </main>
   );
 }
