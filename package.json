@@ -1,7 +1,7 @@
 {
   "name": "evento",
   "version": "0.1.0",
-  "host": "https://evento-calicut.vercel.app/",
+  "host": "https://thepluto.xyz/",
   "private": true,
   "scripts": {
     "dev": "next dev",

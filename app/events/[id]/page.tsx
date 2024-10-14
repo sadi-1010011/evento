@@ -18,7 +18,7 @@ export const revalidate = 60;
 export const dynamicParams = true // dynamic params ON!
 
 export async function generateStaticParams() {
-    const events = await fetch(`https://evento-calicut.vercel.app/api/events`).then(res => res.json());
+    const events = await fetch(`https://thepluto.xyz/api/events`).then(res => res.json());
    
     return events.map((event: any) => ({
       id: event._id,

@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
 import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Evento - find events around you",
+  title: "Pluto - discover events around you",
   description: "platform to host and find events of your interest",
 };
 
