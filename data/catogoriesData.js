@@ -63,7 +63,7 @@ const catogories = [
         iconDark: GamesDIcon
     },
     {
-        catogory: 'Auto expo',
+        catogory: 'Autoexpo',
         icon: AutoExpoIcon,
         iconDark: AutoExpoDIcon
     },

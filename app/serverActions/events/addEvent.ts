@@ -4,7 +4,6 @@
 
 import connectMongoDB from "@/lib/db";
 import Event from "@/models/event";
-import { revalidatePath } from "next/cache";
 
  
 export async function addEvent(data: {}) {

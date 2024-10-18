@@ -7,6 +7,7 @@ import Link from "next/link";
 import { DateTime } from "luxon";
 import { addEvent } from "../serverActions/events/addEvent";
 import { useRouter } from "next/navigation";
+import getEventPosterAction from "../serverActions/events/getEventPosterAction";
 
 export default function CreateEvent() {
 
@@ -20,25 +21,151 @@ export default function CreateEvent() {
         ticketlink: '', // only if ticket price
         additionalinfo: '',
         thumbnail: '',
+        images: [''], // store multiple imgs
         paid: false, // default to free event
         time: '',
+        contactnumber: '',
         date: DateTime.now().toFormat('ff') // event date
     });
     const [dropedImage, setDropedImage] = useState('');
+    const [dropedImages, setDropedImages] = useState<any>([]);
+    const [file, setFile] = useState<File | null>(null)
+    const [files, setFiles] = useState<File | null>(null)
     const [formerrors, setFormErrors] = useState<any>([]);
+    const [uploading, setUploading] = useState(false)
+    const [uploadings, setUploadings] = useState(false)
     const router = useRouter();
 
     useEffect(() => {
-        console.log('image upload coming soon..');
-        // https://dummyjson.com/image/SIZE/?text=TEXT
-        // fetch(`https://dummyjson.com/image/400x200/008080/ffffff?text=${ eventdata.title }`)
-        //     .then(response => response.blob()) // Convert response to blob
-        //     .then(blob => {
-        //         console.log('Fetched image blob:');
-                // setDropedImage();
-        // });
-        // Blob {size: SIZE, type: 'image/png'}
-    }, []);
+        // IMAGE UPLOAD TO AWS S3
+
+        const uploadEventPoster = async () => {
+        
+            if (!file) {
+                console.log('Please select an image as poster.'); return
+            }
+            
+            setUploading(true);
+
+            const response = await fetch(
+                `/api/events/posters`,
+                {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ filename: file.name, contentType: file.type }),
+                }
+            )
+
+            if (response.ok) {
+
+                const { url, fields } = await response.json()
+          
+                const formData = new FormData();
+                Object.entries(fields).forEach(([key, value]) => {
+                  formData.append(key, value as string)
+                })
+      
+                formData.append('file', file)
+
+                const uploadResponse = await fetch(url, {
+                    method: 'POST',
+                    body: formData,
+                })
+
+                if (uploadResponse.ok) {
+                    console.log('Upload successful!');
+        
+                    const posterkey = String(fields.key);
+                    // update new link in event object
+                    getEventPosterAction(posterkey).then(res => {
+                        if (res) setDropedImage(res);
+                    })
+                  } else {
+                    console.error('S3 Upload Error:', uploadResponse)
+                    alert('s3 Upload failed.')
+                  }
+            } else {
+                alert('Failed to get pre-signed URL.')
+              }
+          
+              setUploading(false)
+          
+        }
+
+        uploadEventPoster();
+
+
+    }, [file]);
+
+    useEffect(() => {
+        // IMAGE UPLOAD TO AWS S3
+
+        const uploadEventPosters = async () => {
+        
+            if (!files) {
+                console.log('Please select image as poster.'); return
+            }
+            
+            setUploadings(true);
+
+            const response = await fetch(
+                `/api/events/posters`,
+                {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ filename: files.name, contentType: files.type }),
+                }
+            )
+
+            if (response.ok) {
+
+                const { url, fields } = await response.json()
+          
+                const formData = new FormData();
+                Object.entries(fields).forEach(([key, value]) => {
+                  formData.append(key, value as string)
+                })
+      
+                formData.append('file', files)
+
+                const uploadResponse = await fetch(url, {
+                    method: 'POST',
+                    body: formData,
+                })
+
+                if (uploadResponse.ok) {
+                    console.log('Upload successful!');
+        
+                    const posterkey = String(fields.key);
+                    // update new link in event object
+                    getEventPosterAction(posterkey).then(res => {
+                        if (res) {
+                            let updatedimages = [...dropedImages];
+                            updatedimages.push(res);
+                            console.log(updatedimages);
+                            setDropedImages(updatedimages);
+                        }
+                    })
+                  } else {
+                    console.error('S3 Upload Error:', uploadResponse)
+                    alert('s3 Upload failed.')
+                  }
+            } else {
+                alert('Failed to get pre-signed URL.')
+              }
+          
+              setUploadings(false)
+          
+        }
+
+        uploadEventPosters();
+
+
+    }, [files]);
 
     function getDroppedImage(event: any) {
         const link = event.target.value;
@@ -111,6 +238,13 @@ export default function CreateEvent() {
         setEventData(previusData => { return { ...previusData, ticketprice: value }})        
     }
 
+    function handle_ContactNumber(e: any) {
+        if (!e) return
+        e.preventDefault();
+        const value = e.currentTarget.value;
+        setEventData(previusData => { return { ...previusData, contactnumber: value }})        
+    } 
+
     function handle_TicketLink(e: any) {
         if (!e) return
         e.preventDefault();
@@ -143,9 +277,11 @@ export default function CreateEvent() {
         if (!eventdata.description) errors.push("Description is required!");
         if (!eventdata.date) errors.push("Date is required!");
         // if (!eventdata.ticketprice) 
-        
+
         // set image thumbnail
         if (dropedImage && eventdata) eventdata.thumbnail = dropedImage;
+        if (dropedImages.length && eventdata) setEventData(previusData => { return { ...previusData, images: dropedImages }})
+
         // evaluate ticket related info
         if (eventdata.ticketprice.length) {
             const ticketpriceinNumber = Number(eventdata.ticketprice);
@@ -155,7 +291,6 @@ export default function CreateEvent() {
         
         if (errors.length) setFormErrors(errors);
         
-        // else console.table(eventdata);
         // submit data.. to backend only if 0 errors
         else // SERVER ACTION!
             addEvent(eventdata).then(result => {
@@ -165,17 +300,6 @@ export default function CreateEvent() {
                 }
                 else console.log('something went wrong! in saving to DB ');
             });
-
-
-        // API CALL!
-        // post_event(eventdata).then(res => {
-        //     if (res.ok) {
-        //         console.log('data saved successfully!');
-        //         router.push('/');
-        //     }
-        //     else console.log('something went wrong! in saving to DB ', res.statusText);
-        // })
-    
 
     }
     
@@ -190,11 +314,13 @@ export default function CreateEvent() {
                 
                 {/* IMAGE DROP */}
                 <div className="flex flex-col gap-0.5 pt-4 items-center justify-center rounded-xl bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black placeholder-slate-500 w-full py-2 px-5 outline-none" >
+                    <input id="file" type="file" onChange={ (e) => {const files = e.target.files; if (files) setFile(files[0])}} accept="image/png, image/jpeg" className="bg-evento-white dark:bg-evento-black w-full focus:border-2 py-2 px-5 outline-none text-center rounded-lg focus:border-evento-black text-xs capitalize" />
+                    <span className="text-xs m-1.5 first-letter:capitalize font-light text-gray-400">{ uploading ? 'uploading..': '' }</span>
                     <Image priority className="rounded-xl w-auto h-auto opacity-20" src={ dropedImage ? dropedImage : AddIcon} width={100} height={100} alt="event picture" />
                     <input onChange={ (event) => getDroppedImage(event) } className="bg-evento-white dark:bg-evento-black w-full focus:border-2 py-2 px-5 outline-none text-center rounded-lg focus:border-evento-black text-xs capitalize" type="text" placeholder="drop image or link" />
                 </div>
 
-                    
+
                 {/* EVENT TITLE */}
                 <input onChange={ (e)=> handle_Title(e)} className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black placeholder-slate-500 w-full focus:border-2 rounded-lg focus:border-evento-black py-3 px-5 outline-none" type="text" placeholder="event title" value={eventdata.title} />
                 
@@ -222,6 +348,11 @@ export default function CreateEvent() {
 
                 {/* IMAGE;s DROP */}
                 <div className="flex flex-col gap-0.5 pt-4 items-center justify-center rounded-xl bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black placeholder-slate-500 w-full py-2 px-5 outline-none" >
+                    <input id="additionalfile" type="file" onChange={ (e) => {const files = e.target.files; if (files) setFiles(files[0])}} accept="image/png, image/jpeg" className="bg-evento-white dark:bg-evento-black w-full focus:border-2 py-2 px-5 outline-none text-center rounded-lg focus:border-evento-black text-xs capitalize" />
+                    <span className="text-xs m-1.5 first-letter:capitalize font-light text-gray-400">{ uploadings ? 'uploading..': '' }</span>
+                    {
+                        dropedImages.map((item: string, i:number) => item.length && <Image key={i} className="flex items-center justify-center p-0.5 rounded-xl w-1/2 mx-auto h-auto opacity-20" src={ item } width={50} height={50} alt="event pictures" />)
+                    }
                     <Image className="rounded-xl w-auto h-auto opacity-20" src={ AddIcon} width={100} height={100} alt="event picture" />
                     <input className="bg-evento-white dark:bg-evento-black placeholder-slate-500 w-full focus:border-2 py-3 px-5 outline-none text-center rounded-lg focus:border-evento-black text-xs capitalize" type="text" placeholder="drop additional images or link" />
                 </div>
@@ -253,6 +384,9 @@ export default function CreateEvent() {
 
                 {/* PAYMENT LINK */}
                 { Number(eventdata.ticketprice) !== 0  && <input onChange={ (e)=> handle_TicketLink(e)} className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black placeholder-slate-500 w-full focus:border-2 rounded-lg focus:border-evento-black py-3 px-5 outline-none" name="ticketlink" type="text" placeholder="Payment Link" value={eventdata.ticketlink} /> }
+
+                {/* CONTACT NUMBER */}
+                <input onChange={ (e)=> handle_ContactNumber(e)} className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black placeholder-slate-500 w-full focus:border-2 rounded-lg focus:border-evento-black py-3 px-5 outline-none" name="contactnum" type="text" placeholder="contact info" value={eventdata.contactnumber} />
 
                 {/* ADDITIONAL INFO */}
                 <input onChange={ (e) => handle_AdditionalInfo(e) } className="bg-evento-white border-2 border-evento-border-white dark:border-evento-border-black dark:bg-evento-black placeholder-slate-500 w-full focus:border-2 rounded-lg focus:border-evento-black py-3 px-5 outline-none" type="text" placeholder="Additional Info .." value={eventdata.additionalinfo} />

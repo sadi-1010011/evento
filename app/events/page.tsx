@@ -57,22 +57,23 @@ export default function HomePage() {
     useEffect(() => {
         setEvents([]); // empty events for loading skeleton!
         let todayDate = DateTime.local().toISO().split('T')[0]; // current date
-        if (activeEventTab === 1 && events.length) { // today events only
+        if (activeEventTab === 1) { // today events only
+            console.log('today events')
             // SERVER ACTION
             getEventsByDateAction(todayDate).then(result => {
                 console.log(result)
-                const data = result.data;
-                if (data) setEvents(data)
+                if (result.data) setEvents(result.data)
                 else setOffline(true);
             }).catch((error: any) => {
                 console.log('error in sorting todays events!',error);
             });
         }
-        if (activeEventTab === 2 && events.length) { // upcoming events only
+
+        if (activeEventTab === 2) { // upcoming events only
+        console.log('upcoming events')
             // SERVER ACTION
             getEventsByDateUpcomingAction(todayDate).then(result => {
-                const data = result.data;
-                if (data) setEvents(data)
+                if (result.data) setEvents(result.data)
                 else setOffline(true);
             }).catch((error: any) => {
                 console.log('error in sorting todays events!',error);

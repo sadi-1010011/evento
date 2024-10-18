@@ -13,6 +13,8 @@ export interface IEvent extends Document {
     date: string;
     time: string;
     thumbnail: string;
+    images: Array<string>;
+    contactnumber: string;
     additionalinfo: string;
 }
 
@@ -58,6 +60,14 @@ const eventSchema: Schema = new mongoose.Schema({
         required: true,
     },
     thumbnail: {
+        type: String,
+        required: false,
+    },
+    images: {
+        type: Array,
+        required: false,
+    },
+    contactnumber: {
         type: String,
         required: false,
     },

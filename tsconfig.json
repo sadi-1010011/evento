@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "data/catogoriesData.js", "app/(Loading)/Loading.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "data/catogoriesData.js", "app/(Loading)/BtnLoading.js"],
   "exclude": ["node_modules"]
 }

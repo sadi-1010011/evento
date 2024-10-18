@@ -14,9 +14,8 @@ export async function getEventsByDateUpcomingAction(date: string) {
    // try to get items
    try {
        const events = await Event.find({ date: { $gt: date } });
-       console.log(events)
-       if (events.length) return JSON.parse(JSON.stringify(events))
-       else return { data: false} 
+       if (events.length) return JSON.parse(JSON.stringify({ data: events }))
+       else return { data: false }
    }
 
    // err handling here..

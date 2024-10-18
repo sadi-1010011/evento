@@ -112,7 +112,7 @@ export default function LoginPage() {
                     
                     <h1 className="capitalize text-xs text-center font-light mt-4">forgot password? <Link className="text-blue-500 hover:underline" href="/profile">recover</Link></h1>
                     
-                    <button type="submit" className="capitalize w-1/2 bg-evento-black text-white dark:bg-evento-white dark:text-black hover:bg-slate-700 rounded-lg my-2 py-2 px-5 outline-none border-none" disabled={pending}>{ (pending) ? 'logging..' : 'Login' }</button>
+                    <button type="submit" className="capitalize w-1/2 bg-evento-black text-white dark:bg-evento-white dark:text-black hover:bg-slate-700 rounded-lg my-2 py-2 px-5 outline-none border-none" disabled={false}>{ 'Login' }</button>
                     {
                         formerrors && (formerrors.map((err: string, i: number) =>
                             <span key={i} className="text-xs -m-1 first-letter:capitalize font-light text-red-400">{ err }</span>))

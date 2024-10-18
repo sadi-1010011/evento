@@ -62,7 +62,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
                 <Image className="rounded-full bg-white p-1 bg-center" src={ShareIcon} width={32} height={32} alt="share" />
                 <Image className="rounded-full bg-white p-1" src={FavIcon} width={32} height={32} alt="favorite" />
             </div>
-            <GalleryGrid images={ event ? event.thumbnail : '' } />
+            <GalleryGrid thumbnail={event.thumbnail || ''} images={ event.images? event.images : [] } />
             {
                 !event ?
 
@@ -129,6 +129,14 @@ export default async function EventPage({ params }: { params: { id: string }}) {
                 </div>
                 {/* HR IN DARK THEME! borderColor: '#4b3563' */}
                 <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto' }} /> 
+
+                    
+                <div className="my-0 pl-2">
+                    <h1 className="text-lg font-semibold first-letter:capitalize">contact Info</h1>
+                    <span className="text-gray-600 dark:text-slate-200">{ event.contactnumber ? event.contactnumber : 'not provided' }</span> &nbsp;
+                </div>
+
+                <hr style={{ width: '90%', display: 'block', margin: '1.4rem auto' }} />
 
                 <div className="my-0 pl-2">
                     <h1 className="text-lg font-semibold first-letter:capitalize">Additional Info</h1>

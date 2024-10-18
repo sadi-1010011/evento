@@ -5,6 +5,7 @@ export interface IUser extends Document {
     email: string;
     username: string;
     password: string;
+    profileurlkey: string;
     favorites: [];
     preferences: [];
     isadmin: boolean;
@@ -23,6 +24,10 @@ const userSchema: Schema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
+    },
+    profileurlkey: {
+        type: String,
+        required: false,
     },
     favorites: {
         type: Array,
