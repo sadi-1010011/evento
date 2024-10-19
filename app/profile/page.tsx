@@ -19,7 +19,7 @@ export default async function ProfilePage() {
         
             <TopNavbar />
 
-            <ProfileCard id={ user._id } isadmin={isAdmin} name={ user.username } email= { user.email} profileurlkey={ profileurlkey} likedEvents={ 0 } />
+            <ProfileCard id={ user._id } isadmin={isAdmin} name={ user.username } profileurlkey={ profileurlkey} likedEvents={ 0 } />
 
             {/* <pre>
                 { JSON.stringify(session, null, 2) }
