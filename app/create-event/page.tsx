@@ -48,7 +48,7 @@ export default function CreateEvent() {
             setUploading(true);
 
             const response = await fetch(
-                `https://thepluto.xyz/api/events/posters`,
+                `/api/events/posters`,
                 {
                 method: 'POST',
                 headers: {
@@ -111,7 +111,7 @@ export default function CreateEvent() {
             setUploadings(true);
 
             const response = await fetch(
-                `https://thepluto.xyz/api/events/posters`,
+                `/api/events/posters`,
                 {
                 method: 'POST',
                 headers: {
