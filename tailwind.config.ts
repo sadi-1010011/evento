@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "evento-white": "#e8e8e8",
+        "evento-white": "#fff",
         "evento-black": "#202124",
       },
       borderColor: {
@@ -18,7 +18,7 @@ const config: Config = {
         "evento-border-black": "#3C3D37",
       },
       backgroundColor: {
-        "evento-white": "#f2f2f2",
+        "evento-white": "#fff",
         "evento-black": "#202124",
       },
       backgroundImage: {

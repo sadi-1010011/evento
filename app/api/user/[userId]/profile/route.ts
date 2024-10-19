@@ -8,7 +8,7 @@ export async function POST(request: Request) {
   try {
     const client = new S3Client({ region: 'ap-south-1' })
     const { url, fields } = await createPresignedPost(client, {
-      Bucket: 'plutoevents' ,
+      Bucket: 'plutoevents',
       Key: uuidv4(),
       Conditions: [
         ['content-length-range', 0, 10485760], // up to 10 MB
