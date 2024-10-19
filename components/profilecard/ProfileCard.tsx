@@ -59,9 +59,9 @@ export default function ProfileCard({ id, isadmin, name, email, profileurlkey, l
           if (uploadResponse.ok) {
             alert('Upload successful!');
 
-            const profilekey = String(fields.key);
+            const profilekey = await fields.key;
             // update new link in user object
-            addProfileLinkAction(userId, profilekey).then(res => {
+            addProfileLinkAction(userId, String(profilekey)).then(res => {
               console.log("user profile updated", res);
               if (res) userLogout(); // logout and relogin to apply change!
             })

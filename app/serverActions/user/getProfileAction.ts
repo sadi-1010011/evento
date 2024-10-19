@@ -2,14 +2,8 @@
 
 
 const getProfileAction = async (profileurlkey: string) => {
-    try {
-      const url = `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/${profileurlkey}`; 
-      console.log(url);
-      return (url);
-    } catch (error) {
-    console.error('Error fetching image from S3:', error);
-    return 0;
-  }
+    const url = `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/${profileurlkey}`; 
+    return (url);
 }
 
 export default getProfileAction;

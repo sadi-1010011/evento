@@ -48,7 +48,7 @@ export default function CreateEvent() {
             setUploading(true);
 
             const response = await fetch(
-                `/api/events/posters`,
+                `https://thepluto.xyz/api/events/posters`,
                 {
                 method: 'POST',
                 headers: {
@@ -77,9 +77,9 @@ export default function CreateEvent() {
                 if (uploadResponse.ok) {
                     console.log('Upload successful!');
         
-                    const posterkey = String(fields.key);
+                    const posterkey = await fields.key;
                     // update new link in event object
-                    getEventPosterAction(posterkey).then(res => {
+                    getEventPosterAction(String(posterkey)).then(res => {
                         if (res) setDropedImage(res);
                     })
                   } else {
@@ -111,7 +111,7 @@ export default function CreateEvent() {
             setUploadings(true);
 
             const response = await fetch(
-                `/api/events/posters`,
+                `https://thepluto.xyz/api/events/posters`,
                 {
                 method: 'POST',
                 headers: {
@@ -140,9 +140,9 @@ export default function CreateEvent() {
                 if (uploadResponse.ok) {
                     console.log('Upload successful!');
         
-                    const posterkey = String(fields.key);
+                    const posterkey = await fields.key;
                     // update new link in event object
-                    getEventPosterAction(posterkey).then(res => {
+                    getEventPosterAction(String(posterkey)).then(res => {
                         if (res) {
                             let updatedimages = [...dropedImages];
                             updatedimages.push(res);
