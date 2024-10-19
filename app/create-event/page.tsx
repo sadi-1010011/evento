@@ -8,7 +8,6 @@ import { DateTime } from "luxon";
 import { addEvent } from "../serverActions/events/addEvent";
 import { useRouter } from "next/navigation";
 import getEventPosterAction from "../serverActions/events/getEventPosterAction";
-import resolveUploadResponse from "../serverActions/events/resolveUploadResponse";
 
 export default function CreateEvent() {
 
@@ -70,10 +69,12 @@ export default function CreateEvent() {
       
                 formData.append('file', file)
 
-                const uploadResponse = await resolveUploadResponse(url, formData);
-                console.log(uploadResponse);
-                
-                if (uploadResponse) {
+                const uploadResponse = await fetch(url, {
+                    method: 'POST',
+                    body: formData,
+                })
+
+                if (uploadResponse.ok) {
                     console.log('Upload successful!');
         
                     const posterkey = await fields.key;
