@@ -3,8 +3,9 @@
 
 const getProfileAction = async (profileurlkey: string) => {
     try {
-      const url = `https://plutoevents.s3.amazonaws.com/${profileurlkey}`; 
-      return (url).toString();
+      const url = `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/${profileurlkey}`; 
+      console.log(url);
+      return (url);
     } catch (error) {
     console.error('Error fetching image from S3:', error);
     return 0;
