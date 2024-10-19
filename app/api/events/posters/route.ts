@@ -8,7 +8,7 @@ export async function POST(request: Request) {
   const { filename, contentType } = await request.json()
 
   try {
-    const client = new S3Client({ region: process.env.AWS_REGION })
+    const client = new S3Client({ region: process.env.AWS_REGION || 'ap-south-1' })
     const { url, fields } = await createPresignedPost(client, {
       Bucket: 'plutoevents' ,
       Key: uuidv4(),

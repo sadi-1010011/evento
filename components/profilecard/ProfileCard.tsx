@@ -8,7 +8,7 @@ import HostIcon from "@/assets/icons/host_dark.png";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
-export default function ProfileCard({ id, isadmin, name, email, profileurlkey, likedEvents }: { id: string, isadmin: boolean, name: string, email: string, profileurlkey: string, likedEvents: number }) {
+export default function ProfileCard({ id, isadmin, name, profileurlkey, likedEvents }: { id: string, isadmin: boolean, name: string, profileurlkey: string, likedEvents: number }) {
 
     const userId = id;
     const [file, setFile] = useState<File | null>(null)
@@ -75,8 +75,7 @@ export default function ProfileCard({ id, isadmin, name, email, profileurlkey, l
         }
     
         setUploading(false)
-      }
-
+    }
 
     useEffect(() => {
       if (profileurlkey && userId) getProfileAction(profileurlkey).then(res => {
@@ -103,7 +102,7 @@ export default function ProfileCard({ id, isadmin, name, email, profileurlkey, l
                 <h1 className="text-2xl font-bold capitalize text-center pt-2 break-all">{ name || 'name'}</h1>
                 <div className="inline-flex items-center gap-x-0.5 w-11/12 justify-center">
                     <Image src={HostIcon} width={22} height={22} className="inline p-0.5" alt="host icon" />
-                    <span className="text-sm font-semibold text-center overflow-x-scroll">{ email || 'superhost' }</span>
+                    <span className="text-sm font-semibold text-center overflow-x-scroll">{ 'superhost' }</span>
                 </div>
             </div>
 
