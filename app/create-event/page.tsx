@@ -71,7 +71,6 @@ export default function CreateEvent() {
 
                 const uploadResponse = await fetch(url, {
                     method: 'POST',
-                    mode: 'no-cors',
                     body: formData,
                 })
 
