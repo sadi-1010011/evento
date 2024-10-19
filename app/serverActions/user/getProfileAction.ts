@@ -1,9 +1,9 @@
 "use server"
 
 
-const getProfileAction = async (userId: string, profileurlkey: string) => {
+const getProfileAction = async (profileurlkey: string) => {
     try {
-      const url = `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/${profileurlkey}`; 
+      const url = `https://plutoevents.s3.amazonaws.com/${profileurlkey}`; 
       return (url).toString();
     } catch (error) {
     console.error('Error fetching image from S3:', error);

@@ -79,7 +79,7 @@ export default function ProfileCard({ id, isadmin, name, email, profileurlkey, l
 
 
     useEffect(() => {
-      if (profileurlkey && userId) getProfileAction(userId, profileurlkey).then(res => {
+      if (profileurlkey && userId) getProfileAction(profileurlkey).then(res => {
         if (res) setProfileURL(res);
         else setProfileURL('');
       })

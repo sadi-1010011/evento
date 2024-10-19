@@ -2,7 +2,7 @@
 
 const getEventPosterAction = async (posterurlkey: string) => {
   try {
-    const url = `https://${process.env.AWS_BUCKET_NAME}.s3.amazonaws.com/${posterurlkey}`;
+    const url = `https://plutoevents.s3.amazonaws.com/${posterurlkey}`;
     return (url).toString();
   }
   
@@ -12,4 +12,4 @@ const getEventPosterAction = async (posterurlkey: string) => {
   }
 }
 
-export default getEventPosterAction;
+export default getEventPosterAction; 
