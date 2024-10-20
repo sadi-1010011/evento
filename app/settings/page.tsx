@@ -14,6 +14,7 @@ export default function SettingsPage() {
         localStorage.removeItem('theme')
         localStorage.removeItem('catogory')
         localStorage.removeItem('isAdmin')
+        localStorage.removeItem('userprofile')
         alert('cleared successfully!')
     }
 
@@ -33,7 +34,7 @@ export default function SettingsPage() {
 
                 <button onClick={ () => handleUserPreferences() } className="py-2 px-4 w-3/4 rounded-md border-2 text-md bg-slate-700 dark:bg-evento-white text-white dark:text-evento-black hover:border-slate-700 hover:bg-slate-800 hover:text-white transition capitalize shadow-md">clear data</button>
                 <button onClick={ () => handleRemoveProfile() } className="py-2 px-4 w-3/4 rounded-md border-2 text-md bg-slate-700 dark:bg-evento-white text-white dark:text-evento-black hover:border-slate-700 hover:bg-slate-800 hover:text-white transition capitalize shadow-md">remove profile</button>
-                <button onClick={ () => { userLogout(); localStorage.removeItem('isAdmin'); localStorage.removeItem('user') } } className="py-2 px-4 w-3/4 rounded-md border-2 bg-slate-700 dark:bg-evento-white text-red-500 dark:text-evento-black hover:border-slate-700 hover:bg-slate-800 hover:text-red-600 font-semibold transition capitalize shadow-md">logout</button>
+                <button onClick={ () => { userLogout(); localStorage.removeItem('isAdmin'); localStorage.removeItem('user'); localStorage.removeItem('userprofile') } } className="py-2 px-4 w-3/4 rounded-md border-2 bg-slate-700 dark:bg-evento-white text-red-500 dark:text-evento-black hover:border-slate-700 hover:bg-slate-800 hover:text-red-600 font-semibold transition capitalize shadow-md">logout</button>
 
                 {/* <SearchBar placeholder="search settings.." /> */}
 

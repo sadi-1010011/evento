@@ -5,7 +5,7 @@ export const dynamicParams = true // dynamic params ON!
 import { useEffect, useState } from "react";
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import ProfilIcon from "@/assets/icons/profile-blue.png";
+import ProfileIcon from "@/assets/icons/profile-blue.png";
 import LoginIcon from "@/assets/icons/login.png";
 
 // components
@@ -20,6 +20,7 @@ import { DateTime } from "luxon";
 import { getEventsByDateAction } from "../serverActions/events/getEventsByDateAction";
 import { getEventsByDateUpcomingAction } from "../serverActions/events/getEventsByDateUpcomingAction";
 import { getEventsByCatogory } from "../serverActions/events/getEventsByCatogory";
+import getProfileAction from "../serverActions/user/getProfileAction";
 import Image from "next/image";
 
 
@@ -29,6 +30,7 @@ export default function HomePage() {
     const [activeEventTab, setActiveEventTab] = useState(0); // 1=today, 2=upcoming; default 2
     const [isoffline, setOffline] = useState(false);
     const [login, setLogin] = useState(false);
+    const [profileURL, setProfileURL] = useState('');
     const [isAdmin, setIsAdmin] = useState(false); // admin features!
     const searchParams = useSearchParams();
     const catogory = searchParams.get('catogory')
@@ -87,7 +89,12 @@ export default function HomePage() {
         if (isAdmin) setIsAdmin(true);
     }, []);
 
-    // AUTO SET
+    // PROFILE PIC
+    useEffect(() => {
+        
+      }, []);
+
+    // AUTO SET - LOGIN, PROFILE, THEME
     useEffect(() => {
         // THEME
         const theme = localStorage.getItem('theme');
@@ -98,6 +105,14 @@ export default function HomePage() {
         // LOGIN STATUS
         const loginstatus = localStorage.getItem('user');
         loginstatus ? setLogin(true) : setLogin(false);
+        // PROFILE
+        const profileurlkey = localStorage.getItem('userprofilekey');
+        if (profileurlkey && loginstatus) getProfileAction(profileurlkey).then(res => {
+          if (res) {
+           setProfileURL(res);
+          }
+        else setProfileURL('');
+        })
     }, []);
 
     // change TODAY-UPCOMING tabs
@@ -112,11 +127,11 @@ export default function HomePage() {
                 {
                     login ?
                         <span className="overflow-hidden pr-1" onClick={ () => alert(`hi, welcome back!`)}>
-                            <Image src={ProfilIcon} width={22} height={22} alt="user" />
+                            <Image src={profileURL || ProfileIcon} width={25} height={25} className="rounded-full border border-evento-black" alt="user" />
                         </span>
                         :
                         <span className="overflow-hidden pr-1" onClick={ () => router.push('/login')}>
-                            <Image src={LoginIcon} width={40} height={20} className="w-auto h-auto" alt="login" />
+                            <Image src={LoginIcon} width={30} height={20} className="w-auto h-auto" alt="login" />
                         </span>
 
                 }

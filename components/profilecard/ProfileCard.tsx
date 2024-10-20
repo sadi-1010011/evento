@@ -79,7 +79,10 @@ export default function ProfileCard({ id, isadmin, name, profileurlkey, likedEve
 
     useEffect(() => {
       if (profileurlkey && userId) getProfileAction(profileurlkey).then(res => {
-        if (res) setProfileURL(res);
+        if (res) {
+          localStorage.setItem('userprofilekey', profileurlkey);
+         setProfileURL(res);
+        }
         else setProfileURL('');
       })
     }, [profileURL, profileurlkey]);
