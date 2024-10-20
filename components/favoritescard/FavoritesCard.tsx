@@ -3,7 +3,7 @@
 import Image from "next/image";
 // import RatingIcon from "@/assets/icons/star.png";
 import DummyImage from "@/assets/eventoLogo.jpeg";
-import LocationIcon from "@/assets/icons/location-pin.png";
+// import LocationIcon from "@/assets/icons/location-pin.png";
 // import ShareIcon from "@/assets/icons/share-black.png";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -33,7 +33,7 @@ export default function FavoritesCard({ data } :{ data: IEvent }) {
                 // SERVER ACTION
                 deleteFavoritesAction(userId, favoritedId).then(res => {
                     console.log(res);
-                    router.refresh();
+                    // router.refresh();
                     // CUSTOM MODAL ALERT BOX HERE.. 
                 })
             } else {
@@ -46,11 +46,10 @@ export default function FavoritesCard({ data } :{ data: IEvent }) {
 
     return (
         <>
-        {
-        favorite && <div className="flex z-0 mb-10 w-full flex-col rounded-xl bg-evento-white text-black dark:bg-evento-black dark:text-white relative">
-            <span className="absolute z-50 right-0 m-0.5 inline-flex flex-col gap-5" >
-                <FavoritedBtn checked={true} onclick={() => setFavorite(false) } />
-                <RemindMeBtn />
+        <div className="flex z-0 mb-10 w-full flex-col rounded-xl bg-evento-white text-black dark:bg-evento-black dark:text-white relative">
+            <span className="absolute z-50 right-0 -m-1 inline-flex flex-col gap-5" >
+                <FavoritedBtn checked={favorite} onclick={() => setFavorite(false) } />
+                {/* <RemindMeBtn /> */}
                 {/* <Image src={ShareIcon} width={18} height={18} alt="share icon" /> */}
             </span>
             <div className="absolute font-medium z-50 border bg-evento-white text-black dark:bg-evento-black dark:text-white text-xs px-2 py-1 shadow-md m-2 rounded-md" >
@@ -69,20 +68,19 @@ export default function FavoritesCard({ data } :{ data: IEvent }) {
                     </Carousel>
 
                     <div className="flex flex-row justify-between items-center pr-2 mt-2">
-                        <h2 className="font-medium text-md capitalize">{ `${data.title}`}</h2>
+                        <h2 className="font-medium text-md capitalize leading-4">{ `${data.title}`}</h2>
                         {/* <span className="flex items-center justify-center gap-1 text-sm font-semibold capitalize">
                             <Image src={RatingIcon} width={13} height={13} alt="rating icon" />
                             4.9
                         </span> */}
                     </div>
-                    <div className="flex items-center -mt-0.5 pr-2 text-sm text-gray-600">
+                    <div className="flex items-center mt-1 pr-2 text-sm text-gray-600">
                         <span>Hosted By </span><h3 className="capitalize">{data.hostname || 'host name'}</h3>
                     </div>
-                    <Image className="inline pr-1 text-sm" src={LocationIcon} width={24} height={24} alt="location icon" />
-                    <p className="inline pr-2">{data.location || 'event description'}</p>
+                    {/* <Image className="inline pr-1 text-sm" src={LocationIcon} width={24} height={24} alt="location icon" />
+                    <p className="inline pr-2">{data.location || 'event description'}</p> */}
                 </div>
             </div>
-        }
         </>
     );
 }

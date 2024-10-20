@@ -12,9 +12,11 @@ import dateLabel from "@/utils/dateLabel";
 import { IEvent } from "@/models/event";
 import { FavoritedBtn } from "@/components/animatedbtns/AnimatedBtns";
 import { addFavoritesAction } from "../serverActions/user/addFavoritesAction";
+import { isEventFavoritedAction } from "../serverActions/user/isEventFavoritedAction";
+import { deleteFavoritesAction } from "../serverActions/user/deleteFavoritesAction";
 
 
-export default function EventCard({ data } :{ data: IEvent }) {
+export default function EventCard({ data, handleFavCount } :{ data: IEvent, handleFavCount: Function }) {
 
 
     const router = useRouter();
@@ -24,14 +26,17 @@ export default function EventCard({ data } :{ data: IEvent }) {
     
     function handleFavorite(val: boolean) {
         const userId = localStorage.getItem('user');
-        const favoritedId = `${data._id}`;
-        if (userId) {
+        const eventId = String(data._id);
+        if (userId && eventId) {
             // SERVER ACTION
-            addFavoritesAction(userId, favoritedId).then(res => {
-                // console.log(res);
+            if (!favorite) addFavoritesAction(userId, eventId).then(res => {
+                if (res) handleFavCount();
                 // CUSTOM MODAL ALERT BOX HERE..
+                setFavorite(true);
             })
-            setFavorite(val);
+            else deleteFavoritesAction(userId, eventId).then(res => {
+                if (res) setFavorite(false)
+            })
         }
             // LOGIN TO ADD FAV
         else {
@@ -41,16 +46,26 @@ export default function EventCard({ data } :{ data: IEvent }) {
         }
     }
 
+    // thumbnail, datelabel
     useEffect(() => {
         // insert data after render!
         setThumbnail(data.thumbnail);
         if (typeof data.date === 'string') setEventdate(dateLabel(data.date))
     }, [data]);
 
+    // is user logged in
+    useEffect(()=> {
+        const userId = localStorage.getItem('user');
+        const eventId = String(data._id);
+        if (userId && eventId) isEventFavoritedAction(eventId, userId).then(res => {
+            if (res) setFavorite(true);
+        })
+    }, [data])
+
     return (
         <div className="flex z-0 mb-10 w-full flex-col rounded-xl bg-evento-white text-black dark:bg-evento-black dark:text-white relative overflow-hidden">
             <span className="absolute z-50 right-0 m-0.5 rounded-full" >
-                <FavoritedBtn checked={favorite} onclick={(val: boolean)=> val && handleFavorite(val) } />
+                <FavoritedBtn checked={favorite} onclick={(val: boolean)=> handleFavorite(val) } />
                 {/* <Image onClick={ ()=> { setFavorite(!favorite); alert('you need to Login to add favorites!') } } src={favorite ? FavedIcon : FavIcon} width={22} height={22} alt="favorite icon" /> */}
             </span>
             <div className="absolute font-medium z-50 border bg-evento-white text-black dark:bg-evento-black dark:text-white text-sm px-3 py-1 shadow-md m-3 rounded-md" >

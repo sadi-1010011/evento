@@ -89,10 +89,10 @@ export default function ProfileCard({ id, isadmin, name, profileurlkey, likedEve
     
     return (
         <>
-        <div className="flex items-center justify-around w-4/5 sm:w-4/5 md:w-4/5 lg:w-2/3 xl:w-2/3 px-2 py-6 bg-evento-white text-black rounded-3xl shadow-evento-shadow mt-2">
+        <div className="flex flex-col items-center justify-around w-4/5 sm:w-4/5 md:w-4/5 lg:w-2/3 xl:w-2/3 px-2 py-6 bg-evento-white text-black rounded-3xl shadow-evento-shadow mt-2">
 
             {/* PROFILE PIC, NAME */}
-            <div className="flex flex-col items-center w-2/3">
+            <div className="flex flex-col items-center w-4/5">
                 {
                 profileURL ?
                   <Image priority className="w-3/5 h-auto aspect-square border-gray-300 border p-1.5 rounded-full" width={100} height={100} src={ profileURL || DummyIcon} alt="profile" />
@@ -110,21 +110,20 @@ export default function ProfileCard({ id, isadmin, name, profileurlkey, likedEve
             </div>
 
             {/* INFO */}
-            <div className="flex flex-col w-1/3 text-left items-left justify-evenly">
-                <div>
-                    <h1 className="text-xl font-bold capitalize pt-2">0</h1>
-                    <span className="text-xs font-semibold capitalize text-slate-500">attended</span>
-                </div>
-                <div className="inline-flex flex-col items-start">
-                    <h1 className="inline-flex items-center justify-center gap-x-1 text-xl font-bold capitalize pt-2">
-                        0
-                        {/* <Image src={RatingIcon} width={12} height={12} alt="rating icon" /> */}
-                    </h1>
-                    <span className="text-xs font-semibold capitalize text-slate-500">shared</span>
-                </div>
+            <div className="text-center mt-4">
+                <h1 className="text-3xl font-bold capitalize pt-2">0</h1>
+                <span className="text-sm font-semibold capitalize text-slate-500">events attended</span>
+            </div>
+            <div className="flex w-full items-center text-center justify-evenly">
                 <div>
                     <h1 className="text-xl font-bold capitalize pt-2">{ likedEvents || 0 }</h1>
-                    <span className="text-xs font-semibold capitalize text-slate-500">liked</span>
+                    <span className="text-xs font-semibold capitalize text-slate-500">events liked</span>
+                </div>
+                <div className="inline-flex flex-col items-center">
+                    <h1 className="inline-flex items-center justify-center gap-x-1 text-xl font-bold capitalize pt-2">
+                        0
+                    </h1>
+                    <span className="text-xs font-semibold capitalize text-slate-500">events shared</span>
                 </div>
             </div>
 

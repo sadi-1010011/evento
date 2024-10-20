@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 
 
 
-export default function BottomNavBar({ active = 'Explore'}) {
+export default function BottomNavBar({ active = 'Explore', favcount = 0}) {
 
     const [activeTab, setActiveTab] = useState(active);
     const router = useRouter();
@@ -48,8 +48,10 @@ export default function BottomNavBar({ active = 'Explore'}) {
             router.push('/catogory');
         if (item === 'Explore')
             router.push('/events');
-        if (item === 'Favorites')
+        if (item === 'Favorites') {
             router.push('/favorites');
+            router.refresh();
+        }
         if (item === 'Profile')
             router.push('/profile');
     }
@@ -62,7 +64,8 @@ export default function BottomNavBar({ active = 'Explore'}) {
                 <span className={`text-xs capitalize my-1 ${ activeTab === 'Explore' ? 'font-bold' : 'font-normal' }`}>Explore</span>
             </div>
 
-            <div onClick={ () => changeActiveTab('Favorites') } className={`flex w-full rounded-md flex-col items-center pb-1 pt-2 hover:cursor-pointer transition-all ${ activeTab === 'Favorites' ? 'font-bold' : 'font-normal text-zinc-500' }`}>
+            <div onClick={ () => changeActiveTab('Favorites') } className={`flex w-full relative rounded-md flex-col items-center pb-1 pt-2 hover:cursor-pointer transition-all ${ activeTab === 'Favorites' ? 'font-bold' : 'font-normal text-zinc-500' }`}>
+                 <span className={`rounded-full relative transition ${favcount ? 'bg-red-500' : 'bg-white'} `} style={{ left: '10px', padding: '3px' }}></span>
                 <Image src={ !darkTheme ? FavoritesDarkIcon : FavoritesLIghtIcon} width={22} height={22} alt="Favorites tab" />
                 <span className={`text-xs capitalize my-1 ${ activeTab === 'Favorites' ? 'font-bold' : 'font-normal' }`}>Favorites</span>
             </div>

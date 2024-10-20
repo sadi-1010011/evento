@@ -12,7 +12,7 @@ export default function GalleryGrid({ thumbnail, images }: { thumbnail: string, 
     const gallerypattern = ['tall', 'taller', 'tallest', 'short', 'wider'];
 
     useEffect(() => {
-        console.log(images)
+        // console.log(images)
         if (allimages.length > 1) {
             setSingleView(false)
         } else setSingleView(true);
@@ -26,44 +26,16 @@ export default function GalleryGrid({ thumbnail, images }: { thumbnail: string, 
 
     return(
 
-        <div className={styles.grid_gallery} onClick={ (e)=> handleGalleryView(e) }>
-            {
-                singleview ?
-                        <Image className="w-full h-auto" src={ thumbnail || DummyImg} width={100} height={100} alt="event gallery" />
-                    :
-                 images.map((image: any, i: number) => 
-                    <div key={i} className={`${styles.grid_item} ${getclassname}`}>
-                        <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
-                    </div>)
-            }
-            {/* <div className={`${styles.grid_item} ${styles.tall}`}>
-                <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
+        singleview ?
+                <Image className="w-full h-auto" src={ thumbnail || DummyImg} width={100} height={100} alt="event gallery" />
+            :
+            images.map((image: any, i: number) => 
+            <div className={styles.grid_gallery} onClick={ (e)=> handleGalleryView(e) }>
+                <div key={i} className={`${styles.grid_item} ${getclassname}`}>
+                    <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
+                </div>
             </div>
-            <div className={`${styles.grid_item} ${styles.short}`}>
-                <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
-            </div>
-            <div className={`${styles.grid_item} ${styles.tall}`}>
-                <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
-            </div>
-            <div className={`${styles.grid_item} ${styles.tall}`}>
-                <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
-            </div>
-            <div className={`${styles.grid_item} ${styles.short}`}>
-                <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
-            </div>
-            <div className={`${styles.grid_item} ${styles.tall}`}>
-                <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
-            </div>
-            <div className={`${styles.grid_item} ${styles.short}`}>
-              <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
-            </div>
-            <div className={`${styles.grid_item} ${styles.short}`}>
-                <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
-            </div>
-            <div className={`${styles.grid_item} ${styles.wider}`}>
-                <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
-            </div> */}
-        </div>
-    
+        )
+            
     );
 }

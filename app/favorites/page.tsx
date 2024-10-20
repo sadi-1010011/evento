@@ -61,7 +61,7 @@ export default async function FavoritesPage() {
                 }
             </div>
 
-            <BottomNavBar active="Favorites" />
+            <BottomNavBar active="Favorites" favcount={fetchedfavorites.length} />
         </div>
     );
 }

@@ -28,6 +28,7 @@ export default function HomePage() {
 
     const [events, setEvents] = useState([]);
     const [activeEventTab, setActiveEventTab] = useState(0); // 1=today, 2=upcoming; default 2
+    const [favcount, setFavCount] = useState(0); // favorites count for bottom navbar
     const [isoffline, setOffline] = useState(false);
     const [login, setLogin] = useState(false);
     const [profileURL, setProfileURL] = useState('');
@@ -115,10 +116,15 @@ export default function HomePage() {
         setActiveEventTab(active);
     }
 
+    // handle favourite count on bottombar
+    function handleFavCount() {
+        setFavCount(1);
+    }
+
     return (
         <main className="flex min-h-screen flex-col items-center px-3 pt-2 pb-16 bg-evento-white text-black dark:bg-evento-black dark:text-white">
             <div className="inline-flex w-full mt-1 px-2 pt-2 items-center justify-between">
-                <h1 className="inline-block text-left w-full font-extrabold text-2xl pl-1">Pluto</h1>
+                <h1 className="inline-block text-left w-full font-extrabold text-2xl pl-1" onClick={ ()=> router.replace('/')}>Pluto</h1>
                 {
                     login ?
                         <span className="overflow-hidden pr-1" onClick={ () => alert(`hi, welcome back!`)}>
@@ -146,7 +152,7 @@ export default function HomePage() {
                         :
                     events.length ?
 
-                                events.map((event,i) => <EventCard key={i} data={event} />)
+                                events.map((event,i) => <EventCard key={i} data={event} handleFavCount={handleFavCount} />)
 
                             :
                         <div className="my-8 mx-4">
@@ -170,7 +176,7 @@ export default function HomePage() {
 
                 {/* END */}
 
-                <BottomNavBar />
+                <BottomNavBar favcount={favcount} />
 
             </div>
         </main>
