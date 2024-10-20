@@ -169,6 +169,7 @@ export default function CreateEvent() {
 
     function getDroppedImage(event: any) {
         const link = event.target.value;
+        event.preventDefault();
         // console.log(link)
         if (link.length > 8) { // more regExp evaluation soon
             setDropedImage(link);
@@ -280,7 +281,7 @@ export default function CreateEvent() {
 
         // set image thumbnail
         if (dropedImage && eventdata) eventdata.thumbnail = dropedImage;
-        if (dropedImages.length && eventdata) setEventData(previusData => { return { ...previusData, images: dropedImages }})
+        if (dropedImages.length && eventdata) eventdata.images = dropedImages;
 
         // evaluate ticket related info
         if (eventdata.ticketprice.length) {
@@ -308,7 +309,7 @@ export default function CreateEvent() {
 
             <div className="flex flex-col items-center justify-center w-full sm:w-4/5 md:w-4/5 mx-2 px-4 py-8 shadow-evento-shadow bg-evento-white text-black dark:bg-black dark:text-white rounded-3xl overflow-y-scroll">
                 <h1 className="text-2xl font-bold capitalize">Add event</h1>
-                <h1 className="capitalize text-xs text-center font-light mt-2 mb-2">already have event detail? <Link href="/profile">Scan poster</Link></h1>
+                <h1 className="capitalize text-xs text-center font-light mt-2 mb-2">already have event detail? <Link href="/">Scan poster</Link></h1>
 
             <form action={ (e) => handle_Submit(e) } className="w-full flex flex-col gap-2 items-center justify-center my-4 py-2 px-2">
                 

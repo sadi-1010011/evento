@@ -162,7 +162,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
             <div className="fixed bottom-0 left-0 right-0 w-full flex items-center justify-between py-4 px-4 bg-gray-700 text-white">
                 <h2 className="font-bold text-lg">Total price</h2>
-                <span className="font-bold text-lg">{ event ? event.ticketprice : 'free '} $</span>
+                <span className="font-bold text-lg">{ event.ticketprice ? event.ticketprice : 'free '} $</span>
             </div>
 
             </div>

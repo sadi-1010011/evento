@@ -100,7 +100,7 @@ export default function LoginPage() {
         <div className="flex items-center justify-center w-full h-auto pt-2 px-2 mt-20">
 
             <div className="flex flex-col items-center justify-center w-full sm:w-4/5 md:w-4/5 mx-2 px-4 py-8 bg-evento-white text-black dark:bg-black dark:text-white rounded-3xl shadow-evento-shadow border-slate-100">
-                <h1 className="text-2xl font-bold capitalize">Evento login</h1>
+                <h1 className="text-2xl font-bold capitalize">Pluto login</h1>
                 <h1 className="capitalize text-xs text-center font-light mt-2">Dont have an account? <Link className="text-blue-500 hover:underline" href="/register">register</Link></h1>
 
                 <form action={ async () => handleSubmit() } className="w-full flex flex-col gap-2 items-center justify-center my-4 py-2 px-2">
