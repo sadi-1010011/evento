@@ -6,13 +6,13 @@ import 'react-loading-skeleton/dist/skeleton.css'
 // ICONS
 import VerifyIcon from "@/assets/icons/verify.png";
 import HostIcon from "@/assets/icons/host_dark.png";
-import ShareIcon from "@/assets/icons/sendDark.png";
 import LocationIcon from "@/assets/icons/location-pin.png";
 import EditDelete from "@/components/adminFeatures/adminFeature";
 import EventReviews from "@/components/eventreviews/EventReviews";
 import Event from "@/models/event";
 import connectMongoDB from "@/lib/db";
 import { FavoriteBtn } from "@/components/favoritesbtn/favoritesBtn";
+import ShareBtn from "@/components/shareBtn/ShareBtn";
 
 export const revalidate = 60;
 export const dynamicParams = true // dynamic params ON!
@@ -59,7 +59,7 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
             {/* Share, Favorite Btn */}
             <div className="flex items-center justify-center gap-2 m-2 absolute right-2 top-2 z-10">
-                <Image className="rounded-full bg-white p-1 bg-center" src={ShareIcon} width={32} height={32} alt="share" />
+                <ShareBtn eventId={id} title={event.title} />
                 <FavoriteBtn eventId={id} />
             </div>
 

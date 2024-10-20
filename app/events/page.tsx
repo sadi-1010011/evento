@@ -2,6 +2,7 @@
 
 export const dynamicParams = true // dynamic params ON!
 
+import PlutoLogoDark from "@/assets/logo/plutoblack.png"
 import { useEffect, useState } from "react";
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -124,7 +125,7 @@ export default function HomePage() {
     return (
         <main className="flex min-h-screen flex-col items-center px-3 pt-2 pb-16 bg-evento-white text-black dark:bg-evento-black dark:text-white">
             <div className="inline-flex w-full mt-1 px-2 pt-2 items-center justify-between">
-                <h1 className="inline-block text-left w-full font-extrabold text-2xl pl-1" onClick={ ()=> router.replace('/')}>Pluto</h1>
+                <Image src={PlutoLogoDark} width={100} height={30} className="inline-block font-extrabold pl-1" onClick={ ()=> router.replace('/')} alt="pluto" />
                 {
                     login ?
                         <span className="overflow-hidden pr-1" onClick={ () => alert(`hi, welcome back!`)}>
