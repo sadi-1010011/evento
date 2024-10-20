@@ -16,7 +16,7 @@ export default function FavoritesContainer({ favorites }: { favorites: []}) {
     }, [favorites]);
     
     return (
-        <div className="w-full flex h-auto">
+        <div className="w-full grid grid-cols-2 gap-x-2 h-auto">
             {
                 isoffline ?
                     <h1 className="my-40 w-full text-center text-lg text-slate-400 capitalize font-bold">No events found!</h1>

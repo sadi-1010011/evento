@@ -18,4 +18,10 @@ function dateLabel(date: string) {
     return (`${ eventdate.toFormat('LLL dd') }, ${ shortDayName }`);
 }
 
+export function dateShort(date: string) {
+    const eventdate = DateTime.fromISO(date) // .toFormat('yyyy LLL dd'); //=> '2024 Aug 14';
+    const shortDayName = eventdate.weekdayShort; // show week day
+    return (`${ eventdate.toFormat('LLL dd') }, ${ shortDayName }`);
+}
+
 export default dateLabel;

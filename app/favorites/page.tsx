@@ -35,7 +35,7 @@ export default async function FavoritesPage() {
             const { favorites } = user;            
              // find favorites
             favorites.length ? fetchedfavorites = await getFavoritesAction(favorites) : zerofavorites = true;
-            console.log(fetchedfavorites)
+            // console.log(fetchedfavorites)
         } catch (error) {
             console.log('Error fetching user favorites!', error);
         }

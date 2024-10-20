@@ -11,7 +11,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import dateLabel from "@/utils/dateLabel";
 import { IEvent } from "@/models/event";
 import { FavoritedBtn } from "@/components/animatedbtns/AnimatedBtns";
-import { put_favoritesById } from "../(fetchAPI)/userActions";
 import { addFavoritesAction } from "../serverActions/user/addFavoritesAction";
 
 
