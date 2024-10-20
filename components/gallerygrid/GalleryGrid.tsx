@@ -30,11 +30,11 @@ export default function GalleryGrid({ thumbnail, images }: { thumbnail: string, 
                 <Image className="w-full h-auto" src={ thumbnail || DummyImg} width={100} height={100} alt="event gallery" />
             :
             images.map((image: any, i: number) => 
-            <div className={styles.grid_gallery} onClick={ (e)=> handleGalleryView(e) }>
-                <div key={i} className={`${styles.grid_item} ${getclassname}`}>
+            (<div key={i} className={styles.grid_gallery} onClick={ (e)=> handleGalleryView(e) }>
+                <div className={`${styles.grid_item} ${getclassname}`}>
                     <Image className="w-full h-auto" src={image || DummyImg} width={100} height={100} alt="event gallery" />
                 </div>
-            </div>
+            </div>)
         )
             
     );
