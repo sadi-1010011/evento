@@ -89,11 +89,6 @@ export default function HomePage() {
         if (isAdmin) setIsAdmin(true);
     }, []);
 
-    // PROFILE PIC
-    useEffect(() => {
-        
-      }, []);
-
     // AUTO SET - LOGIN, PROFILE, THEME
     useEffect(() => {
         // THEME
