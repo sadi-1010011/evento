@@ -23,6 +23,8 @@ import { getEventsByDateUpcomingAction } from "../serverActions/events/getEvents
 import { getEventsByCatogory } from "../serverActions/events/getEventsByCatogory";
 import getProfileAction from "../serverActions/user/getProfileAction";
 import Image from "next/image";
+import { IncrementLikeCount } from "../serverActions/user/IncrementLikedCount";
+import { decrementLikeCount } from "../serverActions/user/decrementLikeCount";
 
 
 export default function HomePage() {
@@ -117,9 +119,23 @@ export default function HomePage() {
         setActiveEventTab(active);
     }
 
-    // handle favourite count on bottombar
-    function handleFavCount() {
-        setFavCount(1);
+    // likedevents in profile, dot in favorites tab!
+    function handleFavCount(eventId: string, incrementOrDecrement: boolean) {
+        const userId = localStorage.getItem('user');
+        if (login && userId && eventId) {
+            incrementOrDecrement ?
+                IncrementLikeCount(userId, eventId).then(res => {
+                    console.log(res);
+                    setFavCount(1);
+                })
+            :
+                decrementLikeCount(userId, eventId).then(res => {
+                    console.log(res);
+                    setFavCount(0)
+                })
+        }
+
+        else return;
     }
 
     return (

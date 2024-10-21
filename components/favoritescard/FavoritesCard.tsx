@@ -16,6 +16,7 @@ import { FavoritedBtn, RemindMeBtn } from "../animatedbtns/AnimatedBtns";
 import { deleteFavoritesAction } from "@/app/serverActions/user/deleteFavoritesAction";
 import { getRandomInterval } from "@/utils/getRandomInterval";
 import { dateShort } from "@/utils/dateLabel";
+import { decrementLikeCount } from "@/app/serverActions/user/decrementLikeCount";
 
 
 export default function FavoritesCard({ data } :{ data: IEvent }) {
@@ -23,6 +24,7 @@ export default function FavoritesCard({ data } :{ data: IEvent }) {
     const router = useRouter();
     const [favorite, setFavorite] = useState<boolean>(true); // default favorited
     
+    // delete favorite
     useEffect(() => {
         // Perform cleanup to remove from favorites list of user in server!
         if (favorite) return
@@ -32,7 +34,9 @@ export default function FavoritesCard({ data } :{ data: IEvent }) {
             if (userId) {
                 // SERVER ACTION
                 deleteFavoritesAction(userId, favoritedId).then(res => {
-                    console.log(res);
+                    if (res.length) decrementLikeCount(userId, favoritedId).then(res =>
+                        console.log('like count updated: ', res)
+                    )
                     // router.refresh();
                     // CUSTOM MODAL ALERT BOX HERE.. 
                 })

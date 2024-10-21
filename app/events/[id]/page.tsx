@@ -58,9 +58,9 @@ export default async function EventPage({ params }: { params: { id: string }}) {
         <main className="flex min-h-screen flex-col bg-evento-white text-black dark:bg-evento-black dark:text-white pb-12">
 
             {/* Share, Favorite Btn */}
-            <div className="flex items-center justify-center gap-2 m-2 absolute right-2 top-2 z-10">
-                <ShareBtn eventId={id} title={event.title} />
+            <div className="flex flex-col items-center justify-center gap-2 m-2 absolute right-2 top-2 z-10">
                 <FavoriteBtn eventId={id} />
+                <ShareBtn eventId={id} title={event.title} host={event.hostname} />
             </div>
 
             <GalleryGrid thumbnail={event.thumbnail || ''} images={ event.images? event.images : [] } />

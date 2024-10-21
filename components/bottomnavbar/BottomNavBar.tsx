@@ -65,7 +65,7 @@ export default function BottomNavBar({ active = 'Explore', favcount = 0}) {
             </div>
 
             <div onClick={ () => changeActiveTab('Favorites') } className={`flex w-full relative rounded-md flex-col items-center pb-1 pt-2 hover:cursor-pointer transition-all ${ activeTab === 'Favorites' ? 'font-bold' : 'font-normal text-zinc-500' }`}>
-                 <span className={`rounded-full relative transition ${favcount ? 'bg-red-500' : 'bg-white'} `} style={{ left: '10px', padding: '3px' }}></span>
+                 <span className={`rounded-full relative transition ${favcount ? 'bg-red-500' : 'bg-white dark:bg-evento-black'} `} style={{ left: '10px', padding: '3px' }}></span>
                 <Image src={ !darkTheme ? FavoritesDarkIcon : FavoritesLIghtIcon} width={22} height={22} alt="Favorites tab" />
                 <span className={`text-xs capitalize my-1 ${ activeTab === 'Favorites' ? 'font-bold' : 'font-normal' }`}>Favorites</span>
             </div>

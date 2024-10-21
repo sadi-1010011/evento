@@ -3,6 +3,7 @@ import ProfileCard from "@/components/profilecard/ProfileCard";
 import TopNavbar from "@/components/topnavbar/TopNavbar";
 import { getSession } from "@/utils/getsession";
 import { redirect } from "next/navigation";
+import { getUserInfoAction } from "../serverActions/user/getUserInfoAction";
 
 export default async function ProfilePage() {
 
@@ -11,15 +12,16 @@ export default async function ProfilePage() {
     if (!session) redirect("/login");
     
     const user = session.user[0];
+    const userId = String(user._id);
     const isAdmin = user.isAdmin || false;
-    const profileurlkey: string = user.profileurlkey || '';
+    
     
     return (
         <div className="flex items-center min-h-screen w-full pt-2 overflow-x-hidden flex-col bg-evento-white dark:bg-evento-black dark:text-white transition-all">
         
             <TopNavbar />
 
-            <ProfileCard id={ user._id } isadmin={isAdmin} name={ user.username } profileurlkey={ profileurlkey} likedEvents={ 0 } />
+            <ProfileCard id={ userId } isadmin={isAdmin} name={ user.username } />
 
             {/* <pre>
                 { JSON.stringify(session, null, 2) }

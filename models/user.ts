@@ -8,6 +8,8 @@ export interface IUser extends Document {
     profileurlkey: string;
     favorites: [];
     preferences: [];
+    likedevents: [];
+    sharedevents: [];
     isadmin: boolean;
 }
 
@@ -34,6 +36,14 @@ const userSchema: Schema = new mongoose.Schema({
         required: false,
     },
     preferences: {
+        type: Array,
+        required: false,
+    },
+    likedevents: {
+        type: Array,
+        required: false,
+    },
+    sharedevents: {
         type: Array,
         required: false,
     },

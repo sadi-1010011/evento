@@ -6,12 +6,14 @@ import ShareIconDark from "@/assets/icons/sendwhite.png";
 import { useEffect, useState } from "react";
 import { RWebShare } from "react-web-share";
 import { usePathname } from "next/navigation";
+import { IncrementShareCount } from "@/app/serverActions/user/IncrementShareCount";
 
 
-export default function ShareBtn({ eventId, title }: { eventId: string, title: string }) {
+export default function ShareBtn({ eventId, title, host }: { eventId: string, title: string, host: string }) {
 
     const pathname = usePathname();
 	const [darkTheme, setDarkTheme] = useState<boolean|null>(false);
+    const [user, setUser] = useState<String|null>(null);
 
     // DARK THEME
     useEffect(() => {
@@ -24,20 +26,30 @@ export default function ShareBtn({ eventId, title }: { eventId: string, title: s
 		}
 	}, [darkTheme]);
 
-    function handleShare(id: string) {
-        alert(`sharing article: ${id}`);
+    // user login state
+    useEffect(() => {
+        const user = localStorage.getItem('user');
+        if (user) setUser(user);
+    }, [])
+
+    // Share count in Profile!
+    function handleShareCount() {
+        console.log(`shared article: ${eventId}`);
+        if (user && eventId) IncrementShareCount(String(user), eventId).then(res => {
+            // console.log('shared events count: ', res);
+        })
     }
 
     return (
         <RWebShare
             data={{
-                text: "Explore this event in calicut",
-                url: pathname,
-                title: title,
+                text: `${title} hosted by ${host} explore this event `,
+                url: `https://thepluto.xyz${pathname}`,
+                title: "Explore this event in calicut",
             }}
-        onClick={() => console.log("shared successfully!")}
+        onClick={() => user && handleShareCount()}
       >
-        <Image className="ml-1 p-1 bg-center" src={ darkTheme ? ShareIconDark : ShareIcon } width={32} height={32} alt="share" onClick={ () => handleShare(eventId)} />
+        <Image className="ml-1 p-1" src={ darkTheme ? ShareIcon : ShareIconDark } width={32} height={32} alt="share" />
       </RWebShare>
     )
 }

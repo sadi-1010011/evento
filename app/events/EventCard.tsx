@@ -30,12 +30,13 @@ export default function EventCard({ data, handleFavCount } :{ data: IEvent, hand
         if (userId && eventId) {
             // SERVER ACTION
             if (!favorite) addFavoritesAction(userId, eventId).then(res => {
-                if (res) handleFavCount();
+                if (res) handleFavCount(eventId, true);
                 // CUSTOM MODAL ALERT BOX HERE..
                 setFavorite(true);
             })
             else deleteFavoritesAction(userId, eventId).then(res => {
-                if (res) setFavorite(false)
+                if (res) handleFavCount(eventId, false)
+                setFavorite(false)
             })
         }
             // LOGIN TO ADD FAV
@@ -53,14 +54,14 @@ export default function EventCard({ data, handleFavCount } :{ data: IEvent, hand
         if (typeof data.date === 'string') setEventdate(dateLabel(data.date))
     }, [data]);
 
-    // is user logged in
+    // already favorited event - login only
     useEffect(()=> {
         const userId = localStorage.getItem('user');
         const eventId = String(data._id);
         if (userId && eventId) isEventFavoritedAction(eventId, userId).then(res => {
             if (res) setFavorite(true);
         })
-    }, [data])
+    }, [])
 
     return (
         <div className="flex z-0 mb-10 w-full flex-col rounded-xl bg-evento-white text-black dark:bg-evento-black dark:text-white relative overflow-hidden">

@@ -2,19 +2,35 @@
 
 import addProfileLinkAction from "@/app/serverActions/user/addProfileLinkAction";
 import getProfileAction from "@/app/serverActions/user/getProfileAction";
+import { getUserInfoAction } from "@/app/serverActions/user/getUserInfoAction";
 import { userLogout } from "@/app/serverActions/userLogout";
 import DummyIcon from "@/assets/icons/bottomnavbar/userDark.png";
 import HostIcon from "@/assets/icons/host_dark.png";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-export default function ProfileCard({ id, isadmin, name, profileurlkey, likedEvents }: { id: string, isadmin: boolean, name: string, profileurlkey: string, likedEvents: number }) {
+export default function ProfileCard({ id, isadmin, name }: { id: string, isadmin: boolean, name: string}) {
 
     const userId = id;
     const [file, setFile] = useState<File | null>(null)
     const [uploading, setUploading] = useState(false)
     const [profileURL, setProfileURL] = useState('');
+    const [user, setUser] = useState<any|null>(null);
+    const router = useRouter();
 
+    // fetch latest user data!
+    useEffect(() => {
+      function getuserinfo(userId: string) {
+          getUserInfoAction(userId).then(res => {
+          if (res.data) setUser(res.data);
+        })
+      }
+      // get info
+      getuserinfo(String(userId))
+    }, [])
+
+    // admin user, store in localstorage
     useEffect(() => {
         if (id !== undefined) localStorage.setItem('user', id);
         if (id && isadmin) localStorage.setItem('isAdmin', name);
@@ -63,7 +79,7 @@ export default function ProfileCard({ id, isadmin, name, profileurlkey, likedEve
             // update new link in user object
             addProfileLinkAction(userId, String(profilekey)).then(res => {
               console.log("user profile updated", res);
-              if (res) userLogout(); // logout and relogin to apply change!
+              if (res) router.refresh(); // reload to apply change!
             })
             // setProfileURL(fields.key as string);
           } else {
@@ -77,15 +93,18 @@ export default function ProfileCard({ id, isadmin, name, profileurlkey, likedEve
         setUploading(false)
     }
 
+    // fetch user profile pic
     useEffect(() => {
-      if (profileurlkey && userId) getProfileAction(profileurlkey).then(res => {
+      let profileurlkey = null;
+      if (user) profileurlkey = user.profileurlkey;
+      if (profileurlkey && user) getProfileAction(profileurlkey).then(res => {
         if (res) {
           localStorage.setItem('userprofilekey', profileurlkey);
          setProfileURL(res);
         }
         else setProfileURL('');
       })
-    }, [profileURL, profileurlkey]);
+    }, [user]);
     
     return (
         <>
@@ -110,18 +129,24 @@ export default function ProfileCard({ id, isadmin, name, profileurlkey, likedEve
             </div>
 
             {/* INFO */}
-            <div className="text-center mt-4">
+            {/* <div className="text-center mt-4">
                 <h1 className="text-3xl font-bold capitalize pt-2">0</h1>
                 <span className="text-sm font-semibold capitalize text-slate-500">events attended</span>
-            </div>
-            <div className="flex w-full items-center text-center justify-evenly">
+            </div> */}
+            <div className="flex w-full items-center text-center justify-evenly pt-2">
                 <div>
-                    <h1 className="text-xl font-bold capitalize pt-2">{ likedEvents || 0 }</h1>
+                    <h1 className="text-xl font-bold capitalize pt-2">
+                      {
+                        user ? user.likedevents.length : 0
+                      }
+                    </h1>
                     <span className="text-xs font-semibold capitalize text-slate-500">events liked</span>
                 </div>
                 <div className="inline-flex flex-col items-center">
                     <h1 className="inline-flex items-center justify-center gap-x-1 text-xl font-bold capitalize pt-2">
-                        0
+                        {
+                          user ? user.sharedevents.length : 0
+                        }
                     </h1>
                     <span className="text-xs font-semibold capitalize text-slate-500">events shared</span>
                 </div>

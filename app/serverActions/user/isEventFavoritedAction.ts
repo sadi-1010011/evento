@@ -13,7 +13,7 @@ export async function isEventFavoritedAction(eventId: string, userId: string) {
 
     try {
         
-        // find event
+        // find favs
         const user = await User.findById(userId);
         const favorites = user.favorites;
 

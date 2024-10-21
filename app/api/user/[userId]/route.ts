@@ -13,9 +13,9 @@ export async function GET(req: Request, { params }: { params: { userId: string}}
     try {
         const user = await User.findById({ _id: userId }); // find user
         if (user) {
-            let { email, username, favorites } = user; // get basic user info!
+            let { email, username, favorites, profileurlkey, sharedevents, likedevents } = user; // get basic user info!
             // send back the info
-            return NextResponse.json({ data: { email, username, favorites }});
+            return NextResponse.json({ data: { email, username, favorites, profileurlkey, sharedevents, likedevents }});
         }
         else return NextResponse.json({ message: 'User does not exist!' });
     }

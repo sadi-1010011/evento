@@ -6,6 +6,8 @@ import { addFavoritesAction } from "@/app/serverActions/user/addFavoritesAction"
 import { useRouter } from "next/navigation";
 import { isEventFavoritedAction } from "@/app/serverActions/user/isEventFavoritedAction";
 import { deleteFavoritesAction } from "@/app/serverActions/user/deleteFavoritesAction";
+import { IncrementLikeCount } from "@/app/serverActions/user/IncrementLikedCount";
+import { decrementLikeCount } from "@/app/serverActions/user/decrementLikeCount";
 
 export function FavoriteBtn({ eventId }: { eventId: string}) {
 
@@ -18,13 +20,14 @@ export function FavoriteBtn({ eventId }: { eventId: string}) {
             if (!checked) {
                 // SERVER ACTION
                 addFavoritesAction(userId, eventId).then(res => {
+                    setChecked(true);
+                    if (res.length) IncrementLikeCount(userId, eventId).then(res => console.log(res))
                     // console.log(res);
                     // CUSTOM MODAL ALERT BOX HERE..
-                    setChecked(true);
                 })
             }
             else deleteFavoritesAction(userId, eventId).then(res => {
-                console.log(res);
+                decrementLikeCount(userId, eventId).then(res => console.log(res))
                 setChecked(false);
             })
         }
