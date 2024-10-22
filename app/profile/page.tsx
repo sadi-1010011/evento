@@ -9,7 +9,7 @@ export default async function ProfilePage() {
 
     console.log('reading session!');
     const session = await getSession();
-    if (!session) redirect("/login");
+    if (!session) redirect("/register");
     
     const user = session.user[0];
     const userId = String(user._id);
