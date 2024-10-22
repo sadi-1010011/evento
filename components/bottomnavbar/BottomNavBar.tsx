@@ -3,12 +3,13 @@
 // ICONS DARK & LIGHT Theme outlined
 import HomeDarkIcon from "@/assets/icons/bottomnavbar/homeDark.png"
 import HomeLightIcon from "@/assets/icons/bottomnavbar/homeLight.png"
-import CatogoryDarkIcon from "@/assets/icons/bottomnavbar/categoryDark.png"
-import CatogoryLightIcon from "@/assets/icons/bottomnavbar/categoryLight.png"
+// import CatogoryDarkIcon from "@/assets/icons/bottomnavbar/categoryDark.png"
+// import CatogoryLightIcon from "@/assets/icons/bottomnavbar/categoryLight.png"
 import FavoritesDarkIcon from "@/assets/icons/bottomnavbar/heartDark.png"
 import FavoritesLIghtIcon from "@/assets/icons/bottomnavbar/heartLight.png"
 import ProfileDarkIcon from "@/assets/icons/bottomnavbar/userDark.png"
 import ProfileLightIcon from "@/assets/icons/bottomnavbar/userLight.png"
+import FeedbackIcon from "@/assets/icons/sendDark.png";
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -43,15 +44,28 @@ export default function BottomNavBar({ active = 'Explore', favcount = 0}) {
 
     function changeActiveTab(item: string) {
         setActiveTab(item);
-        // routing
+        
+        // CATOGORY
         if (item === 'Catogory')
-            router.push('/catogory');
+            alert('catogory link clicked!')
+            // catogory page off for starting period!
+            // router.push('/catogory');
+        
+        // EXPLORE
         if (item === 'Explore')
             router.push('/events');
+        
+        // FAVORITES
         if (item === 'Favorites') {
             router.push('/favorites');
             router.refresh();
         }
+
+        // FEEDBACK
+        if (item === 'Feedback')
+            router.push('/feedback');
+
+        // PROFILE
         if (item === 'Profile')
             router.push('/profile');
     }
@@ -70,9 +84,15 @@ export default function BottomNavBar({ active = 'Explore', favcount = 0}) {
                 <span className={`text-xs capitalize my-1 ${ activeTab === 'Favorites' ? 'font-bold' : 'font-normal' }`}>Favorites</span>
             </div>
 
-            <div onClick={ () => changeActiveTab('Catogory') } className={`flex w-full rounded-md flex-col items-center pb-1 pt-2 hover:cursor-pointer transition-all ${ activeTab === 'Catogory' ? 'font-bold' : 'font-normal text-zinc-500' }`}>
+            {/* CATOGORY TAB OFF - FOR BEGINNING STAGE! */}
+            {/* <div onClick={ () => changeActiveTab('Catogory') } className={`flex w-full rounded-md flex-col items-center pb-1 pt-2 hover:cursor-pointer transition-all ${ activeTab === 'Catogory' ? 'font-bold' : 'font-normal text-zinc-500' }`}>
                 <Image src={ !darkTheme ? CatogoryDarkIcon : CatogoryLightIcon} width={22} height={22} alt="Catogory tab" />
                 <span className={`text-xs capitalize my-1 ${ activeTab === 'Catogory' ? 'font-bold' : 'font-normal' }`}>Catogory</span>
+            </div> */}
+
+            <div onClick={ () => changeActiveTab('Feedback') } className={`flex w-full rounded-md flex-col items-center pb-1 pt-2 hover:cursor-pointer transition-all ${ activeTab === 'Feedback' ? 'font-bold' : 'font-normal text-zinc-500' }`}>
+                <Image src={ !darkTheme ? FeedbackIcon : FeedbackIcon} width={22} height={22} alt="profile tab" />
+                <span className={`text-xs capitalize my-1 ${ activeTab === 'Feedback' ? 'font-bold' : 'font-normal' }`}>Feedback</span>
             </div>
 
             <div onClick={ () => changeActiveTab('Profile') } className={`flex w-full rounded-md flex-col items-center pb-1 pt-2 hover:cursor-pointer transition-all ${ activeTab === 'Profile' ? 'font-bold' : 'font-normal text-zinc-500' }`}>

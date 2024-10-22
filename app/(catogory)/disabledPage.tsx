@@ -1,9 +1,9 @@
 "use client"
 
-import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
-import CatogoryCard from "@/components/catogorycard/Catogorycard";
+// import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
+// import CatogoryCard from "@/components/catogorycard/Catogorycard";
 
-export default function CatogoryPage() {
+function CatogoryPage() {
 
 
     return (
@@ -14,7 +14,7 @@ export default function CatogoryPage() {
             <div className="flex-col items-center justify-evenly px-2 py-4">
 
                 <div className="flex items-center pb-10 gap-x-2 justify-center w-full flex-wrap">
-                    <CatogoryCard active="All" />
+                    {/* <CatogoryCard active="All" /> */}
                 </div>
 
             </div>
@@ -24,7 +24,7 @@ export default function CatogoryPage() {
             </Link> */}
 
 
-            <BottomNavBar active="Catogory" />
+            {/* <BottomNavBar active="Catogory" /> */}
 
         </div>
     )

@@ -36,6 +36,7 @@ export default function CreateEvent() {
     const [uploadings, setUploadings] = useState(false)
     const router = useRouter();
 
+    // IMAGE UPLOAD - THUMBNAIL
     useEffect(() => {
         // IMAGE UPLOAD TO AWS S3
 
@@ -99,6 +100,7 @@ export default function CreateEvent() {
 
     }, [file]);
 
+    // IMAGE UPLOAD - MULTIPLE IMGS
     useEffect(() => {
         // IMAGE UPLOAD TO AWS S3
 

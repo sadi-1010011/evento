@@ -12,7 +12,7 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 // import dateLabel from "@/utils/dateLabel";
 import { IEvent } from "@/models/event";
-import { FavoritedBtn, RemindMeBtn } from "../animatedbtns/AnimatedBtns";
+import { FavoritedBtn } from "../animatedbtns/AnimatedBtns";
 import { deleteFavoritesAction } from "@/app/serverActions/user/deleteFavoritesAction";
 import { getRandomInterval } from "@/utils/getRandomInterval";
 import { dateShort } from "@/utils/dateLabel";
@@ -54,7 +54,6 @@ export default function FavoritesCard({ data } :{ data: IEvent }) {
             <span className="absolute z-50 right-0 -m-1 inline-flex flex-col gap-5" >
                 <FavoritedBtn checked={favorite} onclick={() => setFavorite(false) } />
                 {/* <RemindMeBtn /> */}
-                {/* <Image src={ShareIcon} width={18} height={18} alt="share icon" /> */}
             </span>
             <div className="absolute font-medium z-50 border bg-evento-white text-black dark:bg-evento-black dark:text-white text-xs px-2 py-1 shadow-md m-2 rounded-md" >
                 { data.date ? dateShort(data.date) : data.date || 'evnt date' }
@@ -78,8 +77,8 @@ export default function FavoritesCard({ data } :{ data: IEvent }) {
                             4.9
                         </span> */}
                     </div>
-                    <div className="flex items-center mt-1 pr-2 text-sm text-gray-600">
-                        <span>Hosted By </span><h3 className="capitalize">{data.hostname || 'host name'}</h3>
+                    <div className="flex mt-1 pr-2 text-sm text-gray-600">
+                        <h3 className="capitalize">hosted by {data.hostname || 'host name'}</h3>
                     </div>
                     {/* <Image className="inline pr-1 text-sm" src={LocationIcon} width={24} height={24} alt="location icon" />
                     <p className="inline pr-2">{data.location || 'event description'}</p> */}
