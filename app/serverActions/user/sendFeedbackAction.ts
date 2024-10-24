@@ -3,6 +3,7 @@
 import connectMongoDB from "@/lib/db";
 import User from "@/models/user";
 import { DateTime } from "luxon";
+import { feedbackTransporter, mailOptions } from "@/lib/mail";
 
 
 export default async function sendFeedbackAction(feedback: string, userId: string = '') {
@@ -22,8 +23,16 @@ export default async function sendFeedbackAction(feedback: string, userId: strin
                     user: user.username,
                     feedback: feedback,
                     feedbackdate: feedbackDate
-                }
-                console.log(feedbackFormated);
+                };
+
+                await feedbackTransporter.sendMail({
+                    ...mailOptions,
+                    subject: 'Pluto feedback!',
+                    html: `<h1>user: ${feedbackFormated.user}</h1> <br/>
+                           <h3>feedback: ${feedbackFormated.feedback}</h3> <br/>
+                           <h5>date: ${feedbackFormated.feedbackdate}</h5>`
+                })
+
                 return true;
             }
         }
@@ -42,6 +51,15 @@ export default async function sendFeedbackAction(feedback: string, userId: strin
             feedback: feedback,
             feedbackdate: feedbackDate
         }
+
+        await feedbackTransporter.sendMail({
+            ...mailOptions,
+            subject: 'Pluto feedback!',
+            html: `<h1>user: ${feedbackFormated.user}</h1> <br/>
+                   <h3>feedback: ${feedbackFormated.feedback}</h3> <br/>
+                   <h5>date: ${feedbackFormated.feedbackdate}</h5>`
+        })
+        
         console.log(feedbackFormated);
         return true;
     }

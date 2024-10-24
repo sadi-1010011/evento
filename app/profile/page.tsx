@@ -3,7 +3,6 @@ import ProfileCard from "@/components/profilecard/ProfileCard";
 import TopNavbar from "@/components/topnavbar/TopNavbar";
 import { getSession } from "@/utils/getsession";
 import { redirect } from "next/navigation";
-import { getUserInfoAction } from "../serverActions/user/getUserInfoAction";
 
 export default async function ProfilePage() {
 
