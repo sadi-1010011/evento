@@ -1,7 +1,7 @@
 "use client"
 
 import BottomNavBar from "@/components/bottomnavbar/BottomNavBar";
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import sendFeedbackAction from "../serverActions/user/sendFeedbackAction";
 
 export default function FeedbackPage() {
