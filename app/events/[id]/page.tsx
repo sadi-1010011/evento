@@ -13,6 +13,7 @@ import Event from "@/models/event";
 import connectMongoDB from "@/lib/db";
 import { FavoriteBtn } from "@/components/favoritesbtn/favoritesBtn";
 import ShareBtn from "@/components/shareBtn/ShareBtn";
+import Link from "next/link";
 
 export const revalidate = 60;
 export const dynamicParams = true // dynamic params ON!
@@ -164,7 +165,11 @@ export default async function EventPage({ params }: { params: { id: string }}) {
 
             <div className="fixed bottom-0 left-0 right-0 w-full flex items-center justify-between py-4 px-4 bg-gray-700 text-white">
                 <h2 className="font-bold text-lg">Total price</h2>
-                <span className="font-bold text-lg">{ event.ticketprice ? event.ticketprice : 'free '} $</span>
+                {
+                    event.ticketlink ? <Link href={event.ticketlink} target="_blank">
+                        <span className="font-bold text-lg">{ event.ticketprice ? event.ticketprice : 'free '} $</span>
+                    </Link> : <span className="font-bold text-lg">{ event.ticketprice ? event.ticketprice : 'free '} $</span>
+                }
             </div>
 
             </div>
