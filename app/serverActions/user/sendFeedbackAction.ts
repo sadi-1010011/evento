@@ -13,7 +13,7 @@ export default async function sendFeedbackAction(feedback: string, userId: strin
     // self explanatory
     await connectMongoDB();
 
-    if (userId) {
+    if (userId.length) {
 
         try {
             const user = await User.findById(userId); // find user
@@ -28,9 +28,9 @@ export default async function sendFeedbackAction(feedback: string, userId: strin
                 await feedbackTransporter.sendMail({
                     ...mailOptions,
                     subject: 'Pluto feedback!',
-                    html: `<h1>user: ${feedbackFormated.user}</h1> <br/>
-                           <h3>feedback: ${feedbackFormated.feedback}</h3> <br/>
-                           <h5>date: ${feedbackFormated.feedbackdate}</h5>`
+                    html: `<h3>user: ${feedbackFormated.user}</h3> <br/>
+                           <h2>feedback: ${feedbackFormated.feedback}</h2> <br/>
+                           <h4>date: ${feedbackFormated.feedbackdate}</h4>`
                 })
 
                 return true;
@@ -52,13 +52,20 @@ export default async function sendFeedbackAction(feedback: string, userId: strin
             feedbackdate: feedbackDate
         }
 
-        await feedbackTransporter.sendMail({
-            ...mailOptions,
-            subject: 'Pluto feedback!',
-            html: `<h1>user: ${feedbackFormated.user}</h1> <br/>
-                   <h3>feedback: ${feedbackFormated.feedback}</h3> <br/>
-                   <h5>date: ${feedbackFormated.feedbackdate}</h5>`
-        })
+        try {
+
+            await feedbackTransporter.sendMail({
+                ...mailOptions,
+                subject: 'Pluto feedback!',
+                html: `<h1>user: ${feedbackFormated.user}</h1> <br/>
+                <h3>feedback: ${feedbackFormated.feedback}</h3> <br/>
+                <h5>date: ${feedbackFormated.feedbackdate}</h5>`
+            })
+        } // err handling here..
+        catch (error: any) {
+            console.log('error saving feedback: ', error);
+            return 'error saving feedback!';
+        }
         
         console.log(feedbackFormated);
         return true;
