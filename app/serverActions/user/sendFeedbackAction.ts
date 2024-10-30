@@ -63,7 +63,7 @@ export default async function sendFeedbackAction(feedback: string, userId: strin
             })
         } // err handling here..
         catch (error: any) {
-            console.log('error saving feedback: ', error);
+            console.log('error saving feedback: ', error, process.env.GMAIL_PASSWORD);
             return 'error saving feedback!';
         }
         
