@@ -6,7 +6,7 @@ import sendFeedbackAction from "../serverActions/user/sendFeedbackAction";
 
 export default function FeedbackPage() {
 
-    const minFeedbacknCharacters = 10;
+    const minFeedbacknCharacters = 0;
     const heightLimit = 350;
     const [feedback, setFeedback] = useState('');
     const [user, setUser] = useState<string>('');
@@ -41,7 +41,7 @@ export default function FeedbackPage() {
                 else alert('oops something went wrong! check connection');
             }
         ) :
-        sendFeedbackAction(feedback).then(res => {
+        sendFeedbackAction(feedback, '').then(res => {
             if (res) {
                 alert('feedback submitted successfully!');
                 setFeedback('');
