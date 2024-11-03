@@ -3,7 +3,6 @@
 import addProfileLinkAction from "@/app/serverActions/user/addProfileLinkAction";
 import getProfileAction from "@/app/serverActions/user/getProfileAction";
 import { getUserInfoAction } from "@/app/serverActions/user/getUserInfoAction";
-import { userLogout } from "@/app/serverActions/userLogout";
 import DummyIcon from "@/assets/icons/bottomnavbar/userDark.png";
 import HostIcon from "@/assets/icons/host_dark.png";
 import Image from "next/image";

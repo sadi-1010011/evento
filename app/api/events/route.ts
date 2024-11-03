@@ -15,6 +15,7 @@ export async function GET() {
     }
     // err handling here..
     catch (error: any) {
+        console.log('error section-----------');
         return NextResponse.json({ error: error.message });
     }
 

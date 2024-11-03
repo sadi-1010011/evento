@@ -52,12 +52,13 @@ export default function HomePage() {
         else
             // API CALL
             get_allEvents().then((events) => {
+                console.log(events);
                 if (events.length)
                     setEvents(events);
                     // OFFLINE MODE!
                 else setOffline(true);
             });
-      }, [catogory])
+      }, [])
 
     // TODAY-UPCOMING EVENTS
     useEffect(() => {
